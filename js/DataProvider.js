@@ -412,7 +412,7 @@ function DataProvider()
 	 * contol class.
 	 * @param selected_language
 	 */
-	 this.setSelected_language = setSelected_language;
+	this.setSelected_language = setSelected_language;
     function setSelected_language( selected_language_) 
 	{
 		selected_language = selected_language_;
