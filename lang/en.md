@@ -100,8 +100,7 @@ opress14:       About 30 percent of trees blown down; remainder have some branch
 incrater:       You are standing inside the crater
 showCrater:     Show Crater
 hideCrater:     Hide Crater
-damage1:        Damage at 
-damage2:        from crash site
+damage:         Damage at %DISTANCE% from crash site
 help_title:     Input Help
 help_text:      Supply and select a value for each input field then press submit.
 help_text2:     To clear the entered values press reset.

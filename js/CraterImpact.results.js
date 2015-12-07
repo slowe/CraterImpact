@@ -658,10 +658,10 @@
 		x = this.dict.lblInVals;
 		E("#LB_InpactValues").html(x);
 
-		x = this.dict.damage1;
+		x = this.dict.damage.replace(/%DISTANCE%/,this.value.dist);
 		E("#LB_Damage").html(x);
-		x = this.dict.damage2;
-		E("#LB_Damage").append( " " + x + " " + x);
+//		x = this.dict.damage2;
+//		E("#LB_Damage").append( " " + x + " " + x);
 
 		x = this.dict.lblImpEnergy;
 		E("#LB_InputEnergy").html(x);
@@ -722,7 +722,7 @@
 			E('#InputValuesTable').html(makeTable(d.getDgInputs()));
 	
 			// Sets the damage text which is the second table of the data view are.
-			E("#LB_Damage").html( _obj.dict.damage1 + " " +  _obj.value.dist +" km "+ _obj.dict.damage2);
+			E("#LB_Damage").html( _obj.dict.damage.replace(/%DISTANCE%/,_obj.value.dist +" km "));
 			E('#DamageInfo').html(d.getTxtDamage());
 
 			// Sets the data for the energy table which is the third table of the data view.
