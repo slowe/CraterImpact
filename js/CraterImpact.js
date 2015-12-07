@@ -24,7 +24,7 @@ var CraterImpact;
 		for(var i = a; i < z; i++){
 			if(str[i] == "---") continue;
 			var idx = str[i].indexOf(":");
-			if(idx > 0) newdata[str[i].substr(0,idx)] = str[i].substr(idx+1).replace(/^[\t\s]*/,"");
+			if(idx > 0) newdata[str[i].substr(0,idx)] = str[i].substr(idx+1).replace(/^[\t\s]*/,"").replace(/^\"(.*)\"$/,"$1");
 		}
 		return newdata;
 	}

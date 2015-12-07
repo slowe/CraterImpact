@@ -1,116 +1,116 @@
----
-btStart:        Start
-lblTitle:       Impact Calculator
-lblLanguage:    Language:
-lblTranslation: Translation:
-cmdHelp:        Help
-inputs:         Input Parameters
-result:         Calculation Results
-lblAstDiam:     Projectile Diameter
-lblValue:       Value:
-lblWater:       Water
-lblSedRock:     Sedimentary Rock
-lblIgRock:      Igneous Rock
-lblIce:         Ice
-lblPorRock:     Porous Rock
-lblDensRock:    Dense Rock
-lblIron:        Iron
-txtWaterDepth:  Water Depth (m) :
-btSubmit:       Submit
-lblObVelocity:  Object Velocity
-lblSelect:      Please Select...
-lblSphinx:      Sphinx of Giza (20m)
-lblBen:         Big Ben (96m)
-lblEiffel:      Eiffel Tower (324m)
-lblEmpireSt:    Empire State Building (449m)
-lblCN:          CN Tower (553m)
-lblBurj:        Burj Dubai (~800m)
-lblImpactVal:   Impact Values
-lblClickMap:    Click the map to place the crater...
-cvsData:        Data View
-cvsSize:        Crater Size
-cvsDepth:       Crater Depth
-btBack:         Go Back
-btReset:        Reset
-lbCrater:       Crater is too small to be seen
-htParameter:    Parameter
-htValue:        Value
-lblDistance:    Distance from crash site
-lblInVals:      About Your Projectile
-pnlResults:     Calculation Results
-lblCrDepth:     Crater Depth
-lblLandmark:    Select Landmark:
-lblImpEnergy:   Impact Energy
-lblWhatImpactor: What happens to the impactor?
-lblFireball:    Is a fireball seen?
-lbKE:           Kinetic Energy
-lbImE:          Impact Energy
-lbImM:          Mass
-lbPjVel:        Projectile Velocity
-lbPjAng:        Trajectory Angle
-lbTgDens:       Target Density
-lbPjDens:       Projectile Density
-lbCrDiam:       Crater Width
-lbCrDepth:      Crater Depth
-lbCrThickness:  Ejecta Thickness
-lbAbBurst:      Burst Altitude
-lbAbBreak:      Break-up Altitude
-lbAbVel:        Wind Velocity
-lbAbRichter:    Richter Magnitude
-lbAbAmpl:       Sound pulse amplitude
-lbFbRad:        Radius
-lbFbDuration:   Peak thermal radiation at
-lbFbExp:        Exposure
-lbFbPeaktime:   Irradiation duration
-lbNoData:       Not applicable
-lbFreq:         How frequent?
-lbAcknow:       Acknowledgments
-hide:           Hide
-lbAuthor:       Authors:
-lbBased:        Based on original science of:
-projectile1:    The projectile lands intact, with a velocity
-projectile2:    The energy lost in the atmosphere is 
-projectile3:    The projectile begins to breakup at an altitude of 
-projectile4:    The velocity of the projectile fragments after the burst is 
-projectile5:    The energy of the airburst is 
-projectile6:    Large fragments strike the surface and may create a crater strewn field.  A more careful treatment of atmospheric entry is required to accurately estimate the size-frequency distribution of meteoroid fragments and predict the number and size of craters formed.
-projectile7:    The projectile reaches the ground in a broken condition.  The mass of the projectile strikes the surface at  a velocity of 
-expos1:         Clothing ignites
-expos2:         Much of the body suffers third degree burns
-expos3:         Much of the body suffers second degree burns
-expos4:         Much of the body suffers first degree burns
-expos5:         Newspaper ignites
-expos6:         Plywood flames
-expos7:         Deciduous trees ignite
-expos8:         Grass ignites
-opress1:        Multistory wall-bearing buildings will collapse
-opress2:        Multistory wall-bearing buildings will experience severe cracking and interior partitions will be blown down
-opress3:        Wood frame buildings will almost completely collapse
-opress4:        Interior partitions of wood frame buildings will be blown down.  Roof will be severely damaged
-opress5:        Multistory steel-framed office-type buildings will suffer extreme frame distortion, incipient collapse
-opress6:        Small bridges will collapse
-opress7:        Bridges will suffer substantial distortion of bracing
-opress8:        Steel frame bridges will collapse
-opress9:        Glass windows will shatter
-opress10:       Cars and trucks will be largely displaced and grossly distorted and will require rebuilding before use
-opress11:       Cars and trucks will be overturned and displaced, requiring major repairs
-opress12:       No significant damage from atmospheric blast wave
-opress13:       Up to 90 percent of trees blown down; remainder stripped of branches and leaves
-opress14:       About 30 percent of trees blown down; remainder have some branches and leaves blown off
-incrater:       You are standing inside the crater
-showCrater:     Show Crater
-hideCrater:     Hide Crater
-damage:         Damage at %DISTANCE% from crash site
-help_title:     Input Help
-help_text:      Supply and select a value for each input field then press submit.
-help_text2:     To clear the entered values press reset.
-input_error_title:   Input Error
-input_error_diam:    Enter projectile diameter
-input_error_angle:   Enter projectile angle
-input_error_vel:     Enter projectile velocity
-input_error_pjd:     Enter projectile density
-input_error_tgd:     Enter target density
-input_error_water:   Enter water level
-lbfbrad:             Fireball Radius
-brz_warn:            Your internet browser does not support the HTML5 features required for Crater Impact. Consider installing one of the following bowsers.
+--- 
+brz_warn:     "Your internet browser does not support the HTML5 features required for Crater Impact. Consider installing one of the following bowsers."
+btBack:       "Go Back"
+btReset:      Reset
+btStart:      Start
+btSubmit:     Submit
+cmdHelp:      Help
+cvsData:      "Data View"
+cvsDepth:     "Crater Depth"
+cvsSize:      "Crater Size"
+damage:       "Damage at %DISTANCE% from crash site"
+expos1:       "Clothing ignites"
+expos2:       "Much of the body suffers third degree burns"
+expos3:       "Much of the body suffers second degree burns"
+expos4:       "Much of the body suffers first degree burns"
+expos5:       "Newspaper ignites"
+expos6:       "Plywood flames"
+expos7:       "Deciduous trees ignite"
+expos8:       "Grass ignites"
+help_text:    "Supply and select a value for each input field then press submit."
+help_text2:   "To clear the entered values press reset."
+help_title:   "Input Help"
+hide:         Hide
+hideCrater:   "Hide Crater"
+htParameter:  Parameter
+htValue:      Value
+incrater:     "You are standing inside the crater"
+input_error_angle:     "Enter projectile angle"
+input_error_diam:     "Enter projectile diameter"
+input_error_pjd:     "Enter projectile density"
+input_error_tgd:     "Enter target density"
+input_error_title:     "Input Error"
+input_error_vel:     "Enter projectile velocity"
+input_error_water:     "Enter water level"
+inputs:     "Input Parameters"
+lbAbAmpl:     "Sound pulse amplitude"
+lbAbBreak:     "Break-up Altitude"
+lbAbBurst:     "Burst Altitude"
+lbAbRichter:     "Richter Magnitude"
+lbAbVel:     "Wind Velocity"
+lbAcknow:     Acknowledgments
+lbAuthor:     "Authors:"
+lbBased:     "Based on original science of:"
+lbCrDepth:     "Crater Depth"
+lbCrDiam:     "Crater Width"
+lbCrThickness:     "Ejecta Thickness"
+lbCrater:     "Crater is too small to be seen"
+lbFbDuration:     "Peak thermal radiation at"
+lbFbExp:     Exposure
+lbFbPeaktime:     "Irradiation duration"
+lbFbRad:     Radius
+lbFreq:     "How frequent?"
+lbImE:     "Impact Energy"
+lbImM:     Mass
+lbKE:     "Kinetic Energy"
+lbNoData:     "Not applicable"
+lbPjAng:     "Trajectory Angle"
+lbPjDens:     "Projectile Density"
+lbPjVel:     "Projectile Velocity"
+lbTgDens:     "Target Density"
+lbfbrad:     "Fireball Radius"
+lblAstDiam:     "Projectile Diameter"
+lblBen:     "Big Ben (96m)"
+lblBurj:     "Burj Dubai (~800m)"
+lblCN:     "CN Tower (553m)"
+lblClickMap:     "Click the map to place the crater..."
+lblCrDepth:     "Crater Depth"
+lblDensRock:     "Dense Rock"
+lblDistance:     "Distance from crash site"
+lblEiffel:     "Eiffel Tower (324m)"
+lblEmpireSt:     "Empire State Building (449m)"
+lblFireball:     "Is a fireball seen?"
+lblIce:     Ice
+lblIgRock:     "Igneous Rock"
+lblImpEnergy:     "Impact Energy"
+lblImpactVal:     "Impact Values"
+lblInVals:     "About Your Projectile"
+lblIron:     Iron
+lblLandmark:     "Select Landmark:"
+lblLanguage:     "Language:"
+lblObVelocity:     "Object Velocity"
+lblPorRock:     "Porous Rock"
+lblSedRock:     "Sedimentary Rock"
+lblSelect:     "Please Select..."
+lblSphinx:     "Sphinx of Giza (20m)"
+lblTitle:     "Impact Calculator"
+lblTranslation:     "Translation:"
+lblValue:     "Value:"
+lblWater:     Water
+lblWhatImpactor:     "What happens to the impactor?"
+opress1:     "Multistory wall-bearing buildings will collapse"
+opress10:     "Cars and trucks will be largely displaced and grossly distorted and will require rebuilding before use"
+opress11:     "Cars and trucks will be overturned and displaced, requiring major repairs"
+opress12:     "No significant damage from atmospheric blast wave"
+opress13:     "Up to 90 percent of trees blown down; remainder stripped of branches and leaves"
+opress14:     "About 30 percent of trees blown down; remainder have some branches and leaves blown off"
+opress2:     "Multistory wall-bearing buildings will experience severe cracking and interior partitions will be blown down"
+opress3:     "Wood frame buildings will almost completely collapse"
+opress4:     "Interior partitions of wood frame buildings will be blown down.  Roof will be severely damaged"
+opress5:     "Multistory steel-framed office-type buildings will suffer extreme frame distortion, incipient collapse"
+opress6:     "Small bridges will collapse"
+opress7:     "Bridges will suffer substantial distortion of bracing"
+opress8:     "Steel frame bridges will collapse"
+opress9:     "Glass windows will shatter"
+pnlResults:     "Calculation Results"
+projectile1:     "The projectile lands intact, with a velocity"
+projectile2:     "The energy lost in the atmosphere is"
+projectile3:     "The projectile begins to breakup at an altitude of"
+projectile4:     "The velocity of the projectile fragments after the burst is"
+projectile5:     "The energy of the airburst is"
+projectile6:     "Large fragments strike the surface and may create a crater strewn field.  A more careful treatment of atmospheric entry is required to accurately estimate the size-frequency distribution of meteoroid fragments and predict the number and size of craters formed."
+projectile7:     "The projectile reaches the ground in a broken condition.  The mass of the projectile strikes the surface at  a velocity of"
+result:     "Calculation Results"
+showCrater:     "Show Crater"
+txtWaterDepth:     "Water Depth (m):"
 ---
