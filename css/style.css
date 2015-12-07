@@ -1,3 +1,21 @@
+/* Reset block */
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {	margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section { display: block; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+a { color: black; }
+sup { font-size: 0.8em; position: relative; top: -0.5em;}
+sub { font-size: 0.8em; position: relative; bottom: -0.25em; }
+
+/* Cosmos-specific styles */
+html,body {
+	height: 100%;
+	margin: 0px;
+}
 * {
    margin: 0px;
    padding: 0px;
@@ -20,7 +38,7 @@ body {
 	width: 100%;
 	min-height: 600px;
 	min-width: 800px;
-	font-size: 12pt;
+	font-size: 1em;
 	font-family: Arial, Verdana, Sans-serif;
 }
 
@@ -30,44 +48,41 @@ body {
 } 
 
 #header {
- position: fixed;
- top: 0;
- left: 0;
- background-color: #404040;
-  width: 100%;
-  height: 2%;
-  min-height: 20px;
-  margin-bottom:300px;
- 
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #404040;
+	width: 100%;
+	margin-bottom:300px;
 }
-#header  h1
-{
+#header, #footer {
+	height: 2em;
+	line-height: 1.5em;
+	background: #202020;
+}
+#header a { color: inherit; text-decoration: none; }
+#header  h1 {
  color: #ffffff;
- font-size: 16pt;
+ font-size: 1.4em;
 }
 
-#header p
-{
- margin-top: 10px;
- margin-bottom: 2px;
- color: #fff0c0;
+#header p {
+	margin-top: 10px;
+	margin-bottom: 2px;
+	color: #fff0c0;
 }
-#header .spacer
-{
- height: 10px;
+#header .spacer {
+	height: 10px;
 }
 
-#footer
-{
- position: fixed;
- bottom: 0;
- left:0;
- background-color: #404040;
-
- width: 100%;
- height: 2%;
- min-height: 20px;
- font-size: 10px;
+#footer {
+	position: fixed;
+	bottom: 0;
+	left:0;
+	width: 100%;
+	height: 2%;
+	min-height: 20px;
+	font-size: 0.8em;
 }
 
 
@@ -214,15 +229,13 @@ h1
 	 margin-top: 10%;
 }
 
-.screen_title
-{
-	font-size:8pt;
+.screen_title {
+	font-size: 0.8em;
 	text-align: left;
 	font-weight: bold;
 	padding-left: 10px;
 	line-height: 28px;
-	
-	 border-bottom: 1px solid #888888;
+	border-bottom: 1px solid #888888;
 }
 
 /*///////////////////////////////////////////////////////*/
@@ -321,7 +334,7 @@ h1
 #ProjectileValue
 {
   text-align: center;
-  font-size: 12px;
+  font-size: 1em;
   height: 12px;
 }
 
@@ -394,7 +407,7 @@ h1
 
 .input_title
 {
-	font-size:8pt;
+	font-size:1em;
 	text-align: left;
 	font-weight: bold;
 	padding-bottom: 5px;
@@ -414,7 +427,7 @@ h1
 {
 	
 	margin: 0 auto;
-	font-size: 8pt;
+	font-size: 1em;
 	text-align: center;
 	margin-top: 10px;
 }
@@ -424,7 +437,7 @@ h1
 .input_panel p , .input_panel_right p , .input_panel_w p
 {
 	margin-right: 10px;
-	font-size: 8pt;
+	font-size: 1em;
 	font-weight: bold;
 	display: inline;
 }
@@ -488,7 +501,7 @@ h1
 {
 	padding-top: 5px;
 	padding-right: 10px;
-	font-size: 10px;
+	font-size: 1em;
 	font-weight: bold;
 }
 
@@ -510,52 +523,40 @@ h1
 DATA Output 
 //////////////////////////////////////////////*/
 
-#Content_Wrapper
-{
+#Content_Wrapper{
 	background-color: #000000;
 	height: 548px;
 	width: 782px;
-
+	position: relative;
+	top: 0px;
 	margin: 0 auto;
-	
-	 margin-top: 2%;
-	 background-image:url('../imgs/background.jpg');
-	 background-size: contain;
-	 background-repeat: no-repeat;
-	 padding-top: 0%;
+	background-image:url('../imgs/background.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	padding-top: 0%;
 }
 
-#ImpactCalc_Output_Map
-{
+#ImpactCalc_Output_Map{
 	background-color: #f0f0f0;
 	height: 488px;
-	
-	 -moz-border-top-right-radius: 5px;
-	 border-top-right-radius: 5px;
-	 
-	  -moz-border-top-left-radius: 5px;
-	 border-top-left-radius: 5px;
-	 
-	 border-bottom: 1px solid #888888;
-
+	-moz-border-top-right-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom: 1px solid #888888;
 }
 
-#ImpactCalc_Crater_Depth
-{
+#ImpactCalc_Crater_Depth{
 	display: none;
 	height: 488px;
 	background-color: #f0f0f0;
-	
-	 -moz-border-top-right-radius: 5px;
-	 border-top-right-radius: 5px;
-	 
-	  -moz-border-top-left-radius: 5px;
-	 border-top-left-radius: 5px;
-	
+	-moz-border-top-right-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	border-top-left-radius: 5px;
 }
 
-#ImpactCalc_Data_View
-{
+#ImpactCalc_Data_View{
 	display: none;
 	height: 488px;
 	background-color: #f0f0f0;
@@ -609,7 +610,7 @@ float: right;
 #map_inst
 {
   font-weight: bold;
-  font-size: 14pt;
+  font-size: 1.2em;
 }
 #Results_Table_Area h4
 {
@@ -669,7 +670,7 @@ float: right;
 	border: solid #c3c3c3;
 	border-width: 1px 1px;
 	padding: 10px;
-	font-size: 10px;
+	font-size: 1em;
 	overflow-y: auto;
 }
 
@@ -706,7 +707,7 @@ float: right;
 .left_output_text
 {
 	float: left;
-	font-size: 10pt;
+	font-size: 1em;
 	margin-left: 40px;
 }
 
@@ -718,14 +719,14 @@ float: right;
  .datagrid table { border-collapse: collapse; text-align: left; width: 100%;}
  .datagrid{font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #006699; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
  .datagrid table td, .datagrid table th {  padding: 5px 10px; }
- .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; color:#FFFFFF; font-size: 12px; font-weight: bold; border-left: 1px solid #0070A8; } 
+ .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; color:#FFFFFF; font-size: 1em; font-weight: bold; border-left: 1px solid #0070A8; } 
  .datagrid table thead th:first-child { border: none; }
- .datagrid table tbody td {color: #00557F; border-left: 1px solid #E1EEF4;font-size: 10px;font-weight: normal; }
+ .datagrid table tbody td {color: #00557F; border-left: 1px solid #E1EEF4;font-size: 1em;font-weight: normal; }
  .datagrid table tbody .alt td { background: #E1EEf4; color: #00557F; }
  .datagrid table tbody td:first-child  { border-left: none; }
  .datagrid table tbody tr:last-child td { border-bottom: none; }
  .datagrid table tfoot td div  { border-top: 1px solid #006699;background: #E1EEf4;}  
- .datagrid table tfoot td { padding: 0; font-size: 12px } 
+ .datagrid table tfoot td { padding: 0; font-size: 1em; } 
  .datagrid table tfoot td div{ padding: 2px; }
  .datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }
  .datagrid table tfoot  li { display: inline; }
@@ -743,7 +744,7 @@ ACK DIALOG
    color: #d0d0d0;
    float: left;
    margin-left: 20px;
-   font-size: 14px;
+   font-size: 1em;
    padding-top: 2px;
 }
 #ACK
@@ -751,61 +752,80 @@ ACK DIALOG
 	color: #d0d0d0;
 	float: right;
 	margin-right: 20px;
-	font-size: 14px;
+	font-size: 1em;
 	padding-top: 2px;
 }
 
 
-#ACK:hover
-{
+#ACK:hover{
 	color: #ffffff;
 }
 
-#dialog-modal_ack
-{
+#acknowledgements {
+	position: absolute;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+#bg {
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 100;
+	display: block;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+#ACK_inner {
 	background-color: #000000;
+	border: 1px solid white;
 	background-image: url( '../imgs/background_sm.jpg');
-	display:none;
-	
+	position: relative;
+	top: 1em;
+	z-index: 101;
+	display: block;
+	width: 782px;
+	max-width: 90%;
+	min-height: 400px;
+	margin: auto;
+	padding: 1em;
 }
 
+#acknowledgements a { color: #ddbb44; }
 
-#ACK_DIV
-{
-	font-size: 10px;
-	
+#ACK_DIV {
+	font-size: 1em;
 	color: #ffffff;
-
-	position:absolute;
 	top: 10px;
 }
 
-#ACK_DIV h4
-{
-	font-size: 12px;
+#ACK_DIV h4 {
+	font-size: 1em;
 	color: #ddbb44;
 }
 
-#ACK_Imgs
-{
+#ACK_Imgs {
 	float: right;
 }
 
-#ACK_Left_Img
-{
-		position:absolute;
-		top: 30px;
-		right: 10px;
+#ACK_Left_Img{
+	position:absolute;
+	top: 30px;
+	right: 10px;
 }
 
-#ACK_Right_Img
-{
-
+#ACK_Right_Img{
 	float: right;
 	position:absolute;
 	bottom: 30px;
 	right: 50px;
-
 }
 
 

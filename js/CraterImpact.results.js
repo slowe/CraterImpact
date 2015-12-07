@@ -9,9 +9,6 @@
 	images.cnTower = { 'img': new Image(), 'w':77, 'h':554 };
 	images.burj = { 'img': new Image(), 'w':170, 'h':800 };
 	
-	var wide = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-	var tall = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
 	//================================================================================
 	// Prepares the view for displaying the results.
 	CraterImpact.prototype.prepareView = function(){
@@ -23,12 +20,6 @@
 
 		// Show first tab of results
 		this.resultTab(1);
-
-		// Hide header and footer if screen is too small
-		if(tall < 600){
-			E('#header').css({'display':'none'});
-			E('#footer').css({'display':'none'});
-		}
 
 		// Add events
 		E('#cpLocation').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
@@ -134,6 +125,9 @@
 	// Scroll the map to a predefined location on the map
 	CraterImpact.prototype.selectLocation = function(select){
 		this.log('selectLocation',select)
+
+		if(this.map == null) this.initializeMap();
+
 		if(!select) return this;
 		option = select.options[select.selectedIndex];
 		if(!option) return this;
@@ -143,11 +137,8 @@
 		var lon = parseFloat(E(option).attr('data-lon'));
 		var z = parseInt(E(option).attr('data-z'));
 
-		console.log(lat,lon,z)
-
 		if(!lat || !lon || !z) return this;
 
-		if(this.map == null) this.initializeMap();
 		if(this.map) this.map.setCenter(new google.maps.LatLng(lat,lon),z);
 
 		return this;
@@ -167,11 +158,6 @@
 
 		this.setValues();
 
-		if(tall < 600){
-			E('#header').css({'display':'none'});
-			E('#footer').css({'display':'none'});
-		}
-	
 		this.mapTypeIds = new Array();
 
 		// push all mapType keys in to a mapTypeId array to set in the mapTypeControlOptions
@@ -315,10 +301,7 @@
 		lang = "English";
 
 		var crater = null;	/**Hold the map crater overlay object**/
-
-		var calcs;	// = new CraterCalcs();//Will do the calcs for earth/
-		//var moonCalcs;	// = new MoonCraterCalcs();//Will do the calcs for Moon/
-		//var marsCalcs;	// = new MarsCraterCalcs();//Will do the calcs for Mars/
+		var calcs; // Will do the calcs
 
 		/**Locations for crater placement**/
 		var lox;
@@ -330,6 +313,7 @@
 		rightArrow.src = 'imgs/arrowR.png';
 
 		this.prepareView();
+		this.selectLocation();
 		this.mapTypes = {};
 
 		// set up the map types

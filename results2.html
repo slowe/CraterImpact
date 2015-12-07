@@ -25,8 +25,8 @@
 	<div id="container">
 
 		<div id="header">
-			 <div id="AppTitle">Down 2 Earth - Crater Impact  - TEST AREA $accountID</div>
-	  		 <div id="ACK"><a href="#ACK_DIV">Acknowledgements</a></div>
+			 <div id="AppTitle">Down 2 Earth - Crater Impact</div>
+	  		 <div id="ACK"><a href="#acknowledgements">Acknowledgements</a></div>
 			<div class="spacer"></div>
 		</div><!--end header-->
 		
@@ -139,11 +139,11 @@
 					
 					<select id="cpLandmark" class="output_combo">
 					   <option value="0">Please Select...</option>
-					   <option value="1" data-key="sphynx">Spinx of Giza (20m)</option>
+					   <option value="1" data-key="sphynx">Sphinx of Giza (20m)</option>
 					   <option value="2" data-key="bigBen">Big Ben (96m)</option>
 					   <option value="3" data-key="eiffel">Eiffel Tower (324m)</option>
 					   <option value="4" data-key="empire">Empire State Building (449m)</option> 
-					   <option value="5" data-key="cnTower">CN Tower(553m)</option> 
+					   <option value="5" data-key="cnTower">CN Tower (553m)</option> 
 					   <option value="6" data-key="burj">Burj Dubai (~800m)</option> 
 					 </select>
 			 
@@ -154,11 +154,10 @@
 					
 					<div id="Data_View_Title" class="screen_title">Calculation Results - Data View</div>
 					
-				
 					<div id ="DataTables_L">
 					
 						<h6 id="LB_InpactValues">Input Values</h6>
-						<div   class="datagrid">
+						<div class="datagrid">
 							<table>
 								<thead><tr><th id="Thead_param1">header</th><th id="Thead_value1">header</th></tr></thead>
 								<tbody id="InputValuesTable">
@@ -171,8 +170,7 @@
 								</tbody>
 							</table>
 						</div><!--DataGrid-->
-					
-						
+
 						<h6 id="LB_Damage">Damage At</h6>
 						<div id="DamageInfo" class="text_output">Test 124</div>
 						
@@ -181,7 +179,7 @@
 					<div id ="DataTables_R">
 					
 						<h6 id="LB_InputEnergy">Input Energy</h6>
-						<div   class="datagrid">
+						<div class="datagrid">
 							<table>
 								<thead><tr><th id="Thead_param3">header</th><th id="Thead_value3">header</th></tr></thead>
 								<tbody id="InputEnergyTable">
@@ -196,7 +194,7 @@
 						
 			
 						<h6 id="LB_Fireball">Is a fireball Seen?</h6>
-						<div  class="datagrid">
+						<div class="datagrid">
 							<table>
 								<thead><tr><th id="Thead_param4">header</th><th id="Thead_value4">header</th></tr></thead>
 								<tbody id="FireballTable">
@@ -221,63 +219,65 @@
 		</div><!--end content-->
 		
 		<div id="footer">
-			<p>&copy; 2013 - University of South Wales - Developed by Dr Andrew Scott & Dr Stuart Lowe</p>
+			<p>&copy; 2013 - University of South Wales</p>
 		</div><!--end footer-->
 		
 	</div><!--end containter-->
 	
-	<div id="dialog-modal_ack" title="Acknowledgements">
+	<div id="acknowledgements" title="Acknowledgements">
+		<div id="bg"></div>
+		<div id="ACK_inner">
+			<div id="ACK_Imgs">
+				<img id="ACK_Left_Img" src="imgs/esa.png" alt="esa logo and stfc logo">
+				<img id="ACK_Right_Img" src="imgs/faulkes.png" alt="Faulkes Telescopes Logo">
+			</div>
 
-		<div id="ACK_Imgs">
-			<img id="ACK_Left_Img" src="imgs/esa.png" alt="esa logo and stfc logo">
-			<img id="ACK_Right_Img" src="imgs/faulkes.png" alt="Faulkes Telescopes Logo">
-		</div>
+			<div id="ACK_DIV">
+				<div class="ack_sect">
+					<h4>Faulkes Telescope Project (University of South Wales)</h4>
+					<ul>
+						<li>Paul Roche</li>
+						<li>Sarah Roberts</li>
+					</ul>
+				</div>
 	
-		<div id="ACK_DIV">
-			<div class="ack_sect">
-				<h4>Faulkes Telescope Project (University of South Wales)</h4>
-				<ul>
-					<li>Paul Roche</li>
-					<li>Sarah Roberts</li>
-				</ul>
-			</div>
-		
-			<div class="ack_sect">
-				<h4>Developers</h4>
-				<ul>
-					<li>Dr Andrew Scott - University of South Wales & Western Carolina University</li>
-					<li>Dr Stuart Lowe</li>
-				</ul>
-			</div>
-		
-			<div class="ack_sect">
-				<h4>UX Focus Group Coordinator</h4>
-				<p>Eilian Rodkerick - University of South Wales.</p>
-			</div>
-		
-			<div class="ack_sect">
-				<h4>Translation</h4>	
-				<ul>
-					<li>Polski: Jan Pmierny - Astronomia.pl</li>
-					<li>Espanol: Vanessa Stroud</li>
-					<li>Française: Eric Depagne, LCOGT</li>
-					<li>Deutsh: Reinheart Bruling & Vlaudia Heiss</li>
-					<li>Cymraeg: Amgueddfa Cymru/National Museum Wales</li>
-				</ul>
-			</div>
-		
-			<div class="ack_sect">
-				<h4>Based on the original science of </h4>
-				<p>Robert Marcus, H. Jay Melosh & Gareth Collins.</p>
-			</div>
-		
-			<div class="ack_sect">
-				<h4>Original Flash Version</h4>
-				<p>Edward Gomez & Jon Yardley.</p>
-			</div>
-		
-			<div class="ack_sect">
-				<p>For further information on the D2E project, contact: <a href="mailto:info@faulkes-telescope.com">info@faulkes-telescope.com</a></p>
+				<div class="ack_sect">
+					<h4>Developers</h4>
+					<ul>
+						<li>Dr Andrew Scott - University of South Wales & Western Carolina University</li>
+						<li>Dr Stuart Lowe</li>
+					</ul>
+				</div>
+	
+				<div class="ack_sect">
+					<h4>UX Focus Group Coordinator</h4>
+					<p>Eilian Rodkerick - University of South Wales.</p>
+				</div>
+	
+				<div class="ack_sect">
+					<h4>Translation</h4>	
+					<ul>
+						<li>Polski: Jan Pmierny - Astronomia.pl</li>
+						<li>Espanol: Vanessa Stroud</li>
+						<li>Française: Eric Depagne, LCOGT</li>
+						<li>Deutsh: Reinheart Bruling & Vlaudia Heiss</li>
+						<li>Cymraeg: Amgueddfa Cymru/National Museum Wales</li>
+					</ul>
+				</div>
+	
+				<div class="ack_sect">
+					<h4>Based on the original science of </h4>
+					<p>Robert Marcus, H. Jay Melosh & Gareth Collins.</p>
+				</div>
+	
+				<div class="ack_sect">
+					<h4>Original Flash Version</h4>
+					<p>Edward Gomez & Jon Yardley.</p>
+				</div>
+	
+				<div class="ack_sect">
+					<p>For further information on the D2E project, contact: <a href="mailto:info@faulkes-telescope.com">info@faulkes-telescope.com</a></p>
+				</div>
 			</div>
 		</div>
 	</div>

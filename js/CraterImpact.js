@@ -3,6 +3,13 @@ var CraterImpact;
 
 (function(E) {
 
+	var wide = 0;
+	var tall = 0;
+	function height(el){
+		if('getComputedStyle' in window) return parseInt(window.getComputedStyle(el, null).getPropertyValue('height'));
+		else return parseInt(el.currentStyle.height);	
+	}
+
 	// Very basic YAML parser. Only deals with simple key/value pairs
 	function YAML2JSON(str,format,a,z){
 		var newdata = {};
@@ -30,8 +37,47 @@ var CraterImpact;
 
 		this.parseQueryString();
 		this.setValues();
-		this.log('new crater',this.query)
+		this.log('new crater',this.query);
 
+		// Hide header and footer if screen is too small
+		if(tall < 600){
+		//	E('#header').css({'display':'none'});
+		//	E('#footer').css({'display':'none'});
+		}
+		
+		E('#ACK a').on('click',{me:this},function(e){
+			E('#acknowledgements').css({'display': 'block'});
+			var h = height(E('#ACK_inner').e[0]);
+			E('#ACK_inner').css({'top':((tall-h)/2)+'px'});
+		});
+		E('#bg').on('click',{me:this},function(e){
+			console.log(e.data.me)
+			E('#acknowledgements').css({'display': ''});
+		});
+		
+		var _obj = this;
+		// We'll need to change the sizes when the window changes size
+		window.addEventListener('resize',function(e){ _obj.resize(); });
+		this.resize();
+
+		return this;
+	}
+
+	CraterImpact.prototype.resize = function(){
+		var el,h;
+		wide = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+		tall = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+		// Update main panel
+		el = E('#Content_Wrapper');
+		h = height(el.e[0]);
+		if(h > 0 && tall > h) el.css({'top':((tall-h)/2)+'px'});
+
+		// Update acknowledgement popup
+		el = E('#ACK_inner');
+		h = height(el.e[0]);
+		if(h > 0 && tall > h) el.css({'top':((tall-h)/2)+'px'});
+		
 		return this;
 	}
 
@@ -91,7 +137,6 @@ var CraterImpact;
 		return this;
 	}
 	
-
 	// Log messages
 	CraterImpact.prototype.log = function(){
 		//if(!this.testmode) return this;
