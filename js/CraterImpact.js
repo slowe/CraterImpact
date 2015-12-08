@@ -130,7 +130,7 @@ var CraterImpact;
 		this.value.traj = (this.query.traj) ? this.query.traj : 90;
 		this.value.velo = (this.query.velo) ? this.query.velo : 0;
 		this.value.pjd = (this.query.pjd) ? this.query.pjd : 0;
-		this.value.tgd = (this.query.tjd) ? this.query.tjd : 0;
+		this.value.tgd = (this.query.tgd) ? this.query.tgd : 0;
 		this.value.wlvl = (this.query.wlvl) ? this.query.wlvl : 0;
 		this.value.planet = (this.query.planet) ? this.query.planet : "Earth";
 		this.log('setValues',this.value)

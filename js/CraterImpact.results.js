@@ -154,7 +154,6 @@
 			if(!this.gmap){
 				var JS = document.createElement('script');
 				JS.setAttribute('src','http://maps.google.com/maps/api/js?sensor=false&language='+this.lang);
-				console.log('http://maps.google.com/maps/api/js?sensor=false&language='+this.lang)
 				document.head.appendChild(JS);
 				this.gmap = true;
 			}
@@ -305,8 +304,6 @@
 		creditNode.style.whitespace = 'nowrap';
 		creditNode.index = 0;
 
-		//function setCredit(credit){ console.log('setCredit'); creditNode.innerHTML = credit + ' -'; }
-
 		// push the credit/copyright custom control
 		this.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(creditNode);
 
@@ -379,13 +376,13 @@
 		var selectedBuilding = 0;	/**The selected building**/
 
 		//input values from previous screen
-		var dist = 0;
-		var diam = 0;
-		var traj = 0;
-		var velo = 0;
-		var pjd = 0;
-		var tgd = 0;
-		var wlvl = 0;
+		var dist = this.value.dist;
+		var diam = this.value.diam;
+		var traj = this.value.traj;
+		var velo = this.value.velo;
+		var pjd = this.value.pjd;
+		var tgd = this.value.tgd;
+		var wlvl = this.value.wlvl;
 
 		var crater = null;	/**Hold the map crater overlay object**/
 		var calcs; // Will do the calcs
