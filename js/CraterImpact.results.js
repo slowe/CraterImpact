@@ -149,7 +149,18 @@
 	CraterImpact.prototype.initializeMap = function(){
 
 		this.log('initialising map');
-
+		var _obj = this;
+		if(typeof google==="undefined"){
+			if(!this.gmap){
+				var JS = document.createElement('script');
+				JS.setAttribute('src','http://maps.google.com/maps/api/js?sensor=false&language='+this.lang);
+				console.log('http://maps.google.com/maps/api/js?sensor=false&language='+this.lang)
+				document.head.appendChild(JS);
+				this.gmap = true;
+			}
+			setTimeout(function(){ _obj.initializeMap() },50);
+			return this;
+		}
 		planet = this.value.planet;
 
 		this.resultTab(1);
@@ -159,6 +170,81 @@
 		this.setValues();
 
 		this.mapTypeIds = new Array();
+
+
+		// set up the map types
+		this.mapTypes['moon'] = {
+			getTileUrl: function(coord, zoom){
+				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom) {
+					var bound = Math.pow(2, zoom);
+					return "http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/clem_bw/" + zoom + "/" + coord.x + "/" + (bound - coord.y - 1) + '.jpg';
+				});
+			},
+			tileSize: new google.maps.Size(256, 256),
+			isPng: false,
+			maxZoom: 9,
+			minZoom: 0,
+			radius: 1738000,
+			name: 'Moon',
+			credit: 'Image Credit: NASA/USGS'
+		};
+
+		this.mapTypes['sky'] = {
+			getTileUrl: function(coord, zoom){
+				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom){
+					return "http://mw1.google.com/mw-planetary/sky/skytiles_v1/" + coord.x + "_" + coord.y + '_' + zoom + '.jpg';
+				});
+			},
+			tileSize: new google.maps.Size(256, 256),
+			isPng: false,
+			maxZoom: 13,
+			radius: 57.2957763671875,
+			name: 'Sky',
+			credit: 'Image Credit: SDSS, DSS Consortium, NASA/ESA/STScI'
+		};
+
+		this.mapTypes['mars_elevation'] = {
+			getTileUrl: function(coord, zoom){
+				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom){
+					return getMarsTileUrl("http://mw1.google.com/mw-planetary/mars/elevation/", coord, zoom);
+				});
+			},
+			tileSize: new google.maps.Size(256, 256),
+			isPng: false,
+			maxZoom: 8,
+			radius: 3396200,
+			name: 'Mars Elevation',
+			credit: 'Image Credit: NASA/JPL/GSFC'
+		};
+
+		this.mapTypes['mars_visible'] = {
+			getTileUrl: function(coord, zoom){
+				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom){
+					return getMarsTileUrl("http://mw1.google.com/mw-planetary/mars/visible/", coord, zoom);
+				});
+			},
+			tileSize: new google.maps.Size(256, 256),
+			isPng: false,
+			maxZoom: 9,
+			radius: 3396200,
+			name: 'Mars Visible',
+			credit: 'Image Credit: NASA/JPL/ASU/MSSS'
+		};
+
+		this.mapTypes['mars_infrared'] = {
+			getTileUrl: function(coord, zoom){
+				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom){
+					return getMarsTileUrl("http://mw1.google.com/mw-planetary/mars/infrared/", coord, zoom);
+				});
+			},
+			tileSize: new google.maps.Size(256, 256),
+			isPng: false,
+			maxZoom: 9,
+			radius: 3396200,
+			name: 'Mars Infrared',
+			credit: 'Image Credit: NASA/JPL/ASU'
+		};
+
 
 		// push all mapType keys in to a mapTypeId array to set in the mapTypeControlOptions
 		for(var key in this.mapTypes){
@@ -316,79 +402,6 @@
 		this.prepareView();
 		this.selectLocation();
 		this.mapTypes = {};
-
-		// set up the map types
-		this.mapTypes['moon'] = {
-			getTileUrl: function(coord, zoom){
-				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom) {
-					var bound = Math.pow(2, zoom);
-					return "http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/clem_bw/" + zoom + "/" + coord.x + "/" + (bound - coord.y - 1) + '.jpg';
-				});
-			},
-			tileSize: new google.maps.Size(256, 256),
-			isPng: false,
-			maxZoom: 9,
-			minZoom: 0,
-			radius: 1738000,
-			name: 'Moon',
-			credit: 'Image Credit: NASA/USGS'
-		};
-
-		this.mapTypes['sky'] = {
-			getTileUrl: function(coord, zoom){
-				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom){
-					return "http://mw1.google.com/mw-planetary/sky/skytiles_v1/" + coord.x + "_" + coord.y + '_' + zoom + '.jpg';
-				});
-			},
-			tileSize: new google.maps.Size(256, 256),
-			isPng: false,
-			maxZoom: 13,
-			radius: 57.2957763671875,
-			name: 'Sky',
-			credit: 'Image Credit: SDSS, DSS Consortium, NASA/ESA/STScI'
-		};
-
-		this.mapTypes['mars_elevation'] = {
-			getTileUrl: function(coord, zoom){
-				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom){
-					return getMarsTileUrl("http://mw1.google.com/mw-planetary/mars/elevation/", coord, zoom);
-				});
-			},
-			tileSize: new google.maps.Size(256, 256),
-			isPng: false,
-			maxZoom: 8,
-			radius: 3396200,
-			name: 'Mars Elevation',
-			credit: 'Image Credit: NASA/JPL/GSFC'
-		};
-
-		this.mapTypes['mars_visible'] = {
-			getTileUrl: function(coord, zoom){
-				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom){
-					return getMarsTileUrl("http://mw1.google.com/mw-planetary/mars/visible/", coord, zoom);
-				});
-			},
-			tileSize: new google.maps.Size(256, 256),
-			isPng: false,
-			maxZoom: 9,
-			radius: 3396200,
-			name: 'Mars Visible',
-			credit: 'Image Credit: NASA/JPL/ASU/MSSS'
-		};
-
-		this.mapTypes['mars_infrared'] = {
-			getTileUrl: function(coord, zoom){
-				return getHorizontallyRepeatingTileUrl(coord, zoom, function(coord, zoom){
-					return getMarsTileUrl("http://mw1.google.com/mw-planetary/mars/infrared/", coord, zoom);
-				});
-			},
-			tileSize: new google.maps.Size(256, 256),
-			isPng: false,
-			maxZoom: 9,
-			radius: 3396200,
-			name: 'Mars Infrared',
-			credit: 'Image Credit: NASA/JPL/ASU'
-		};
 
 		// Normalizes the tile URL so that tiles repeat across the x axis (horizontally) like the
 		// standard Google map tiles.
@@ -661,8 +674,6 @@
 
 		x = this.dict.damage.replace(/%DISTANCE%/,this.value.dist);
 		E("#LB_Damage").html(x);
-//		x = this.dict.damage2;
-//		E("#LB_Damage").append( " " + x + " " + x);
 
 		x = this.dict.lblImpEnergy;
 		E("#LB_InputEnergy").html(x);

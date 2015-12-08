@@ -36,6 +36,7 @@ var CraterImpact;
 
 		this.dict = {};
 		this.lang = "en";
+		this.gmap = false;
 
 		this.parseQueryString();
 		this.setValues();
