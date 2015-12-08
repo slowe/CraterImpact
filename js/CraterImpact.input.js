@@ -28,8 +28,6 @@
 
 		this.initialiseInput();
 
-		// Make the crater object
-		var crater = new CraterImpact({});
 		// Update this language
 		crater.loadLanguage(crater.lang);
 
@@ -52,7 +50,8 @@
 		E('#cpTgDens').on('change',{me:this},function(e){ e.data.me.selectTgDensity(e.currentTarget); });
 		E('#cpTgDensMarsMoon').on('change',{me:this},function(e){ e.data.me.selectTgDensityMarsMoon(e.currentTarget); });
 		E('#BT_Reset').on('click',{me:this},function(e){ e.data.me.resetValues(); });
-
+		E('#BT_Submit').on('click',{me:this},function(e){ e.data.me.validateAndSumbit(); });
+		E('#BT_Help').on('click',{me:this},function(e){ e.data.me.help(); });
 		return this;
 	};
 
@@ -497,92 +496,72 @@
 		return this;
 	 }
 	 
-	 //=============================================
-	 /**
-	 Validate the entry
-	 **/
-	 //=============================================
-	 function validateAndSumbit()
-	 {
+	//=============================================
+	// Validate the entry
+	CraterImpact.prototype.validateAndSumbit = function(){
 		var passed = true;
 		var msg = "";
 	
-	
-		if (diameterVal <= 0)
-		{
-		    msg += "<li>" + input_error_diam + "</li>";
+		if(diameterVal <= 0){
+			msg += "<li>" + input_error_diam + "</li>";
 			passed = false;
 		}
 		
-		if(tragAngleVal <= 0)
-		{
+		if(tragAngleVal <= 0){
 			msg += "<li>" + input_error_angle + "</li>";
 			passed = false;
 		}
 		
-		if(projVelVal <= 0)
-		{
+		if(projVelVal <= 0){
 			msg +="<li>" + input_error_vel + "</li>";
 			passed = false;
 		}
 		
-		if (pjDens <= 0)
-		{
+		if(pjDens <= 0){
 			msg+= "<li>" + input_error_pjd + "</li>";
 			passed = false;
 		}
 		
-		if(tgDens <= 0)
-		{
+		if(tgDens <= 0){
 			msg += "<li>" + input_error_tgd + "</li>";
 			passed = false;
-			
 		}
 		
-		if (tgDens == 1)
-		{
-			if (waterLevel <= 0)
-			{
-				passed = false;
-				msg +="<li>" + input_error_water + "</li>";
-			}
+		if(tgDens == 1 && waterLevel <= 0){
+			passed = false;
+			msg +="<li>" + input_error_water + "</li>";
 		}
 		
 		
-		if (passed == false)
-		{
-		//  alert("More Details Required","More Details Required/n/nTest");
+		if(passed == false){
+			console.log("More Details Required","More Details Required/n/nTest");
+		/*
+			$( "#dialog-modal" ).dialog({
+				  height: 220,
+				  modal: true	  
+			});
+			*/
 		
-		 $( "#dialog-modal" ).dialog({
-			  height: 220,
-			  modal: true	  
-		});
-		
-		document.getElementById('dialog_text').innerHTML = "<ul>" + msg + "</ul>";
-    	$("span.ui-dialog-title").text(input_error_title); 
-		}
-		else
-		{
+			E('#dialog_text').html("<ul>" + msg + "</ul>");
+			E('#validation').css({'display':'block'});
+			E("#validation .title").html(input_error_title); 
+			this.resize();
+		}else{
 		//"results.html?dist=" + distVal +"&diam=" + diameterVal + "&trag=" + tragAngleVal + "&velo=" + projVelVal = "&pjd=" + pjDens + "&tjd=" + tgDens + "&wlvl=" + waterLevel
-		  window.location = "results.html?lang=" + lang +"&dist=" +"&planet=" + planet +"&dist=" + distVal +"&diam=" + diameterVal + "&trag=" + tragAngleVal + "&velo=" + projVelVal + "&pjd=" + pjDens + "&tjd=" + tgDens + "&wlvl=" + waterLevel;
+			window.location = "results.html?lang=" + lang +"&dist=" +"&planet=" + planet +"&dist=" + distVal +"&diam=" + diameterVal + "&trag=" + tragAngleVal + "&velo=" + projVelVal + "&pjd=" + pjDens + "&tjd=" + tgDens + "&wlvl=" + waterLevel;
 		}
-	 }//===========================================
-	 
-	 //============================================
-	 /**
-	 Display the help window.
-	 **/
-	 //============================================
-	 function help()
-	 {
-		 $( "#dialog-modal2" ).dialog({
-			  height: 250,
-			  modal: true	  
-		});
-		$("span.ui-dialog-title").text(help_title); 
-		document.getElementById('dialog_text2').innerHTML = help_text + "<br/><br/>" + help_text2;
-	 }//============================================
-
+	}
+	
+	//============================================
+	// Display the help window.
+	CraterImpact.prototype.help = function(){
+		E("#help .title").html(help_title); 
+		E('#dialog_text2').html(help_text + "<br/><br/>" + help_text2);
+		E('#help').css({'display':'block'});
+		this.resize();
+		return this;
+	}
+	
 	//==============================================
 	// Resets all the input fields and globals.
 	CraterImpact.prototype.resetValues = function(){

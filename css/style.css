@@ -635,8 +635,9 @@ DATA Output
 	color: #ffffff;
 }
 
-#acknowledgements {
-	position: absolute;
+.modal {
+	background-color: rgba(50, 50, 50, 0.85);
+	position: fixed;
 	display: none;
 	width: 100%;
 	height: 100%;
@@ -644,48 +645,54 @@ DATA Output
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	z-index: 1000;
 }
-#bg {
-	position: absolute;
-	background-color: rgba(50, 50, 50, 0.85);
-	z-index: 100;
-	display: block;
-	width: 100%;
-	height: 100%;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
-}
-#close {
-	float: right;
-	z-index: 200;
-}
-#close button {
-	cursor: pointer;
-	padding: 0.25em;
-	line-height: 1.5em;
-	width: 2.5em;
-	border: 1px solid black;
-	border-radius: 5px;
-}
-#ACK_inner {
-	background-color: #000000;
+.modal-inner {
+	background-color: #efefef;
 	border: 1px solid #999999;
-	background-image: url( '../imgs/background_sm.jpg');
 	position: relative;
 	top: 1em;
 	z-index: 101;
 	display: block;
+	width: 400px;
 	max-width: 90%;
-	min-height: 400px;
+	min-height: 200px;
 	margin: auto;
 	padding: 1em;
 	border-radius: 8px;
 }
-
+#acknowledgements .modal-inner {
+	background-color: #000000;
+}
+.close {
+	float: right;
+	z-index: 200;
+}
+.close button {
+	cursor: pointer;
+	padding: 0.25em;
+	line-height: 1.5em;
+	width: 2.5em;
+	border-radius: 5px;
+	background-color: #dfdfdf;
+	border: 1px solid #cccccc;
+	color: black;
+	margin-left: 1em;
+	margin-bottom: 1em;
+}
+.modal h2 {
+	font-size: 1.2em;
+	line-height: 2.4em;
+	font-weight: bold;
+}
+#acknowledgements .close button {
+	border: 1px solid black;
+	background-color: #efefef;
+}
 #acknowledgements a { color: #f6a828; }
-
+#ACK_inner {
+	background-image: url( '../imgs/background_sm.jpg');
+}
 #ACK_DIV {
 	font-size: 1em;
 	color: #ffffff;

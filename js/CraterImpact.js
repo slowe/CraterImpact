@@ -48,18 +48,23 @@ var CraterImpact;
 		//	E('#footer').css({'display':'none'});
 		}
 		
+		// Open the acknowledgements
 		E('#ACK a').on('click',{me:this},function(e){
 			E('#acknowledgements').css({'display': 'block'});
 			var h = height(E('#ACK_inner').e[0]);
 			E('#ACK_inner').css({'top':((tall-h)/2)+'px'});
 		});
-		E('#bg').on('click',{me:this},function(e){
-			console.log(e.data.me)
-			E('#acknowledgements').css({'display': ''});
+
+		// Add close buttons to modal dialogs
+		var m = E('.modal-inner');
+		for(var i = 0; i < m.e.length; i++){
+			var el = E(m.e[i]);
+			el.html('<div class="close"><button>&times;</button></div>'+el.html())
+		}
+		// Attach events to close buttons
+		E('.modal-inner .close button').on('click',function(e){
+			E(e.currentTarget).parent().parent().parent().css({'display': 'none'});
 		});
-		E('#close button').on('click',{me:this},function(){
-			E('#bg').trigger('click');
-		})
 		
 		var _obj = this;
 		// We'll need to change the sizes when the window changes size
@@ -75,11 +80,14 @@ var CraterImpact;
 		tall = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 		// Update main panel
-		var els = ['#impactCalc','#ImpactCalc_Input','#Content_Wrapper']
+		var els = ['#impactCalc','#ImpactCalc_Input','#Content_Wrapper','.modal-inner']
 		for(var i = 0; i < els.length; i++){
 			el = E(els[i]);
-			h = height(el.e[0]);
-			if(h > 0 && tall > h) el.css({'top':((tall-h)/2)+'px'});
+			for(var j = 0; j < el.e.length; j++){
+				h = height(el.e[j]);
+				if(isNaN(h)) h = 10;
+				if(h > 0 && tall > h) E(el.e[j]).css({'top':((tall-h)/2)+'px'});
+			}
 		}
 
 		// Update acknowledgement popup
