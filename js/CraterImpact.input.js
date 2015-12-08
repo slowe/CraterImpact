@@ -143,6 +143,7 @@
 	// value.
 	CraterImpact.prototype.updateDiameter = function(e){
 		if(!e) e = E('#ProjectileSize').attr('value');
+		if(isNaN(e)) e = 0;
 		// Set global value
 		diameterVal = parseFloat(e);
 		
@@ -232,6 +233,7 @@
 	// value.
 	CraterImpact.prototype.updateAngle = function(e){
 		if(!e) e = E('#ProjectileAngle').attr('value');
+		if(isNaN(e)) e = 90;
 		var angleVal = parseFloat(e);
 		var angleValI = 90 - angleVal; //Invert value
 
@@ -272,6 +274,7 @@
 	// value.
 	CraterImpact.prototype.updateVelocity = function(e){
 		if(!e) e = E('#ProjectileVelocity').attr('value');
+		if(isNaN(e)) e = 0;
 		projVelVal = parseFloat(e);
 		
 		var c = document.getElementById("Speedo");
@@ -286,6 +289,7 @@
 		
 		var img;
 		if(str.length > 1){
+			console.log(projVelVal,n1)
 			img = speedImgs[parseInt(n1)];
 			//if(n1 != 9)
 			ctx.drawImage(img,63,105);
