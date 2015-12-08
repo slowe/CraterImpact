@@ -1,48 +1,41 @@
-
 <!DOCTYPE HTML> 
 <html> 
 <head> 
 <title>Crater Impact</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-
-  <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.2.custom.css" />
-  <script src="js/jquery-1.9.1.js"></script>
-  <script src="js/jquery-ui-1.10.2.custom.js"></script>
-  <script src="js/HashMap.js"></script>
-  <script src="js/ImpactModel.js"></script>
-  <script src="js/DataProvider.js"></script>
-  <script src="js/MoonDataProvider.js"></script>
-  <script src="js/MarsDataProvider.js"></script>
-  <script src="js/CraterCalcs.js"></script>
-  <script src="js/MoonCraterCalcs.js"></script>
-  <script src="js/MarsCraterCalcs.js"></script>
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-  <script src="js/results.js"></script> 
- 
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/stuquery.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+	<script src="js/HashMap.js"></script>
+	<script src="js/ImpactModel.js"></script>
+	<script src="js/DataProvider.js"></script>
+	<script src="js/CraterImpact.calculations.js"></script>
+	<script src="js/CraterImpact.js"></script>
+	<script src="js/CraterImpact.results.js"></script>
+	<script>
+	// Add an event to be called when the document is loaded
+	E(document).ready(function(){
+		crater = new CraterImpact({});
+		crater.processResults();
+	});
+	</script>
 </head> 
-<!-- Taken out onLoad because initialize method runs when map is initialized anyway (map's DomListener) -->
- <body onload="prepareView();">
+<body>
  
- 
- 
-	<div  id="container">
+	<div id="container">
 
 		<div id="header">
-			 <div id="AppTitle" >Down 2 Earth - Crater Impact  - TEST AREA $accountID</div>
-	  		 <div id="ACK" onClick=" displayACK();">Acknowledgements</div>
-			<div class="spacer"></div>		
+			 <div id="AppTitle">Down 2 Earth - Crater Impact</div>
+	  		 <div id="ACK"><a href="#acknowledgements">Acknowledgements</a></div>
+			<div class="spacer"></div>
 		</div><!--end header-->
 		
 		<div id="content">
-		
 			<div id="Content_Wrapper">
-			
 				<div id="ImpactCalc_Output_Map">	
-					
-					<div  id="Crater_Size_Title" class="screen_title">Calculation Results - Crater Size</div>
-					
-				
+
+					<div id="Crater_Size_Title" class="screen_title">Calculation Results - Crater Size</div>
+
 					<div id ="Results_Table_Area">
 						<h4 id="InputValues_Title">Input Values:</h4>
 						<div class="datagrid">
@@ -61,79 +54,71 @@
 								</tbody>
 							</table>
 						</div><!--DataGrid-->
-        
-						<h4 id="SelectLM_Title">Please Select City:</h4>
-						 <select id = "cpLocarion" class="input_combo" onChange="selectLocation(this)">
-							   <option id="cpp_0" value = "0">Please Select...</option>
-							   <option id="cpp_1" value = "1">Cardiff</option>
-							   <option id="cpp_2" value = "2">London</option>
-							   <option id="cpp_3" value = "3">Paris</option>
-							   <option id="cpp_4" value = "4">New York</option>
-							   <option id="cpp_5" value = "5">Barringer Meteor Crater, Arizona</option>
-							   <option id="cpp_6" value = "6">Aorounga, Chad, Africa</option>
-							   <option id="cpp_7" value = "7">Wolfe Creek, Australia</option>
-							   <option id="cpp_8" value = "8">Roter Kamm, Namibia</option>
-							   <option id="cpp_9" value = "9">Mistastin Lake, Canada</option>
-							   <option id="cpp_10" value = "10">Bosumtwi, Ghana</option>
-							   <option id="cpp_11" value = "11">Karakul, Tajikstan</option>
+						<h4 id="SelectLM_Title" class="forEarth">Please Select City:</h4>
+						<select id="cpLocation" class="forEarth input_combo">
+							<option value="0">Please Select...</option>
+							<option value="1" data-lat="51.390209" data-lon="-3.179855" data-z="11">Cardiff</option>
+							<option value="2" data-lat="51.495065" data-lon="-0.282898" data-z="11">London</option>
+							<option value="3" data-lat="48.767957" data-lon="2.272797" data-z="11">Paris</option>
+							<option value="4" data-lat="40.720201" data-lon="-73.755341" data-z="11">New York</option>
+							<option value="5" data-lat="34.988941" data-lon="-110.99556" data-z="11">Barringer Meteor Crater, Arizona</option>
+							<option value="6" data-lat="19.120841" data-lon="19.267273" data-z="11">Aorounga, Chad, Africa</option>
+							<option value="7" data-lat="19.093335" data-lon="19.242731" data-z="11">Wolfe Creek, Australia</option>
+							<option value="8" data-lat="-27.722436" data-lon="16.369629" data-z="11">Roter Kamm, Namibia</option>
+							<option value="9" data-lat="55.920354" data-lon="-63.199539" data-z="11">Mistastin Lake, Canada</option>
+							<option value="10" data-lat="6.50431" data-lon="-1.378098" data-z="11">Bosumtwi, Ghana</option>
+							<option value="11" data-lat="39.03572" data-lon="73.464203" data-z="12">Karakul, Tajikstan</option>
 						</select>
-						<h4 id="SelectLM_TitleMoon">Please Select Crater:</h4>
-						 <select id = "cpLocarionMoon" class="input_combo" onChange="selectLocationOnMoon(this)">
-							   <option id="cpp_0" value = "0">Please Select...</option>
-							   <option id="cpp_1" value = "1">Kelvin A</option>
-							   <option id="cpp_2" value = "2">Roberts Q</option>
-							   <option id="cpp_3" value = "3">Rittenhouse</option>
-							   <option id="cpp_4" value = "4">Ellison</option>
-							   <option id="cpp_5" value = "5">Aristarchus</option>
-							   <option id="cpp_6" value = "6">Moore</option>
-							   <option id="cpp_7" value = "7">Hercules</option>
-							   <option id="cpp_8" value = "8">Tycho</option>
-							   <option id="cpp_9" value = "9">Copernicus</option>
-							   <option id="cpp_10" value = "10">Russel</option>
-							   <option id="cpp_11" value = "11">Hevelius</option>
-                               <option id="cpp_12" value = "12">Paschen</option>
-							   <option id="cpp_13" value = "13">Pythagoras</option>
-							   <option id="cpp_14" value = "14">Roche</option>
-							   <option id="cpp_15" value = "15">Fermi</option>							   
-                               <option id="cpp_16" value = "16">Gagarin</option>
-							   <option id="cpp_17" value = "17">Planck</option>
-							   <option id="cpp_18" value = "18">Korolev</option>
-							   <option id="cpp_19" value = "19">Apollo</option>
-							   <option id="cpp_20" value = "20">Hertzsprung</option>
-
-
+						<h4 id="SelectLM_TitleMoon" class="forMoon">Please Select Crater:</h4>
+						<select id="cpLocationMoon" class="forMoon input_combo">
+							<option value="0">Please Select...</option>
+							<option value="1" data-lat="-27.5" data-lon="-31.5" data-z="11">Kelvin A</option>
+							<option value="2" data-lat="68.9" data-lon="177.3" data-z="11">Roberts Q</option>
+							<option value="3" data-lat="-74.5" data-lon="106.5" data-z="11">Rittenhouse</option>
+							<option value="4" data-lat="55.1" data-lon="-107.5" data-z="11">Ellison</option>
+							<option value="5" data-lat="23.7" data-lon="-177.5" data-z="11">Aristarchus</option>
+							<option value="6" data-lat="46.7" data-lon="39.1" data-z="11">Moore</option>
+							<option value="7" data-lat="-43.3" data-lon=" -11.2" data-z="11">Hercules</option>
+							<option value="8" data-lat="9.7" data-lon="-20" data-z="11">Tycho</option>
+							<option value="9" data-lat="26.5" data-lon="-75.4" data-z="11">Copernicus</option>
+							<option value="10" data-lat="2.2" data-lon="-67.6" data-z="11">Russel</option>
+							<option value="11" data-lat="-13.5" data-lon="-139.8" data-z="12">Hevelius</option>
+							<option value="12" data-lat="63.5" data-lon="-63" data-z="12">Paschen</option>
+							<option value="13" data-lat="-42.3" data-lon="136.5" data-z="12">Pythagoras</option>
+							<option value="14" data-lat="-19.3" data-lon="122.6" data-z="12">Roche</option>
+							<option value="15" data-lat="-20.2" data-lon="149.2" data-z="12">Fermi</option>							   
+							<option value="16" data-lat="-57.9" data-lon=" 136.8" data-z="12">Gagarin</option>
+							<option value="17" data-lat="-4" data-lon="-157.4" data-z="12">Planck</option>
+							<option value="18" data-lat="-36.1" data-lon="-151.8" data-z="12">Korolev</option>
+							<option value="19" data-lat="2.6" data-lon="-129.2" data-z="12">Apollo</option>
+							<option value="20">Hertzsprung</option>
 						</select>
-                        <h4 id="SelectLM_TitleMars">Please Select Crater:</h4>
-						 <select id = "cpLocarionMars" class="input_combo" onChange="selectLocationOnMars(this)">
-						   <option id="cpp_0" value = "0">Please Select...</option>
-							   <option id="cpp_1" value = "1">Houston</option>
-							   <option id="cpp_2" value = "2">Jodrell</option>
-							   <option id="cpp_3" value = "3">Loon</option>
-							   <option id="cpp_4" value = "4">Gold</option>
-							   <option id="cpp_5" value = "5">Butte</option>
-							   <option id="cpp_6" value = "6">Flora</option>
-							   <option id="cpp_7" value = "7">Ruby</option>
-							   <option id="cpp_8" value = "8">Bombala</option>
-							   <option id="cpp_9" value = "9">Stokes</option>
-							   <option id="cpp_10" value = "10">Da Vinci</option>
-							   <option id="cpp_11" value = "11">Columbus</option>
-                               <option id="cpp_12" value = "12">Orson Welles</option>
-							   <option id="cpp_13" value = "13">Hooke</option>
-							   <option id="cpp_14" value = "14">Graff</option>
-							   <option id="cpp_15" value = "15">Darwin</option>							   
-                               <option id="cpp_16" value = "16">Kepler</option>
-							   <option id="cpp_17" value = "17">Newton</option>
-							   <option id="cpp_18" value = "18">Herschel</option>
-							   <option id="cpp_19" value = "19">Huygens</option>
-							   <option id="cpp_20" value = "20">Agyre Planitia</option>
-                               <option id="cpp_21" value = "21">Hellas Planitia</option>
-							   <option id="cpp_22" value = "22">Utopia Planitia</option>
-
+                        <h4 id="SelectLM_TitleMars" class="forMars">Please Select Crater:</h4>
+						<select id="cpLocationMars" class="forMars input_combo">
+							<option value="0">Please Select...</option>
+							<option value="1"data-lat="48.5" data-lon="-224.1" data-z="11">Houston</option>
+							<option value="2" data-lat="48.8" data-lon="-227.8" data-z="11">Jodrell</option>
+							<option value="3" data-lat="-19.0" data-lon="-246.6" data-z="11">Loon</option>
+							<option value="4" data-lat="20.2" data-lon="-31.3" data-z="11">Gold</option>
+							<option value="5" data-lat="-5.2" data-lon="-39.0" data-z="11">Butte</option>
+							<option value="6" data-lat="-45" data-lon="-51.5" data-z="11">Flora</option>
+							<option value="7" data-lat="-25.5" data-lon=" -17.1" data-z="11">Ruby</option>
+							<option value="8" data-lat="-27.9 " data-lon=" -254.0" data-z="11">Bombala</option>
+							<option value="9" data-lat="55.9" data-lon="-188.8" data-z="11">Stokes</option>
+							<option value="10" data-lat="1.4" data-lon="-39.4" data-z="11">Da Vinci</option>
+							<option value="11" data-lat="-29.8" data-lon=" -166.1" data-z="12">Columbus</option>
+							<option value="12" data-lat="-0.25" data-lon="-45.9" data-z="12">Orson Welles</option>
+							<option value="13" data-lat="-45.2" data-lon=" -44.4" data-z="12">Hooke</option>
+							<option value="14" data-lat="-21.4" data-lon=" -206.3" data-z="12">Graff</option>
+							<option value="15" data-lat="-57.3" data-lon=" -19.5" data-z="12">Darwin</option>							   
+							<option value="16" data-lat="-47.1" data-lon=" -219.1" data-z="12">Kepler</option>
+							<option value="17" data-lat="-40.8 " data-lon=" -158.1" data-z="12">Newton</option>
+							<option value="18" data-lat="-14.9" data-lon=" -230.3" data-z="12">Herschel</option>
+							<option value="19" data-lat="-14.3" data-lon=" -304.6" data-z="12">Huygens</option>
+							<option value="20" data-lat="-49.7" data-lon=" 316.0" data-z="12">Agyre Planitia</option>
+							<option value="21" data-lat="-42.7" data-lon=" 70.0" data-z="12">Hellas Planitia</option>
+							<option value="22" data-lat="49.7" data-lon=" 118.0" data-z="12">Utopia Planitia</option>
 						</select>
-                        
-                        
-                        
-                        
                         
 						<h4 id="MapInst">Click the map to place the crater...</h4>
 
@@ -152,14 +137,14 @@
 					
 					<p id="LB_SelectLandmark" class="left_output_text">Select Landmark</p>
 					
-					<select id = "cpLadmark" class="output_combo" onChange="drawCrater(this)">
-					   <option id="cpl_0" value = "0">Please Select...</option>
-					   <option id="cpl_1" value = "1">Spinx of Giza (20m)</option>
-					   <option id="cpl_2" value = "2">Big Ben (96m)</option>
-					   <option id="cpl_3" value = "3">Eiffel Tower (324m)</option>
-					   <option id="cpl_4" value = "4">Empire State Building (449m)</option> 
-					   <option id="cpl_5" value = "5">CN Tower(553m)</option> 
-					   <option id="cpl_6" value = "6">Burg Dubai (~800m)</option> 
+					<select id="cpLandmark" class="output_combo">
+					   <option value="0">Please Select...</option>
+					   <option value="1" data-key="sphynx">Sphinx of Giza (20m)</option>
+					   <option value="2" data-key="bigBen">Big Ben (96m)</option>
+					   <option value="3" data-key="eiffel">Eiffel Tower (324m)</option>
+					   <option value="4" data-key="empire">Empire State Building (449m)</option> 
+					   <option value="5" data-key="cnTower">CN Tower (553m)</option> 
+					   <option value="6" data-key="burj">Burj Dubai (~800m)</option> 
 					 </select>
 			 
 				</div><!--end impactCalc crater depth-->
@@ -169,11 +154,10 @@
 					
 					<div id="Data_View_Title" class="screen_title">Calculation Results - Data View</div>
 					
-				
 					<div id ="DataTables_L">
 					
 						<h6 id="LB_InpactValues">Input Values</h6>
-						<div   class="datagrid">
+						<div class="datagrid">
 							<table>
 								<thead><tr><th id="Thead_param1">header</th><th id="Thead_value1">header</th></tr></thead>
 								<tbody id="InputValuesTable">
@@ -186,8 +170,7 @@
 								</tbody>
 							</table>
 						</div><!--DataGrid-->
-					
-						
+
 						<h6 id="LB_Damage">Damage At</h6>
 						<div id="DamageInfo" class="text_output">Test 124</div>
 						
@@ -196,7 +179,7 @@
 					<div id ="DataTables_R">
 					
 						<h6 id="LB_InputEnergy">Input Energy</h6>
-						<div   class="datagrid">
+						<div class="datagrid">
 							<table>
 								<thead><tr><th id="Thead_param3">header</th><th id="Thead_value3">header</th></tr></thead>
 								<tbody id="InputEnergyTable">
@@ -211,7 +194,7 @@
 						
 			
 						<h6 id="LB_Fireball">Is a fireball Seen?</h6>
-						<div  class="datagrid">
+						<div class="datagrid">
 							<table>
 								<thead><tr><th id="Thead_param4">header</th><th id="Thead_value4">header</th></tr></thead>
 								<tbody id="FireballTable">
@@ -224,119 +207,82 @@
 							</table>
 						</div><!--DataGrid-->
 					</div><!--End Data Tables-->
-					 
 				</div><!--end impactCalc data view-->
 				
-				
 				<div ID="Output_Footer">
-							<button id="BT_Back" class="left_footer_button" onClick="goBack()">Go Back</button>
-							<button id="BT_Data" class="right_footer_button" onClick="resultTap(3)">Data View</button>
-							<button id="BT_CraterDepth" class="right_footer_button" onClick="resultTap(2)">Crater Depth</button>
-							<button id="BT_CraterPlace" class="right_footer_button" onClick="resultTap(1)">Crater Size</button>
+					<button id="BT_Back" class="left_footer_button">Go Back</button>
+					<button id="BT_Data" class="right_footer_button">Data View</button>
+					<button id="BT_CraterDepth" class="right_footer_button">Crater Depth</button>
+					<button id="BT_CraterPlace" class="right_footer_button">Crater Size</button>
 				</div><!--end output button footer-->
 			</div><!--content wrapper-->
 		</div><!--end content-->
 		
 		<div id="footer">
-			<p>&copy; 2013 - University of South Wales - Developed by Dr Andrew Scott</p>
+			<p>&copy; 2013 - University of South Wales</p>
 		</div><!--end footer-->
 		
 	</div><!--end containter-->
 	
-	<div id="dialog-modal_ack" title="Acknowledgements">
-	<div id="ACK_Imgs">
-		<img id="ACK_Left_Img" src="imgs/esa.png" alt="esa logo and stfc logo">
-		<img id="ACK_Right_Img" src="imgs/faulkes.png" alt="Faulkes Telescopes Logo">
+	<div id="acknowledgements" title="Acknowledgements">
+		<div id="bg"></div>
+		<div id="ACK_inner">
+			<div id="ACK_Imgs">
+				<img id="ACK_Left_Img" src="imgs/esa.png" alt="ESA logo and STFC logo">
+				<img id="ACK_Right_Img" src="imgs/faulkes.png" alt="Faulkes Telescopes Logo">
+			</div>
+			<div id="close"><button>&times;</button></div>
+
+			<div id="ACK_DIV">
+				<div class="ack_sect">
+					<h4>Faulkes Telescope Project (University of South Wales)</h4>
+					<ul>
+						<li>Paul Roche</li>
+						<li>Sarah Roberts</li>
+					</ul>
+				</div>
+	
+				<div class="ack_sect">
+					<h4>Developers</h4>
+					<ul>
+						<li>Andrew Scott - University of South Wales & Western Carolina University</li>
+						<li>Stuart Lowe</li>
+					</ul>
+				</div>
+	
+				<div class="ack_sect">
+					<h4>UX Focus Group Coordinator</h4>
+					<p>Eilian Rodkerick - University of South Wales.</p>
+				</div>
+	
+				<div class="ack_sect">
+					<h4>Translation</h4>	
+					<ul>
+						<li>Polski: Jan Pmierny - Astronomia.pl</li>
+						<li>Espanol: Vanessa Stroud</li>
+						<li>Française: Eric Depagne, LCOGT</li>
+						<li>Deutsh: Reinheart Bruling & Vlaudia Heiss</li>
+						<li>Cymraeg: Amgueddfa Cymru/National Museum Wales</li>
+					</ul>
+				</div>
+	
+				<div class="ack_sect">
+					<h4>Based on the original science of </h4>
+					<p>Robert Marcus, H. Jay Melosh & Gareth Collins.</p>
+				</div>
+	
+				<div class="ack_sect">
+					<h4>Original Flash Version</h4>
+					<p>Edward Gomez & Jon Yardley.</p>
+				</div>
+	
+				<div class="ack_sect">
+					<p>For further information on the D2E project, contact: <a href="mailto:info@faulkes-telescope.com">info@faulkes-telescope.com</a></p>
+				</div>
+			</div>
+		</div>
 	</div>
-	
-	<div id="ACK_DIV">
 
-		<div class="ack_sect">
-		<div class="ack_sect">
-		<h4>Faulkes Telescope Project (University of South Wales)</h4>
-		<ul>
-		<li>Paul Roche</li>
-		<li>Sarah Robers</li>
-		</ul>
-		</div>
-		
-		<div class="ack_sect">
-		<h4>Developer</h4>
-		Dr Andrew Scott - University of South Wales & Western Carolina University
-		</div>
-		
-		<div class="ack_sect">
-		<h4>UX Focus Group Coordinator</h4>
-		Eilian Rodkerick - University of South Wales.	
-		</div>
-		
-		<div class="ack_sect">
-			<h4>Translation</h4>	
-			<p>Polski: Jan Pmierny-   Astronomia.pl</p>
-			<p>Espanol: Vanessa Stroud</p>
-			<p>Française: Eric Depagne, LCOGT</p>
-			<p>Deutsh: Reinheart Bruling & Vlaudia Heiss</p>
-			<p>Cymraeg: Amgueddfa Cymru/National Museum Wales</p>
-		</div>
-		
-		<div class="ack_sect">
-		<h4>Based on the Original science of </h4>
-		<p>Robert Marcus, H. Jay Melosh & Gareth Collins.</p>
-		</div>
-		
-		<div class="ack_sect">
-		<h4>Original Flash Version</h4>
-		<p>Edward Gomez & Jon Yardley.</p>
-		</div>
-		
-		<div class="ack_sect">
-		For further information on the D2E project, contact: <a style="color:#ffdd22;" href="mailto:info@faulkes-telescope.com">info@faulkes-telescope.com</a>
-		</div>
-		
-	</div>
-	
-	
-</div>
-	       <?php
-
-?>
-<script type="text/javascript">
- 
-function getUrlVars()
-{
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
-}
-	
-var planetname = getUrlVars()["planet"];
-
-if (planetname == "Earth"){
-$("#SelectLM_TitleMoon").remove();
-$("#cpLocarionMoon").remove();
-$("#SelectLM_TitleMars").remove();
-$("#cpLocarionMars").remove();
-}
-else if (planetname == "Moon"){
-$("#SelectLM_Title").remove();
-$("#cpLocarion").remove();
-$("#SelectLM_TitleMars").remove();
-$("#cpLocarionMars").remove();
-}
-else if (planetname == "Mars"){
-$("#SelectLM_Title").remove();
-$("#cpLocarion").remove();
-$("#SelectLM_TitleMoon").remove();
-$("#cpLocarionMoon").remove();
-}
-
-</script>
 </body> 
 </html>
          
