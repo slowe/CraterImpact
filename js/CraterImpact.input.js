@@ -32,9 +32,9 @@
 		crater.loadLanguage(crater.lang);
 
 		var planetname = crater.query.planet;
-		if(planetname == "Earth") E("#cpTgDensMarsMoon").remove();
-		else if(planetname == "Moon") E("#cpTgDens").remove();
-		else if(planetname == "Mars") E("#cpTgDens").remove();
+		console.log(planetname,E("#cpTgDensMarsMoon").e[0])
+		if(planetname == "Earth") E("#cpTgDensMarsMoon").css({'display':'none'});
+		else E("#cpTgDens").css({'display':'none'});
 
 		this.prepareView();
 	
@@ -134,6 +134,7 @@
 	// value.
 	CraterImpact.prototype.updateDistance = function(e){
 		if(!e) e = E('#ImpactDistance').attr('value');
+		if(isNaN(e)) e = 0;
 		distVal = parseFloat(e);
 		E('#DistanceAMT').html(distVal +'&nbsp;km');
 	}
@@ -234,6 +235,7 @@
 	CraterImpact.prototype.updateAngle = function(e){
 		if(!e) e = E('#ProjectileAngle').attr('value');
 		if(isNaN(e)) e = 90;
+		console.log('updateAngle',e)
 		var angleVal = parseFloat(e);
 		var angleValI = 90 - angleVal; //Invert value
 
@@ -594,6 +596,7 @@
 	// to that specified in the URL params.
 	CraterImpact.prototype.initialiseInput = function(){
 
+		this.log('initialiseInput')
 		lang = this.query.lang;
 		if(lang == "") lang = "en";
 		
@@ -601,33 +604,25 @@
 		if (planet == "") planet = "Earth";
 		
 		var param = this.query.dist;
-		if(param == "" ) distVal = 0;
-		else distVal = parseInt(param);
+		distVal = (param) ? parseInt(param) : 0;
 		
 		param = this.query.diam;
-		if (param == "") diameterVal = 0;
-		else diameterVal = parseInt(param);
+		diameterVal = (param) ? parseInt(param) : 0;
 		
 		param = this.query.trag;
-		if (param  == "") tragAngleVal  = 90;
-		else tragAngleVal = parseInt(param);
+		tragAngleVal = (param) ? parseInt(param) : 90;
 		
 		param = this.query.velo;
-		if (param == "") projVelVal = 0;
-		else projVelVal = parseInt(param);
+		projVelVal = (param) ? parseInt(param) : 0;
 		
 		param = this.query.pjd;
-		if (param == "") pjDens = 0;
-		else pjDens = parseInt(param);
+		pjDens = (param) ? parseInt(param) : 0;
 		
 	    param = this.query.tjd;
-	    if (param == "") tgDens = 0;
-		else tgDens = parseInt(param);
+		tgDens = (param) ? parseInt(param) : 0;
 		
-		//else tgDens++;
 		param = this.query.wlvl;
-		if (param == "") waterLevel = 0;
-		else waterLevel = parseInt(param);
+		waterLevel = (param) ? parseInt(param) : 0;
 
 		this.updateControls();
 		return this;

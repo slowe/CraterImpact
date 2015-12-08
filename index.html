@@ -39,7 +39,8 @@
 			crater.loadLanguage(E(e.currentTarget).attr('id'));
 		});
 
-		E('#StartButton').css({'display':'none'}).on('mousedown',{},function(e){
+		E('#StartButton').css({'display':'none'});
+		E('#StartButton').on('mousedown',{},function(e){
 			E(e.currentTarget).attr('class','StartButtonClicked');
 		}).on('mouseout',{},function(e){
 			E(e.currentTarget).attr('class','StartButton');
