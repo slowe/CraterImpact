@@ -253,7 +253,9 @@
 
 	CraterImpact.prototype.processResults = function(){
 
-		this.loadLanguage("en");
+		lang = "en";
+		if(this.query.lang) lang = this.query.lang;
+		this.loadLanguage(lang);
 
 		var planetname = this.query.planet;
 		this.log(planetname)
@@ -298,7 +300,6 @@
 		var pjd = 0;
 		var tgd = 0;
 		var wlvl = 0;
-		lang = "English";
 
 		var crater = null;	/**Hold the map crater overlay object**/
 		var calcs; // Will do the calcs

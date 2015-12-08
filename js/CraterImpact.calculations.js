@@ -232,32 +232,27 @@ CraterCalcs.prototype.sentData = function(){
 	
 	var crf =this.standform(this.impactor.crMass);
 	var cr = this.impactor.crMass;
-	InArray.put(this.getString("lbImM"), this.standform(this.impactor.crMass)+" kg");
-	InArray.put(this.getString("lbPjVel"),  nbFormat(this.impactor.pjVel)+" km/s");
-	InArray.put(this.getString("lbPjAng"),  nbFormat(this.impactor.pjAngle)+"&deg;");
-	InArray.put(this.getString("lbPjDens"),  nbFormat(this.impactor.pjDens)+" kg/m<sup>3</sup>");
-	InArray.put(this.getString("lbTgDens"),   nbFormat(this.impactor.tgDens)+" kg/m<sup>3</sup>");
-	InArray.put(this.getString("lbfbrad"), nbFormat2(this.impactor.fbRadius) + " km" );
+	InArray.put(this.getString("lbImM"), this.standform(this.impactor.crMass)+"&nbsp;kg");
+	InArray.put(this.getString("lbPjVel"), nbFormat(this.impactor.pjVel)+"&nbsp;km/s");
+	InArray.put(this.getString("lbPjAng"), nbFormat(this.impactor.pjAngle)+"&deg;");
+	InArray.put(this.getString("lbPjDens"), nbFormat(this.impactor.pjDens)+"&nbsp;kg/m<sup>3</sup>");
+	InArray.put(this.getString("lbTgDens"), nbFormat(this.impactor.tgDens)+"&nbsp;kg/m<sup>3</sup>");
+	InArray.put(this.getString("lbfbrad"), nbFormat2(this.impactor.fbRadius) + "&nbsp;km" );
 	
 	var Outarray = new HashMap();
 	
-	if(this.impactor.crDepth > 1) Outarray.put(this.getString("lbCrDepth"), nbFormat(this.impactor.crDepth)+" m" );
-		
-	if(this.impactor.crDiam > 1) Outarray.put(this.getString("lbCrDiam"), nbFormat(this.impactor.crDiam)+" m" );
-	
-	if(this.impactor.ejThickness > 0.0001) Outarray.put(this.getString("lbCrThickness"),  nbFormat2(this.impactor.ejThickness)+" m");
-	
-	if(this.impactor.abAltBurst !=0) Outarray.put(this.getString("lbAbBurst"),  nbFormat(this.impactor.abAltBurst)+" m");
-	
-	if(this.impactor.abAltBreak !=0) Outarray.put(this.getString("lbAbBreak"),  nbFormat(this.impactor.abAltBreak)+" m");
-	
-	if(this.impactor.abWindvel > 0.5) Outarray.put(this.getString("lbAbVel"),  nbFormat(this.impactor.abWindvel)+" m/s");
+	if(this.impactor.crDepth > 1) Outarray.put(this.getString("lbCrDepth"), nbFormat(this.impactor.crDepth)+"&nbsp;m" );
+	if(this.impactor.crDiam > 1) Outarray.put(this.getString("lbCrDiam"), nbFormat(this.impactor.crDiam)+"&nbsp;m" );
+	if(this.impactor.ejThickness > 0.0001) Outarray.put(this.getString("lbCrThickness"),  nbFormat2(this.impactor.ejThickness)+"&nbsp;m");
+	if(this.impactor.abAltBurst !=0) Outarray.put(this.getString("lbAbBurst"),  nbFormat(this.impactor.abAltBurst)+"&nbsp;m");
+	if(this.impactor.abAltBreak !=0) Outarray.put(this.getString("lbAbBreak"),  nbFormat(this.impactor.abAltBreak)+"&nbsp;m");
+	if(this.impactor.abWindvel > 0.5) Outarray.put(this.getString("lbAbVel"),  nbFormat(this.impactor.abWindvel)+"&nbsp;m/s");
 	else//this line and next by AS(REMOVE WHEN REAL)
-		Outarray.put(this.getString("lbAbVel"),  nbFormat(this.impactor.abWindvel)+" m/s");
+		Outarray.put(this.getString("lbAbVel"),  nbFormat(this.impactor.abWindvel)+"&nbsp;m/s");
 	
 	Outarray.put(this.getString("lbAbRichter"),  nbFormat(this.impactor.smRichter) );
 	
-	if(this.impactor.abAmpl > 0) Outarray.put(this.getString("lbAbAmpl"),  nbFormat(this.impactor.abAmpl)+" dB");
+	if(this.impactor.abAmpl > 0) Outarray.put(this.getString("lbAbAmpl"),  nbFormat(this.impactor.abAmpl)+"&nbsp;dB");
 
 	var firearray = new HashMap();
 	firearray.put(this.getString("lbFbRad"), nbFormat2(this.impactor.fbRadius)+" km" );
@@ -271,7 +266,6 @@ CraterCalcs.prototype.sentData = function(){
 	nodata.put(this.getString("lbNoData"), this.getString("lbNoData"));
 	
 	var energyarray = new HashMap();
-	//HashMap<String,String> energyarray = new HashMap<String,String>();
 	
 	energyarray.put(this.getString("lbKE"), this.standform(this.impactor.pjEnergy)+" J");
 	energyarray.put(this.getString("lbImE"), this.standform(this.impactor.imEnergy)+" J");
@@ -298,8 +292,8 @@ CraterCalcs.prototype.sentData = function(){
 			this.impactor.imDesc += this.getString("projectile6");	
 		}else{
 			this.impactor.imDesc += this.getString("projectile7").replace(/%VELOCITY%/,nbFormat2(this.impactor.imVel)+" km/s")+"<br/><br/>";
-		}//end else
-	}//end else
+		}
+	}
 		
 	this.trace("Impact vel"+this.impactor.imVel);
 

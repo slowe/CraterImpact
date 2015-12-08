@@ -289,7 +289,7 @@ button:hover {
 	display: inline-block;
 }
 #ImpactDistanceSlider {
-   width: 180px;
+   width: 160px;
    display: inline-block;
 }
 #impactDist, #WaterDepthSlider {
@@ -403,7 +403,7 @@ button:hover {
 .slider_text_r {
 	padding-top: 0px;
 	padding-left: 20px;
-	min-width: 5em;
+	min-width: 4em;
 }
 .slider_text_l {
 	padding-right: 20px;
