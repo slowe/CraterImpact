@@ -155,6 +155,7 @@ h1
 	border-color: #ffffff;
 	text-align: center;
 	background-color: transparent;
+	border-radius: 5px;
 }
 #LanguageList li:hover {
 	cursor: pointer;
