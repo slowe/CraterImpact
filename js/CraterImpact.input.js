@@ -571,23 +571,17 @@
 		tragAngleVal = 90;
 		projVelVal = 0;
 		pjDens = 0;
-		tjDens = 0;
+		tgDens = 0;
 		waterLevel = 0;
 		
-		E("#ImpactDistance").attr("value", distVal).trigger('change');
-		E("#ProjectileDiameter").attr("value", diameterVal).trigger('change');
-		E("#ProjectileAngle").attr("value", tragAngleVal).trigger('change');
-		E("#ProjectileVelocity").attr("value", projVelVal).trigger('change');
-		E("#WaterDepth").attr("value", waterLevel).trigger('change');
-		E("#cpPjDens").attr('value', pjDens).trigger('change'); 
-		E("#cpTgDens").attr('value', tjDens).trigger('change');
-
 		this.selectTgDensity(E("#cpPjDens").e[0]);
 		this.selectPjDensity(E("#cpTgDens").e[0]);
 
 		E('#TargetFeature').css({'display':"block"});
 		E('#WaterFeature').css({'display':"none"});
 		
+		this.updateControls();
+
 		return this;
 	}
 
@@ -630,15 +624,33 @@
 		param = this.query.wlvl;
 		if (param == "") waterLevel = 0;
 		else waterLevel = parseInt(param);
-		
+
+		this.updateControls();
+		return this;
+	}
+
+	//============================================
+	// Set all the control values
+	CraterImpact.prototype.updateControls = function(){
+	
+		this.log('updateControls');
+
+		E("#ImpactDistance").attr("value", distVal).trigger('change');
+		E("#ProjectileSize").attr("value", diameterVal).trigger('change');
+		E("#ProjectileAngle").attr("value", tragAngleVal).trigger('change');
+		E("#ProjectileVelocity").attr("value", projVelVal).trigger('change');
+		E("#WaterDepth").attr("value", waterLevel).trigger('change');
+		E("#cpPjDens").attr('value', pjDens).trigger('change'); 
+		E("#cpTgDens").attr('value', tgDens).trigger('change');
+
 		if(pjDens) E('#cpPjDens option:eq('+(pjDens+1)+')').attr('selected','selected');
 		if(pjDens) E('#cpTgDens option:eq('+(tgDens+1)+')').attr('selected','selected');
 		this.selectTgDensity2(parseInt(tgDens));
 		this.selectPjDensity2(parseInt(pjDens));
 		
 		return this;
-	}//===========================================
-	
+	}
+
 	//============================================
 	// Parse the XML for this page
 	CraterImpact.prototype.onload = function(){
