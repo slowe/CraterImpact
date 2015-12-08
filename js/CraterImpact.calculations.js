@@ -1,115 +1,56 @@
 //###############################################################################
-/**
-* This class holds the core data model for the crater impact application holding
-* data for target, projectile, calculated cater values, crater dimensions, 
-* fireball, Ejecta, Air Blast, Seismic activity and impact.
-* 
-* @author asscott, slowe
-* @version v2.0
-*/
+// This class holds the core data model for the crater impact application holding
+// data for target, projectile, calculated cater values, crater dimensions, 
+// fireball, Ejecta, Air Blast, Seismic activity and impact.
+// 
+// @author asscott, slowe
+// @version v2.0
 //###############################################################################
-
-
-//============================================================================
-/**
- * A convenience method for getting at strings of the Android framework.
- * @param resID the ID of the string to be sought.
- * @return The string that matches the resID, or an empty string if no Android 
- * framework context exists.
- *CONVERT TO GET XML FROM THE FILE
- */
-//============================================================================
 
 var str = new HashMap();
 var craterCals;
 
-//DecimalFormat nbFormat = new DecimalFormat( "#,###,###,##0" );
-//DecimalFormat nbFormat2 = new DecimalFormat( "#,###,###,##0.00" );
-//DecimalFormat nbFormat3 = new DecimalFormat( "#,###,###,##0.00000" );
-
-//==============================================================================
-/**
-Format to 0dp.
-**/
-//==============================================================================
-function nbFormat (number)
-{
+// Format to 0dp.
+function nbFormat(number){ return number_format(number, 0, ".",","); }
+// Format to 2dp.
+function nbFormat2(number){ return number_format(number, 2, ".",","); }
+// Format to 5dp.
+function nbFormat3(number){ return number_format(number, 5, ".",","); }
 
 
-  var test3  = number_format(1234567.5678, 2, '.', ',');
-
-
-
-return number_format(number, 0, ".",",");
-}//=============================================================================
-
-//==============================================================================
-/**
-Format to 0dp.
-**/
-//==============================================================================
-function nbFormat2 (number)
-{
-return number_format(number, 2, ".",",");
-}//=============================================================================
-
-//==============================================================================
-/**
-Format to 0dp.
-**/
-//==============================================================================
-function nbFormat3 (number)
-{
-
-return number_format(number, 5, ".",",");
-}//=============================================================================
-
-
-//==============================================================================
-/**
-Format number to a number of decimal places with a given decimal_point and 
-thousands separater.
-**/
-//==============================================================================
-function number_format (number, decimals, dec_point, thousands_sep) {
- 
-//   number = (number + '').replace(/[^0-9+-Ee.]/g, '');
-
-number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
-var n = !isFinite(+number) ? 0 : +number,
-prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-s = '',
-toFixedFix = function (n, prec) {
-  var k = Math.pow(10, prec);
-  return '' + Math.round(n * k) / k;
-};
-// Fix for IE parseFloat(0.55).toFixed(0) = 0;
-s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-if (s[0].length > 3) {
-s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+// Format number to a number of decimal places with a given decimal_point and 
+// thousands separater.
+function number_format(number, decimals, dec_point, thousands_sep) {
+	number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+	var n = !isFinite(+number) ? 0 : +number,
+	prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+	sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+	dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+	s = '',
+	toFixedFix = function (n, prec) {
+		var k = Math.pow(10, prec);
+		return '' + Math.round(n * k) / k;
+	};
+	// Fix for IE parseFloat(0.55).toFixed(0) = 0;
+	s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+	if (s[0].length > 3) {
+		s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+	}
+	if ((s[1] || '').length < prec) {
+		s[1] = s[1] || '';
+		s[1] += new Array(prec - s[1].length + 1).join('0');
+	}
+	return s.join(dec);
 }
-if ((s[1] || '').length < prec) {
-s[1] = s[1] || '';
-s[1] += new Array(prec - s[1].length + 1).join('0');
-}
-return s.join(dec);
-}//==============================================================================
 
 //================================================================================
-/**
-Crater calcs object constructor.
-**/
-//================================================================================	
+// Crater calcs object constructor.
 function CraterCalcs(inp){
 
 	if(!inp) inp = {};
-	
 
 	// Variables used in calculations
 	this.velocity;				// velocity at target surface km/s
-	//this.distance;				// distance in km
 	this.mwater;				// mass of water
 	this.vseafloor;				// velocity of projectile at seafloor
 	this.energy0;				// input energy before atmospheric entry
@@ -133,7 +74,7 @@ function CraterCalcs(inp){
 	this.PO = Math.pow(10,5);                          // ambient pressure in Pa
 	this.G = (inp.G) ? inp.G : 9.8;                    // acceleration due to gravity
 	this.R_earth = (inp.R) ? inp.R : 6370;             // radius of the earth in km
-	this.surface_wave_v =5;                            // velocity of surface wave in km/s
+	this.surface_wave_v = 5;                           // velocity of surface wave in km/s
 	this.melt_coeff = 8.9 * Math.pow(10,-21);          // coefficient for melt volume calc
 	this.vEarth = (inp.V) ? inp.V : 1.1 * Math.pow(10,12); // volume of earth in km^3
 	this.vratio;				// ratio of volume of crater to volume of earth
@@ -145,8 +86,8 @@ function CraterCalcs(inp){
 	this.pratio;				// ratio of proj lin. momen to $pEarth
 	this.rhoSurface = (inp.rhoSurface) ? inp.rhoSurface : 1;			// suface density of atmosphere kg/m^3
 	this.scaleHeight = (inp.scaleHeight) ? inp.scaleHeight : 8000;			// scale height of atmosphere in m
-	this.dragC =1;				// drag coefficient
-	this.fp =7;				// pancake factor
+	this.dragC = 1;             // drag coefficient
+	this.fp = 7;                // pancake factor
 	this.valid_data =1;
 	this.returnVal;
 	this.freq_text;
@@ -156,13 +97,13 @@ function CraterCalcs(inp){
 
 	this.impactor = new ImpactModel();//Hold the impact model data.
 
-
 	/**For logging events and values for debugging purposes**/
 	this.LOGTAG = "CraterImpact";
 
 	return this;
-}//==================================================================
+}
 
+//==================================================================
 CraterCalcs.prototype.getString = function(str){
 	if(!this.dict) return "";
 	if(this.dict[str]) return this.dict[str];
@@ -170,10 +111,7 @@ CraterCalcs.prototype.getString = function(str){
 }
 
 //==================================================================
-/**
- * Gets the core data by performing the main calculations.
- */
-//==================================================================
+// Gets the core data by performing the main calculations.
 CraterCalcs.prototype.getData = function(dataProvider_,dict,callback){
 	this.dict = dict;
 	this.callback = callback;
@@ -181,13 +119,10 @@ CraterCalcs.prototype.getData = function(dataProvider_,dict,callback){
 	this.dataProvider.setImpactor(this.impactor);
 	this.doCalcs();
 	return this;	
-}//=================================================================
+}
 
 //===================================================================
-/**
-Once strings are retreived do the calcs.
-**/
-//===================================================================
+// Once strings are retreived do the calcs.
 CraterCalcs.prototype.doCalcs = function(){
 
 	//distance = 100;
@@ -201,11 +136,10 @@ CraterCalcs.prototype.doCalcs = function(){
 	}*/
 	this.sentData();
 	return this;
-}//=================================================================
+}
 
-/*==================================================================
-  Resets all the model values to zero
-==================================================================*/
+//==================================================================
+// Resets all the model values to zero
 CraterCalcs.prototype.loadParameters = function(){
 	//Alert.show(message, "Crater parameters");
 	this.impactor.reset();
@@ -255,18 +189,12 @@ CraterCalcs.prototype.loadParameters = function(){
 	this.impactor.pjAngle = this.dataProvider.getProjAngle();
 	this.impactor.pjDiam = this.dataProvider.getProjDiam();
 	this.impactor.pjVel = this.dataProvider.getProjVel();
-}//end load parameters===============================================
-
+}
 
 //==================================================================
-/**
- * 
- * @pre:  All necessary parameters are valid, results calculated
- * @post: Displays the results to the user
- */
-//==================================================================
-CraterCalcs.prototype.main_calculation = function()
-{
+// @pre:  All necessary parameters are valid, results calculated
+// @post: Displays the results to the user
+CraterCalcs.prototype.main_calculation = function(){
 	this.trace("P diam "+ this.impactor.pjDiam);
 	this.trace("P dens "+this.impactor.pjDens);
 	this.trace("V input "+this.impactor.pjVel);
@@ -277,7 +205,6 @@ CraterCalcs.prototype.main_calculation = function()
 		this.print_atmosphere();
 	}
 	this.find_crater();
-
 
 	if(this.impactor.abAltBurst <= 0.){
 
@@ -294,34 +221,25 @@ CraterCalcs.prototype.main_calculation = function()
 	this.air_blast();
 	
    this.trace("Energy "+this.impactor.imEnergy);
-}//=================================================================
+}
 
 //==================================================================
-/**
- *  Retrieves from the model and packages the calculated results by 
- *  sending the data to the data provider class from where it may be 
- *  collected by he UI.
- */
-//==================================================================
-CraterCalcs.prototype.sentData = function()
-{
+//  Retrieves from the model and packages the calculated results by 
+//  sending the data to the data provider class from where it may be 
+//  collected by he UI.
+CraterCalcs.prototype.sentData = function(){
 	var InArray = new HashMap();
-   //HashMap<String,String> InArray = new HashMap<String,String>();
 	
 	var crf =this.standform(this.impactor.crMass);
 	var cr = this.impactor.crMass;
 	InArray.put(this.getString("lbImM"), this.standform(this.impactor.crMass)+" kg");
 	InArray.put(this.getString("lbPjVel"),  nbFormat(this.impactor.pjVel)+" km/s");
-	InArray.put(this.getString("lbPjAng"),  nbFormat(this.impactor.pjAngle)+"<sup>o</sup>");
+	InArray.put(this.getString("lbPjAng"),  nbFormat(this.impactor.pjAngle)+"&deg;");
 	InArray.put(this.getString("lbPjDens"),  nbFormat(this.impactor.pjDens)+" kg/m<sup>3</sup>");
 	InArray.put(this.getString("lbTgDens"),   nbFormat(this.impactor.tgDens)+" kg/m<sup>3</sup>");
 	InArray.put(this.getString("lbfbrad"), nbFormat2(this.impactor.fbRadius) + " km" );
 	
-
 	var Outarray = new HashMap();
-//	HashMap<String,String> Outarray = new HashMap<String,String>();
-
-
 	
 	if(this.impactor.crDepth > 1) Outarray.put(this.getString("lbCrDepth"), nbFormat(this.impactor.crDepth)+" m" );
 		
@@ -341,8 +259,6 @@ CraterCalcs.prototype.sentData = function()
 	
 	if(this.impactor.abAmpl > 0) Outarray.put(this.getString("lbAbAmpl"),  nbFormat(this.impactor.abAmpl)+" dB");
 
-
-
 	var firearray = new HashMap();
 	firearray.put(this.getString("lbFbRad"), nbFormat2(this.impactor.fbRadius)+" km" );
 	firearray.put(this.getString("lbFbDuration"),  nbFormat3(this.impactor.fbDuration)+" s" );
@@ -350,12 +266,9 @@ CraterCalcs.prototype.sentData = function()
 	
 	if(this.impactor.fbExposure != 0) firearray.put(this.getString("lbFbExp"), this.standform(this.impactor.fbExposure)+" J/m<sup>2</sup>");
 	
-
 	var nodata = new HashMap();
 	//HashMap<String,String> nodata = new HashMap<String,String>();
 	nodata.put(this.getString("lbNoData"), this.getString("lbNoData"));
-	
-
 	
 	var energyarray = new HashMap();
 	//HashMap<String,String> energyarray = new HashMap<String,String>();
@@ -371,14 +284,8 @@ CraterCalcs.prototype.sentData = function()
 	if(this.impactor.fbRadius > 0.01) this.dataProvider.setDgFirevall(firearray);
 	else this.dataProvider.setDgFirevall(nodata);
 
-	
-
 	// Projectile travelling through the atmosphere
 	this.impactor.imDesc = "";
-	
-	//if (this.impactor.pjDens > 1000){
-
-
 	
 	if(this.iFactor >= 1){
 		this.impactor.imDesc += this.getString("projectile1")+nbFormat(this.impactor.imVel)+" km/s <br/><br/>";
@@ -390,16 +297,13 @@ CraterCalcs.prototype.sentData = function()
 			this.impactor.imDesc += this.getString("projectile5")+this.standform(this.impactor.imEnergy)+" J<br/><br/>";
 			this.impactor.imDesc += this.getString("projectile6");	
 		}else{
-			this.impactor.imDesc += this.getString("projectile7")+nbFormat2(this.impactor.imVel)+" km/s<br/><br/>";
+			this.impactor.imDesc += this.getString("projectile7").replace(/%VELOCITY%/,nbFormat2(this.impactor.imVel)+" km/s")+"<br/><br/>";
 		}//end else
 	}//end else
 		
 	this.trace("Impact vel"+this.impactor.imVel);
-	/*}else{
-		this.impactor.imDesc = "The this.impactor was cometary and it is likely that no solid fragments hit the earth.";
-	}*/
+
 	// Thermal effects and blast wave
-	
 	this.impactor.smDesc = "";
 	
 	if(this.impactor.fbExposure > (Math.pow(10,6) * this.megaton_factor)) this.impactor.smDesc += this.getString("expos1")+"<br/><br/>";
@@ -460,17 +364,13 @@ CraterCalcs.prototype.sentData = function()
 	//setCraterSize();
 	//sizeCompare();
 	//showMap();
-}//=-==============================================================
+}
 
 
 //==================================================================
-/**
- *Calculates the impact energy assigning results to class global 
- *impact model.
- */
-//==================================================================
-CraterCalcs.prototype.calc_energy = function()
-{
+// Calculates the impact energy assigning results to class global 
+// impact model.
+CraterCalcs.prototype.calc_energy = function(){
 	////// mass = density * volume, volume calculated assuming the projectile to be approximately spherical
 	////// V = 4/3pi(r^3) = 1/6pi(d^3)
 	var alpha;
@@ -552,17 +452,12 @@ CraterCalcs.prototype.calc_energy = function()
 		printf("</dl>\n");
 		return;
 	}*/
-}//===================================================================
-
+}
 
 //==================================================================
-/**
- * Calculates statistics and details regarding atmospheric entry and 
- * assigns the results within the Global impact model.
- */
-//==================================================================
-CraterCalcs.prototype.atmospheric_entry = function()
-{
+// Calculates statistics and details regarding atmospheric entry and 
+// assigns the results within the Global impact model.
+CraterCalcs.prototype.atmospheric_entry = function(){
 	var yield;		// yield strength of projectile in Pa 
 	var av;			//velocity decrement factor
 	var rStrength;		//strength ratio
@@ -588,8 +483,8 @@ CraterCalcs.prototype.atmospheric_entry = function()
 
 	this.iFactor = 5.437 * av * rStrength;
 
-	if(this.iFactor >= 1)// projectile lands intact
-	{		
+	if(this.iFactor >= 1){
+		// projectile lands intact
 
 		this.impactor.abAltBurst = 0;
 		tmp = (2 * this.impactor.pjDens * this.impactor.pjDiam * this.G / (3 * this.rhoSurface * this.dragC));
@@ -602,9 +497,8 @@ CraterCalcs.prototype.atmospheric_entry = function()
 			this.impactor.imVel = vSurface;
 		
 
-	}//end if
-	else // projectile does not land intact
-	{
+	}else{
+		// projectile does not land intact
 		
 		//Alert.show("Projectile does not land");
 		altitude1 = - this.scaleHeight * Math.log(rStrength);
@@ -620,34 +514,26 @@ CraterCalcs.prototype.atmospheric_entry = function()
 		this.impactor.abAltBurst = this.impactor.abAltBreak - altitudePen;
 		this.trace ("Projectile does not land");
 		
-		if(this.impactor.abAltBurst > 0)
-		{			// this.impactor bursts in atmosphere
+		if(this.impactor.abAltBurst > 0){
+			// this.impactor bursts in atmosphere
 			expfac = 1/24 * alpha2 *(24 + 8 * Math.pow(alpha2,2) + 6 * alpha2 * lDisper / this.scaleHeight + 3 * Math.pow(alpha2,3) * lDisper / this.scaleHeight);
 			this.impactor.imVel = vBU * Math.exp(- expfac * vFac);
-		}//end if
-		else
-		{
+		}else{
 			altitudeScale = this.scaleHeight / lDisper;
 			integral = Math.pow(altitudeScale,3) / 3 * (3 * (4 + 1/Math.pow(altitudeScale,2)) * Math.exp(this.impactor.abAltBreak / this.scaleHeight) + 6 * Math.exp(2 * this.impactor.abAltBreak / this.scaleHeight) - 16 * Math.exp(3 * this.impactor.abAltBreak / (2 * this.scaleHeight)) - 3 / Math.pow(altitudeScale,2) - 2);
 			this.impactor.imVel = vBU * Math.exp(- vFac * integral);
 			dispersion = this.impactor.pjDiam * Math.pow((1 + 4 * Math.pow(altitudeScale,2) * Math.pow((Math.exp(this.impactor.abAltBreak / (2 * this.scaleHeight)) - 1),2)),0.5);
 
-		}//end else
+		}
+	}
 
-	}//end else
-
-	this.impactor.imVel /= 1000;
-	
-}//=================================================================
+	this.impactor.imVel /= 1000;	
+}
 
 //==================================================================
-/**
- * Crater based calculations to find the dimensions of the crater and 
- * its depth. Assigns the results to the class global impact model.
- */
-//==================================================================
-CraterCalcs.prototype.find_crater = function()
-{
+// Crater based calculations to find the dimensions of the crater and 
+// its depth. Assigns the results to the class global impact model.
+CraterCalcs.prototype.find_crater = function(){
 	var Cd;
 	var beta;
 	var anglefac;
@@ -656,32 +542,27 @@ CraterCalcs.prototype.find_crater = function()
 
 	anglefac = Math.pow((Math.sin (this.impactor.pjAngle * Math.PI / 180)),(1/3));
 	
-	if(this.impactor.tgType == 1)
-	{
+	if(this.impactor.tgType == 1){
 		Cd = 1.88;
 		beta = 0.22;
-	}//end if
-	else if(this.impactor.tgType == 2)
-	{
+	}else if(this.impactor.tgType == 2){
 		Cd = 1.54;
 		beta = 0.165;
-	}//end else if
-	else
-	{
+	}else{
 		Cd = 1.6;
 		beta = 0.22;
-	}//end else
-	
-	if(this.impactor.tgDepth != 0)
-	{		// calculate crater in water using Cd = 1.88 and beta = 0.22
+	}
+		
+	if(this.impactor.tgDepth != 0){
+		// calculate crater in water using Cd = 1.88 and beta = 0.22
 	
 		wdiameter = 1.88 * (Math.pow((this.impactor.crMass / this.impactor.tgDens),1/3)) * Math.pow(( (1.61*this.G*this.impactor.pjDiam)/Math.pow((this.impactor.imVel*1000),2)),(- 0.22));
 		wdiameter *= anglefac;
 		
 		this.impactor.tgDens = 2700;	// change target density for seafloor crater calculation
-	}//end else
+	}
 	
-		// vseafloor == surface velocity if there is no water
+	// vseafloor == surface velocity if there is no water
 	this.impactor.crTsDiam = Cd * (Math.pow((this.impactor.crMass / this.impactor.tgDens),0.333)) * Math.pow(( (1.61*this.G*this.impactor.pjDiam)/Math.pow((vseafloor*1000),2)),(- beta));
 	this.impactor.crTsDiam *= anglefac;
 	
@@ -690,43 +571,41 @@ CraterCalcs.prototype.find_crater = function()
 	
 	this.impactor.crTsDepth = this.impactor.crTsDiam / 2.828;
 
-	if(this.impactor.crTsDiam*1.25 >= 3200)
-	{                  // complex crater will be formed, use equation from McKinnon and Schenk (1985)
-	  this.impactor.crDiam = (1.17 * Math.pow(this.impactor.crTsDiam,1.13)) / (2.8554);
-	  this.impactor.crDepth = 37 * Math.pow(this.impactor.crDiam,0.301);
-	}//end if
-	else//simple crater will be formed.
-	{                                  
+	if(this.impactor.crTsDiam*1.25 >= 3200){
+		// complex crater will be formed, use equation from McKinnon and Schenk (1985)
+		this.impactor.crDiam = (1.17 * Math.pow(this.impactor.crTsDiam,1.13)) / (2.8554);
+		this.impactor.crDepth = 37 * Math.pow(this.impactor.crDiam,0.301);
+	}else{
+		//simple crater will be formed.
 
-	  //Diameter of final crater in m
-	  this.impactor.crDiam = 1.25 * this.impactor.crTsDiam;
+		//Diameter of final crater in m
+		this.impactor.crDiam = 1.25 * this.impactor.crTsDiam;
 
-	  //Breccia lens volume in m^3
-	  vbreccia = 0.032 * Math.pow(this.impactor.crDiam,3);		// in m^3
+		//Breccia lens volume in m^3
+		vbreccia = 0.032 * Math.pow(this.impactor.crDiam,3);		// in m^3
 
-	  //Rim height of final crater in m
-	  rimHeightf = 0.07 * Math.pow(this.impactor.crTsDiam,4) / Math.pow(this.impactor.crDiam,3);
+		//Rim height of final crater in m
+		rimHeightf = 0.07 * Math.pow(this.impactor.crTsDiam,4) / Math.pow(this.impactor.crDiam,3);
 
-	  //Thickness of breccia lens in m
-	  this.impactor.crBrecThick = 2.8 * vbreccia * ((this.impactor.crTsDepth + rimHeightf) / (this.impactor.crTsDepth * Math.pow(this.impactor.crDiam,2)));
-	
-	  //Final crater depth (in m) = transient crater depth + final rim height - breccia thickness
-	  this.impactor.crDepth = this.impactor.crTsDepth + rimHeightf - this.impactor.crBrecThick;
+		//Thickness of breccia lens in m
+		this.impactor.crBrecThick = 2.8 * vbreccia * ((this.impactor.crTsDepth + rimHeightf) / (this.impactor.crTsDepth * Math.pow(this.impactor.crDiam,2)));
 
-	}//end else
+		//Final crater depth (in m) = transient crater depth + final rim height - breccia thickness
+		this.impactor.crDepth = this.impactor.crTsDepth + rimHeightf - this.impactor.crBrecThick;
+
+	}
 	
 	this.impactor.crVol = (Math.PI / 24) * Math.pow((this.impactor.crTsDiam/1000),3);
 	vratio = this.impactor.crVol / this.vEarth;
 	
-	if(this.impactor.imVel >= 12)
-	{
+	if(this.impactor.imVel >= 12){
 		this.impactor.crVolMelt = this.melt_coeff * (energy_seafloor) * Math.sin(this.impactor.pjAngle * Math.PI / 180);		// energy_seafloor = this.impactor.imEnergy if there is no water layer
 		if(this.impactor.crVolMelt > this.vEarth)
 			this.impactor.crVolMelt = this.vEarth;
 	
 		mratio = this.impactor.crVolMelt / this.vEarth;
 		mcratio = this.impactor.crVolMelt / this.impactor.crVol;
-	}//end if
+	}
 	this.trace("Final Crater diam "+this.impactor.crDiam);
 	this.trace("Final crater depth "+this.impactor.crDepth);
 	this.trace("Transient crater "+this.impactor.crTsDiam);	
@@ -735,13 +614,9 @@ CraterCalcs.prototype.find_crater = function()
 
 
 //==================================================================
-/**
- * Calculates statistics about the impact ejecta. Assigns the resuts 
- * to the class global impact model.
- */
-//==================================================================
-CraterCalcs.prototype.find_ejecta = function ()
-{
+// Calculates statistics about the impact ejecta. Assigns the resuts 
+// to the class global impact model.
+CraterCalcs.prototype.find_ejecta = function (){
 	
 	var phi = (this.impactor.imDist) / (2 * this.R_earth);
 	var X = (2 * Math.tan(phi)) / (1 + Math.tan(phi));
@@ -768,13 +643,9 @@ CraterCalcs.prototype.find_ejecta = function ()
 }////// end of find_ejecta==========================================
 
 //==================================================================
-/**
- * Calculates thermal statistics and assigns the results to the class 
- * global impact model.
- */
-//==================================================================
-CraterCalcs.prototype.find_thermal = function()
-{
+// Calculates thermal statistics and assigns the results to the class 
+// global impact model.
+CraterCalcs.prototype.find_thermal = function(){
 	var eta;
 	var T_star;
 	var sigma;
@@ -806,16 +677,12 @@ CraterCalcs.prototype.find_thermal = function()
 	this.megaton_factor = Math.pow(this.impactor.imMegaton,1/6);
 	this.trace("Exposure "+this.impactor.fbExposure);
 
-}//=================================================================
+}
 
 //==================================================================
-/**
- *  returns the richter magnitude of the seismic disturbance caused 
- *  by impact
- */
-//==================================================================
-CraterCalcs.prototype.find_magnitude = function()
-{	
+//  returns the richter magnitude of the seismic disturbance caused 
+//  by impact
+CraterCalcs.prototype.find_magnitude = function(){
 	var Ax;
 	
 	this.impactor.smRichter = 0.67 * ((Math.log (energy_seafloor))/Math.LN10) - 5.87;
@@ -837,16 +704,12 @@ CraterCalcs.prototype.find_magnitude = function()
 	this.impactor.smEffMag = (Math.log (Ax) /Math.LN10) + 1.4;
 	this.impactor.smArrival = this.impactor.imDist / this.surface_wave_v;
 	this.trace("Effective mag: "+this.impactor.smEffMag);
-}//=================================================================
+}
 
 //==================================================================
-/**
- * Calculates statistics about the air blast created and assigns the 
- * results to the class global impact model.
- */
-//==================================================================
-CraterCalcs.prototype.air_blast = function()
-{
+// Calculates statistics about the air blast created and assigns the 
+// results to the class global impact model.
+CraterCalcs.prototype.air_blast = function(){
 
 	var vsound = 330;	// speed of sound in m/s
 	var r_cross0 = 290;	// radius at which relationship between overpressure and distance changes (for surface burst)
@@ -872,60 +735,44 @@ CraterCalcs.prototype.air_blast = function()
 	d_scale = (this.impactor.imDist * 1000) / sf;
 
 	z_scale = this.impactor.abAltBurst / sf;
-  //radius at which relationship between overpressure and distance changes
+	//radius at which relationship between overpressure and distance changes
 	r_cross = r_cross0 + 0.65 * z_scale;
 	r_mach = 550 * z_scale /(1.2 * (550 - z_scale));
-	if(z_scale >= 550)
-		r_mach = 1e30;
+	if(z_scale >= 550) r_mach = 1e30;
 	
 
-	if(this.impactor.abAltBurst > 0)
-	{
+	if(this.impactor.abAltBurst > 0){
 
 		d_smooth = Math.pow(z_scale,2) * 0.00328;
 		p_machT = ((r_cross * op_cross) / 4) * (1 / (r_mach + d_smooth)) * Math.pow((1 + 3*(r_cross / (r_mach + d_smooth))),1.3);
 		p_0 = 3.1423e11 / Math.pow(z_scale,2.6);
 		expFactor = - 34.87 / Math.pow(z_scale,1.73);
 		p_regT = p_0 * Math.exp(expFactor * (r_mach - d_smooth));
-	}//end if
-	else
-	{
+	}else{
 		d_smooth = 0;
 		p_machT = 0;
-	}//end else
+	}
 	
-	if(d_scale >= (r_mach + d_smooth))
-		this.impactor.abOpressure = ((r_cross * op_cross) / 4) * (1 / d_scale) * (1 + 3*Math.pow((r_cross / d_scale), 1.3));
-	else if(d_scale <= (r_mach - d_smooth))
-		this.impactor.abOpressure = p_0 * Math.exp(expFactor * d_scale);
-	else
-		this.impactor.abOpressure = p_regT - (d_scale - r_mach + d_smooth) * 0.5 * (p_regT - p_machT)/d_smooth;
+	if(d_scale >= (r_mach + d_smooth)) this.impactor.abOpressure = ((r_cross * op_cross) / 4) * (1 / d_scale) * (1 + 3*Math.pow((r_cross / d_scale), 1.3));
+	else if(d_scale <= (r_mach - d_smooth)) this.impactor.abOpressure = p_0 * Math.exp(expFactor * d_scale);
+	else this.impactor.abOpressure = p_regT - (d_scale - r_mach + d_smooth) * 0.5 * (p_regT - p_machT)/d_smooth;
 	
-
 	this.impactor.abWindvel = ((5 * this.impactor.abOpressure) / (7 * this.PO)) * (vsound / Math.pow((1 + (6 * this.impactor.abOpressure) / (7 * this.PO)),0.5));
 
 	////// damage descriptions:  structures
 
-	
-
 	////// sound intensity
 
-	if(this.impactor.abOpressure > 0)
-		this.impactor.abAmpl = 20 * (Math.log (this.impactor.abOpressure) / Math.LN10);
-	else
-		this.impactor.abAmpl = 0;
+	if(this.impactor.abOpressure > 0) this.impactor.abAmpl = 20 * (Math.log (this.impactor.abOpressure) / Math.LN10);
+	else this.impactor.abAmpl = 0;
 	
 	this.trace("O pressure "+this.impactor.abOpressure);
-}//================================================================
+}
 
 //==================================================================
-/**
- * Calculates atmospheric data and assigns the results to the class 
- * global impact model.
- */
-//==================================================================
-CraterCalcs.prototype.print_atmosphere = function()
-{
+// Calculates atmospheric data and assigns the results to the class 
+// global impact model.
+CraterCalcs.prototype.print_atmosphere = function(){
 
 	//Atmospheric Entry:
 
@@ -959,17 +806,13 @@ CraterCalcs.prototype.print_atmosphere = function()
 	this.impactor.imEnergy *= Math.pow(10,ens_power);
 	this.impactor.imMegaton *= Math.pow(10,megaton_power);
 
-}//================================================================
+}
 
 //==================================================================
-/**
- * Convets a double to standard form.
- * @param a The double to convert.
- * @return The conerted number as a String.
- */
-//==================================================================
-CraterCalcs.prototype.standform = function( a)
-{
+// Convets a double to standard form.
+// @param a The double to convert.
+// @return The conerted number as a String.
+CraterCalcs.prototype.standform = function(a){
 	var exponent = Math.floor(Math.log(Math.abs(a)) / Math.LN10); 
 	
  
@@ -981,22 +824,14 @@ CraterCalcs.prototype.standform = function( a)
 
 	this.trace("x "+mantissa+" y "+exponent+" a "+a);
 	return nbFormat2(mantissa)+" x 10<sup>"+exponent + "</sup>";
-} //==========================================================================
+}
 
 //============================================================================
-/**
- * A convenience method to enable the trace method to work which was originally 
- * an ActionScript commend. Using this method means that many log commands to not
- * need to be rewritten.
- */
-//============================================================================
-CraterCalcs.prototype.trace = function(s)
-{
+// A convenience method to enable the trace method to work which was originally 
+// an ActionScript commend. Using this method means that many log commands to not
+// need to be rewritten.
+CraterCalcs.prototype.trace = function(s){
 	console.log("CRATER IMPACT" + ": " + s);
-	//console.log("log jam");
-}//===========================================================================
-
-
-
+}
 
 //##############################################################################

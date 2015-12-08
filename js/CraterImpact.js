@@ -5,7 +5,9 @@ var CraterImpact;
 
 	var wide = 0;
 	var tall = 0;
+
 	function height(el){
+		if(!el) return 0;
 		if('getComputedStyle' in window) return parseInt(window.getComputedStyle(el, null).getPropertyValue('height'));
 		else return parseInt(el.currentStyle.height);	
 	}
@@ -37,6 +39,7 @@ var CraterImpact;
 
 		this.parseQueryString();
 		this.setValues();
+		if(this.query.lang) this.lang = this.query.lang;
 		this.log('new crater',this.query);
 
 		// Hide header and footer if screen is too small
@@ -54,6 +57,9 @@ var CraterImpact;
 			console.log(e.data.me)
 			E('#acknowledgements').css({'display': ''});
 		});
+		E('#close button').on('click',{me:this},function(){
+			E('#bg').trigger('click');
+		})
 		
 		var _obj = this;
 		// We'll need to change the sizes when the window changes size
@@ -69,9 +75,12 @@ var CraterImpact;
 		tall = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 		// Update main panel
-		el = E('#Content_Wrapper');
-		h = height(el.e[0]);
-		if(h > 0 && tall > h) el.css({'top':((tall-h)/2)+'px'});
+		var els = ['#impactCalc','#Content_Wrapper']
+		for(var i = 0; i < els.length; i++){
+			el = E(els[i]);
+			h = height(el.e[0]);
+			if(h > 0 && tall > h) el.css({'top':((tall-h)/2)+'px'});
+		}
 
 		// Update acknowledgement popup
 		el = E('#ACK_inner');
