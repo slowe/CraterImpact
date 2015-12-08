@@ -483,7 +483,7 @@ h1
 DATA Output 
 //////////////////////////////////////////////*/
 
-#impactCalc, #Content_Wrapper {
+#impactCalc, #ImpactCalc_Input, #Content_Wrapper {
 	position: relative;
 	top: 0px;
 	text-align: center;

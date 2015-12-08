@@ -4,10 +4,6 @@
 	<title>Crater Impact</title>
 	<meta http-equiv="Content-type" content="text/html;charset=utf-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.2.custom.css" />
-	<script src="js/jquery-1.9.1.js"></script>
-	<script src="js/jquery-ui-1.10.2.custom.js"></script>
-	<script type="text/javascript" src="js/planets.js"></script> 
 	<script type="text/javascript" src="js/stuquery.js"></script> 
 	<script type="text/javascript" src="js/CraterImpact.js"></script> 
 	<script>
@@ -18,9 +14,9 @@
 
 			E("#StartButton").html(this.dict.btStart);
 			E("#lang_warn").html(this.dict.brz_wrn);
-			E('#earth p').html(this.dict.bodyEarth);
-			E('#moon p').html(this.dict.bodyMoon);
-			E('#mars p').html(this.dict.bodyMars);
+			E('#Earth p').html(this.dict.bodyEarth);
+			E('#Moon p').html(this.dict.bodyMoon);
+			E('#Mars p').html(this.dict.bodyMars);
 	
 			if(isCanvasSupported()) E('#lang_warn').css({'display':'none'});
 			else E('#lang_warn').css({'display':'block'});
@@ -63,14 +59,27 @@
 		});
 	
 	});
+	//========================================================
+	// Returns true of the browser supporte the Canvas feature
+	function isCanvasSupported(){
+		var elem = document.createElement('canvas');
+		return !!(elem.getContext && elem.getContext('2d'));
+	}
+	
+	//=========================================================
+	// Check browser support for canvas.
+	function isCanvasSupported(){
+		var elem = document.createElement('canvas');
+		return !!(elem.getContext && elem.getContext('2d'));
+	}
 	</script> 
 </head>
-<body onload="prepareView()">
+<body>
 
 	<div  id="container">
 
 		<div id="header">
-			 <div id="AppTitle">Down 2 Earth - Crater Impact</div>
+			 <div id="AppTitle"><a href="index.html">Down 2 Earth - Crater Impact</a></div>
 	  		 <div id="ACK"><a href="#acknowledgements">Acknowledgements</a></div>
 			<div class="spacer"></div>
 		</div><!--end header-->

@@ -75,7 +75,7 @@ var CraterImpact;
 		tall = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 		// Update main panel
-		var els = ['#impactCalc','#Content_Wrapper']
+		var els = ['#impactCalc','#ImpactCalc_Input','#Content_Wrapper']
 		for(var i = 0; i < els.length; i++){
 			el = E(els[i]);
 			h = height(el.e[0]);
@@ -143,6 +143,8 @@ var CraterImpact;
 	// Deal with a change in language - update the DOM
 	CraterImpact.prototype.updateLanguage = function(){
 		this.log('updateLanguage');
+		E('#AppTitle a').html(this.dict.lblTitle)
+		E('#ACK a').html(this.dict.lbAcknow);
 		return this;
 	}
 	
