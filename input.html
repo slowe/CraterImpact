@@ -4,14 +4,20 @@
 	<title>Crater Impact</title>
 	<meta http-equiv="Content-type" content="text/html;charset=ISO-8859-1">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.2.custom.css" />
+	<link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
 	<!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
-	<script src="js/jquery-1.9.1.js"></script>
-	<script src="js/jquery-ui-1.10.2.custom.js"></script>
-	<script src="js/jquery.ui.touch-punch.min.js"></script>
 	<script type="text/javascript" src="js/stuquery.js"></script> 
+	<script type="text/javascript" src="js/nouislider.min.js"></script> 
 	<script type="text/javascript" src="js/CraterImpact.js"></script>
 	<script type="text/javascript" src="js/CraterImpact.input.js"></script>
+	<script>
+	// Add an event to be called when the document is loaded
+	E(document).ready(function(){
+		crater = new CraterImpact({});
+		crater.processInput();
+	});
+
+	</script>
 </head>
 <body>
 
@@ -29,33 +35,45 @@
 		
 				<div id="Title" class="screen_title">Input Parameters</div>
 				<table  class="input_table">
-				<!--ASTEROID DIAMETER-->
-					<tr><td>
-					<div id="titleProjectile" class="input_title">Projectile Diameter</div>
-					<div id="Projectile"><img alt="The projectile" id="Projectile_Img" src="imgs/prj.png"/></div>
-					<canvas id="ProjectileWidth" width="200" height="13"></canvas>
-					<div id="ProjectileValue">15000m</div>
-					<div  class="input_panel"><div id="Slider1_Text" class="slider_text_l">Value:</div><div><div id="projDiam" class="slider" ></div></div></div>
-					</td>
-				<!--TRAJECTORY ANGLE-->
+				<tr>
+					<!--ASTEROID DIAMETER-->
 					<td>
-					<div id="titleAngle" class="input_title">Projectile Angle</div>
-					<canvas ID="Angle" width="159" height="108" ></canvas>
-					<div class="input_panel"><div id="Slider2_Text" class="slider_text_l">Value:</div><div><div id="projAngle" class="slider" ></div></div></div>
+						<div id="titleProjectile" class="input_title">Projectile Diameter</div>
+						<div id="Projectile"><img alt="The projectile" id="Projectile_Img" src="imgs/prj.png"/></div>
+						<canvas id="ProjectileWidth" width="200" height="13"></canvas>
+						<div id="ProjectileValue">15000m</div>
+						<div class="input_panel">
+							<input type="number" id="ProjectileSize" min="0" max="15000" step="100" required="required" value="0" />
+							<div id="Slider1_Text" class="slider_text_l">Value:</div><div id="ProjectileSizeSlider"></div>
+							<div><div id="projDiam" class="slider" ></div></div>
+						</div>
 					</td>
-				<!--OBJECT VELOCITY-->
+					<!--TRAJECTORY ANGLE-->
+					<td>
+						<div id="titleAngle" class="input_title">Projectile Angle</div>
+						<canvas ID="Angle" width="159" height="108" ></canvas>
+						<div class="input_panel">
+							<input type="number" id="ProjectileAngle" min="0" max="90" step="1" required="required" value="90" />
+							<div id="Slider2_Text" class="slider_text_l">Value:</div><div id="ProjectileAngleSlider"></div>
+							<div><div id="projAngle" class="slider" ></div></div>
+						</div>
+					</td>
+					<!--OBJECT VELOCITY-->
 					<td>
 						<div  id ="titleVelocity" class="input_title">Projectile Velocity</div>
-				
 						<canvas ID="Speedo" width="159" height="156" ></canvas>
-						<div class="input_panel"><div id="Slider3_Text" class="slider_text_l">Value:</div><div><div id="projVel" class="slider" ></div></div></div>
+						<div class="input_panel">
+							<input type="number" id="ProjectileVelocity" min="0" max="60" step="1" required="required" value="0" />
+							<div id="Slider3_Text" class="slider_text_l">Value:</div><div id="ProjectileVelocitySlider"></div>
+							<div><div id="projVel" class="slider" ></div></div>
+						</div>
 					</td></tr>
 				</table>
 				<table  class="input_table">
 					<!--PROJECTILE DENSITTY-->
 					<tr><td class="input_area">
 						<div id="titlePJDensity" class="input_title">Projectile Density</div>
-						 <select id = "cpPjDens" class="input_combo" onChange="selectPjDensity(this)">
+						 <select id="cpPjDens" class="input_combo">
 						   <option id="pjd_op0" value = "0">Please Select...</option>
 						   <option id="pjd_op1" value = "1">Ice</option>
 						   <option id="pjd_op2" value = "2">Porous Rock</option>
@@ -66,31 +84,38 @@
 					<!--TARGET DENSITY-->
 					</td><td class="input_area">
 						<div id="titleTGDensity" class="input_title">Target Density</div>
-						 <select id = "cpTgDens" class="input_combo" onChange="selectTgDensity(this)">
-						   <option id="tgd_op0" value = "0">Please Select...</option>
-						   <option id="tgd_op1" value = "1">Water</option>
-						   <option id="tgd_op2" value = "2">Sedimentry Rock</option>
-						   <option id="tgd_op3" value = "3">Igneous Rock</option>
+						 <select id="cpTgDens" class="input_combo">
+						   <option id="tgd_op0" value="0">Please Select...</option>
+						   <option id="tgd_op1" value="1">Water</option>
+						   <option id="tgd_op2" value="2">Sedimentry Rock</option>
+						   <option id="tgd_op3" value="3">Igneous Rock</option>
 						 </select>
-						 <select id = "cpTgDensMarsMoon" class="input_combo" onChange="selectTgDensityMarsMoon(this)">
+						 <select id="cpTgDensMarsMoon" class="input_combo">
 							<option id="tgd_op0" value = "0">Please Select...</option>
 							<option id="tgd_op3" value = "3">Igneous Rock</option>
 						 </select>
 						<div id="TargetFeature" class="input_image"><img  alt="Projectile Target Density" id="TargetImage" src="imgs/blank.png"/></div>
 						<div id="WaterFeature" style="display: none;" class="input_image">
 							<canvas ID="WaterVis" width="344" height="122"></canvas>
-							<div class="input_panel_w"><div id="Slider4_Text" class="slider_text_l">Value:</div><div><div id="wtr" class="slider" ></div></div></div>
+							<div class="input_panel_w">
+								<input type="number" id="WaterDepth" min="0" max="2000" step="20" required="required" value="0" />
+								<div id="Slider4_Text" class="slider_text_l">Value:</div><div id="WaterDepthSlider"></div>
+							</div>
 						</div>
 					</td></tr>
 				</table>
 			
-				<div ID="Input_Footer">
+				<div id="Input_Footer">
 					<div class="input_bottom_buttons">
-						<button id="BT_Reset" class="left_footer_button" onMouseUp="reset();">Reset</button>
-						<button id="BT_Submit" class="left_footer_button" onMouseUp=" validateAndSumbit();">Submit</button>
-						<button id="BT_Help" class="left_footer_button_s" onMouseUp=" help();">?</button>
+						<button id="BT_Reset" class="left_footer_button">Reset</button>
+						<button id="BT_Submit" class="left_footer_button" onMouseUp="validateAndSumbit();">Submit</button>
+						<button id="BT_Help" class="left_footer_button_s" onMouseUp="help();">?</button>
 					</div>
-					<div class="input_panel_right"><div id="Slider5_Text" class="slider_text_l">Distance from Crash Site:</div><div><div id="impactDist" class="slider" ></div></div><div class="slider_text_r" id="DistanceAMT">0km</div></div>
+					<div class="input_panel_right">
+						<input type="number" id="ImpactDistance" min="0" max="500" step="1" required="required" value="0" />
+						<div id="Slider5_Text" class="slider_text_l">Distance from Crash Site:</div><div id="ImpactDistanceSlider"></div>
+						<div class="slider_text_r" id="DistanceAMT">0km</div>
+					</div>
 				</div>
 		
 		 

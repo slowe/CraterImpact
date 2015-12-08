@@ -186,16 +186,22 @@ h1
 	margin-left: 300px;
 }
 
-
-.StartButton {
+button {
 	border: 0px;
 	border-radius: 5px;
 	background-color: #efefef;
 	cursor: pointer;
-	width: 180px;
-	line-height: 2.5em;
+	line-height: 2em;
 	font-size: 1em;
 	text-align: center;
+	margin-right: 0.25em;
+	padding: 0 0.5em;
+}
+button:hover {
+	background-color: #bbeeff;
+}
+.StartButton {
+	width: 180px;
 	margin: 2em auto 0 auto;
 }
 
@@ -238,133 +244,87 @@ h1
 }
 
 
-#Input_Footer
-{
-	background-color: #c3c3c3;
-	height: 5%;
-	padding: 10px;
-	
-	 -moz-border-bottom-right-radius: 5px;
-	 border-bottom-right-radius: 5px;
-	 
-	  -moz-border-bottom-left-radius: 5px;
-	 border-bottom-left-radius: 5px;
-	 
-	  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #939393), color-stop(1, #d3d3d3) );
-	 background:-moz-linear-gradient( center top, #c3c3c3 5%, #d3d3d3 100% );
-	 filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#939393', endColorstr='#d3d3d3');
+.tmp {
+	background-image: url('../imgs/speedo.png');
 }
 
-.tmp
-{
- background-image: url('../imgs/speedo.png');
+#Speedo {
+	clear: all;
+	width: 159px;
+	height: 156px;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	display: block;
 }
 
-#Speedo
-{
-  clear: all;
-  width: 159px;
-  height: 156px;
-  background-repeat: no-repeat;
-  margin: 0 auto;
-  display: block;
-
-  
-}
-
-#Angle
-{
+#Angle {
 	width: 100%;
 	margin: 0 auto;
-	 width: 159px;
+	width: 159px;
 	height: 107.5px;
 	margin-top: 22.5px;
 	margin-bottom: 22.5px;
-	
 }
 
-#Projectile
-{
+#Projectile {
 	width: 100%;
 	width: 159px;
 	height: 131px;
 	position:relative;
-
-	 left: 40px;
-	 top: 0px;
+	left: 40px;
+	top: 0px;
 }
 
-#WaterFeature
-{
-
-	
-	
+#WaterFeature {
 }
 
-
-
-#Projectile_Img
-{
+#Projectile_Img {
 	position:absolute;
 }
-#ProjectileValue
-{
-  text-align: center;
-  font-size: 1em;
-  height: 12px;
+#ProjectileValue {
+	text-align: center;
+	font-size: 1em;
+	height: 12px;
 }
 
 
-#impactDist
-{
+#projDiam, #projAngle, #projVel, #ProjectileSizeSlider, #ProjectileAngleSlider, #ProjectileVelocitySlider {
+	width: 120px;
+	display: inline-block;
+}
+#impactDist, #ImpactDistanceSlider, #WaterDepthSlider {
    width: 200px;
    display: inline-block;
 }
 
-#projDiam, #projAngle, #projVel
-{
-   width: 120px;
-	display: inline-block;
-}
 
-#wtr
-{
+#wtr {
 	width: 280px;
 	display: inline-block;
 }
 
-#ProjectileWidth
-{
- display: block;
- margin: 0 auto;
- 
- 
+#ProjectileWidth {
+	display: block;
+	margin: 0 auto;
 }
 
-#WaterVis
-{
-
- width: 344px;
- 
- height: 122px;
- margin-top: 10px;
- margin: 0 auto;
- display: block;
+#WaterVis {
+	width: 344px;
+	height: 122px;
+	margin-top: 10px;
+	margin: 0 auto;
+	display: block;
 }
 
 
 
-.input_table
-{
-
+.input_table {
 	width: 100%;
-	height: 44%;
+	height: 223px;
 	border-color:#9c9c9c;
 	border-width: 0px;
 	background: #f0f0f0;
 	border-spacing: 10px 5px;
-	
-	
 }
 
 .input_table td {
@@ -374,6 +334,7 @@ h1
 	padding: 5px;
 	vertical-align: top;
 	border-radius: 5px;
+	border-bottom: 0px;
 }
 
 
@@ -407,77 +368,61 @@ h1
 }
 
 
-.input_combo
-{
+.input_combo {
   width: 100%;
   margin-bottom: 10px;
 }
 
 
-.input_image, .input_image img
-{
-
- width: 100%;
+.input_image, .input_image img{
+	width: 100%;
 }
 
-.input_bottom_buttons
-{
- float: left;
+.input_bottom_buttons {
+	display: inline-block;
 }
 
-.input_bottom_buttons button
-{
-  width: 100px;
+.input_bottom_buttons button {
 }
 
 
-.input_panel_right
-{
-  float: right;
-  margin-top: 0px;
-  width: 400px;
+.input_panel_right {
+	float: right;
+	margin-top: 0px;
 }
 
-.input_panel div, .input_panel_w div
-{
- display: inline;
+.input_panel_right p {
+	padding-top: 5px;
 }
 
-.input_panel_right div
-{
- display: inline;
-}
-.input_panel_right p
-{
-    padding-top: 5px;
-}
 
-.slider_text_r
-{
+.slider_text_r {
 	padding-top: 0px;
-	padding-left:10px;
-	width: 50px;
-	min-width: 50px;
+	padding-left: 20px;
+	min-width: 5em;
 	float: right;	
 }
-
-.slider_text_l
-{
-	padding-top: 5px;
-	padding-right: 10px;
-	font-size: 1em;
+.slider_text_l {
+	padding-right: 20px;
 	font-weight: bold;
 }
-
-
-.left_footer_button {
-	width: 130px;
+.slider_text_l, .slider_text_r {
+	display: inline;
+}
+.input_panel input, .input_panel_right input, .input_panel_w input {
+	display: none;
 }
 
 .left_footer_button_s {
 	width: 50px;
 }
 
+.noUi-base {
+	background-color: #f6a828;
+}
+.noUi-origin {
+	background-color: white;
+}
 
 /*/////////////////////////////////////////////
 DATA Output 
@@ -518,10 +463,12 @@ DATA Output
 	border-top-left-radius: 5px;
 }
 
-#Output_Footer {
+#Output_Footer, #Input_Footer {
+	line-height: 32px;
 	background-color: #c3c3c3;
-	padding: 10px;
-	padding-top: 20px;
+	text-align: left;
+	padding: 1em;
+	height: 66px;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #939393), color-stop(1, #d3d3d3) );
@@ -625,14 +572,11 @@ DATA Output
 }
 
 
-.left_footer_button {
-	width: 130px;
-}
-
-
 .right_footer_button {
 	float: right;
-	width: 150px;
+}
+.right_footer_button:first-child {
+	margin-right: 0px;
 }
 
 .output_combo {
@@ -740,7 +684,7 @@ DATA Output
 	border-radius: 8px;
 }
 
-#acknowledgements a { color: #ddbb44; }
+#acknowledgements a { color: #f6a828; }
 
 #ACK_DIV {
 	font-size: 1em;
@@ -750,7 +694,7 @@ DATA Output
 
 #ACK_DIV h4 {
 	font-size: 1em;
-	color: #ddbb44;
+	color: #f6a828;
 }
 
 #ACK_Imgs {

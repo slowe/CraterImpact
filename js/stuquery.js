@@ -156,10 +156,10 @@ function E(e){
 	stuQuery.prototype.trigger = function(e){
 		var event; // The custom event that will be created
 
-		if (document.createEvent) {
+		if(document.createEvent) {
 			event = document.createEvent("HTMLEvents");
 			event.initEvent(e, true, true);
-		} else {
+		}else{
 			event = document.createEventObject();
 			event.eventType = e;
 		}
@@ -167,7 +167,7 @@ function E(e){
 		event.eventName = e;
 
 		for(var i = 0 ;  i < this.e.length ; i++){
-			if (document.createEvent) this.e[i].dispatchEvent(event);
+			if(document.createEvent) this.e[i].dispatchEvent(event);
 			else this.e[i].fireEvent("on" + event.eventType, event);
 		}
 
@@ -290,7 +290,8 @@ function E(e){
 			if(typeof val==="string" || typeof val==="number") this.e[i].setAttribute(attr,val)
 		}
 		if(tmp.length==1) tmp = tmp[0];
-		return tmp;
+		if(typeof val==="undefined") return tmp;
+		else return E(this.e);
 	}
 	stuQuery.prototype.prop = function(attr,val){
 		var tmp = [];
