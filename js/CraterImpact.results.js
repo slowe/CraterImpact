@@ -721,7 +721,7 @@
 			E('#InputValuesTable').html(makeTable(d.getDgInputs()));
 	
 			// Sets the damage text which is the second table of the data view are.
-			E("#LB_Damage").html( _obj.dict.damage.replace(/%DISTANCE%/,_obj.value.dist +" km "));
+			E("#LB_Damage").html( _obj.str('damage').replace(/%DISTANCE%/,_obj.value.dist +" km "));
 			E('#DamageInfo').html(d.getTxtDamage());
 
 			// Sets the data for the energy table which is the third table of the data view.
