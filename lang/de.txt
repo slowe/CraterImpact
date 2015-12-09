@@ -1,5 +1,5 @@
 --- 
-brz_warn:              "Your internet browser does not support the HTML5 features required for Crater Impact. Consider installing one of the following bowsers."
+brz_warn:              "Ihr Internet Browser unterstützt nicht die HTML5-Funktionen für Crater Auswirkungen erforderlich."
 btBack:                "Go Back"
 btReset:               "Reset"
 btStart:               "Start"
