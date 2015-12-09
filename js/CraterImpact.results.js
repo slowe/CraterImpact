@@ -602,73 +602,73 @@
 	// Parse the XML for this page
 	CraterImpact.prototype.onload = function(){
 
-		this.log('onload',this.dataProvider);
+		this.log('onload',this.dataProvider,this.dict);
 
-		var x = this.dict.result;
+		var x = this.str('result');
 		E("#Crater_Size_Title").html(x);
 		E("#Crater_Depth_Title").html(x);
 		E("#Data_Title").html(x);
 
-		x = this.dict.lblImpactVal;
+		x = this.str('lblImpactVal');
 		E("#InputValues_Title").html(x);
 
-		x = this.dict.htParameter;
+		x = this.str('htParameter');
 		E("#Thead_param").html(x);
 		E("#Thead_param1").html(x);
 		E("#Thead_param3").html(x);
 		E("#Thead_param4").html(x);
 
-		x = this.dict.htValue;
+		x = this.str('htValue');
 		E("#Thead_value").html(x);
 		E("#Thead_value1").html(x);
 		E("#Thead_value3").html(x);
 		E("#Thead_value4").html(x)
 
-		x = this.dict.lblSelect;
+		x = this.str('lblSelect');
 		E("#SelectLM_Title").html(x);
 		E("#cpLocation option:eq(0)").html(x);
 		E("#cpLocationMoon option:eq(0)").html(x);
 		E("#cpLocationMars option:eq(0)").html(x);
 		E("#cpLandmark option:eq(0)").html(x);
 
-		E('#cpLandmark option:eq(1)').html(this.dict.lblSphinx);
-		E('#cpLandmark option:eq(2)').html(this.dict.lblBen);
-		E('#cpLandmark option:eq(3)').html(this.dict.lblEiffel);
-		E('#cpLandmark option:eq(4)').html(this.dict.lblEmpireSt);
-		E('#cpLandmark option:eq(5)').html(this.dict.lblCN);
-		E('#cpLandmark option:eq(6)').html(this.dict.lblBurj);
+		E('#cpLandmark option:eq(1)').html(this.str('lblSphinx'));
+		E('#cpLandmark option:eq(2)').html(this.str('lblBen'));
+		E('#cpLandmark option:eq(3)').html(this.str('lblEiffel'));
+		E('#cpLandmark option:eq(4)').html(this.str('lblEmpireSt'));
+		E('#cpLandmark option:eq(5)').html(this.str('lblCN'));
+		E('#cpLandmark option:eq(6)').html(this.str('lblBurj'));
 
-		E("#MapInst").html(this.dict.lblClickMap);
-		E("#BT_Back").html(this.dict.btBack);
+		E("#MapInst").html(this.str('lblClickMap'));
+		E("#BT_Back").html(this.str('btBack'));
 
-		x = this.dict.cvsData;
+		x = this.str('cvsData');
 		E("#BT_Data").html(x);
 		E("#Data_Title").append(" - " + x);
 
-		x = this.dict.cvsDepth;
+		x = this.str('cvsDepth');
 		E("#BT_CraterDepth").html(x);
 		E("#Crater_Depth_Title").append(" - " + x);
 
-		x = this.dict.cvsSize;
+		x = this.str('cvsSize');
 		E("#BT_CraterPlace").html(x);
 		E("#Crater_Size_Title").append(" - " +x);
 
-		x = this.dict.lblLandmark;
+		x = this.str('lblLandmark');
 		E("#LB_SelectLandmark").html(x);
 
-		x = this.dict.lblInVals;
+		x = this.str('lblInVals');
 		E("#LB_InpactValues").html(x);
 
-		x = this.dict.damage.replace(/%DISTANCE%/,this.value.dist);
+		x = this.str('damage').replace(/%DISTANCE%/,this.value.dist);
 		E("#LB_Damage").html(x);
 
-		x = this.dict.lblImpEnergy;
+		x = this.str('lblImpEnergy');
 		E("#LB_InputEnergy").html(x);
 
-		x = this.dict.lblWhatImpactor;
+		x = this.str('lblWhatImpactor');
 		E("#LB_Impactor").html(x);
 
-		x = this.dict.lblFireball;
+		x = this.str('lblFireball');
 		E("#LB_Fireball").html(x);
 
 		this.onLoadComplete();

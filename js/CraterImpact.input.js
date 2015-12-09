@@ -653,49 +653,49 @@
 	// Parse the XML for this page
 	CraterImpact.prototype.onload = function(){
 		this.log('onload');
-		var x = this.dict.inputs;
-		E("#Title").html(this.dict.inputs);
+		var x = this.str('inputs');
+		E("#Title").html(this.str('inputs'));
 
-		x = this.dict.lblValue;
+		x = this.str('lblValue');
 		E("#Slider1_Text").html(x);
 		E("#Slider2_Text").html(x);
 		E("#Slider3_Text").html(x);
 		E("#Slider4_Text").html(x);
 
-		E("#Slider5_Text").html(this.dict.lblDistance);
-		E("#titleProjectile").html(this.dict.lblAstDiam);
-		E("#titleAngle").html(this.dict.lbPjAng);
-		E("#titleVelocity").html(this.dict.lbPjVel);
-		E("#titlePJDensity").html(this.dict.lbPjDens);
-		E("#titleTGDensity").html(this.dict.lbTgDens);
-		E("#BT_Reset").html(this.dict.btReset);
-		E("#BT_Submit").html(this.dict.btSubmit);
+		E("#Slider5_Text").html(this.str('lblDistance'));
+		E("#titleProjectile").html(this.str('lblAstDiam'));
+		E("#titleAngle").html(this.str('lbPjAng'));
+		E("#titleVelocity").html(this.str('lbPjVel'));
+		E("#titlePJDensity").html(this.str('lbPjDens'));
+		E("#titleTGDensity").html(this.str('lbTgDens'));
+		E("#BT_Reset").html(this.str('btReset'));
+		E("#BT_Submit").html(this.str('btSubmit'));
 
 
-		x = this.dict.lblSelect;
+		x = this.str('lblSelect');
 		E("#pjd_op0").html(x);
 		E("#tgd_op0").html(x);
 
-		E("#pjd_op1").html(this.dict.lblIce);
-		E("#pjd_op2").html(this.dict.lblPorRock);
-		E("#pjd_op3").html(this.dict.lblDensRock);
-		E("#pjd_op4").html(this.dict.lblIron);
+		E("#pjd_op1").html(this.str('lblIce'));
+		E("#pjd_op2").html(this.str('lblPorRock'));
+		E("#pjd_op3").html(this.str('lblDensRock'));
+		E("#pjd_op4").html(this.str('lblIron'));
 
-		E("#tgd_op1").html(this.dict.lblWater);
-		E("#tgd_op2").html(this.dict.lblSedRock);
-		E("#tgd_op3").html(this.dict.lblIgRock);
+		E("#tgd_op1").html(this.str('lblWater'));
+		E("#tgd_op2").html(this.str('lblSedRock'));
+		E("#tgd_op3").html(this.str('lblIgRock'));
 
-		help_title = this.dict.help_title;
-		help_text = this.dict.help_text;
-		help_text2=  this.dict.help_text2;
+		help_title = this.str('help_title');
+		help_text = this.str('help_text');
+		help_text2=  this.str('help_text2');
 
-		input_error_title = this.dict.input_error_title;
-		input_error_diam = this.dict.input_error_diam;
-		input_error_angle = this.dict.input_error_angle;
-		input_error_vel = this.dict.input_error_vel;
-		input_error_pjd = this.dict.input_error_pjd;
-		input_error_tgd = this.dict.input_error_tgd;
-		input_error_water = this.dict.input_error_water;
+		input_error_title = this.str('input_error_title');
+		input_error_diam = this.str('input_error_diam');
+		input_error_angle = this.str('input_error_angle');
+		input_error_vel = this.str('input_error_vel');
+		input_error_pjd = this.str('input_error_pjd');
+		input_error_tgd = this.str('input_error_tgd');
+		input_error_water = this.str('input_error_water');
 		
 		return this;
 

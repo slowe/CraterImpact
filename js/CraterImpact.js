@@ -152,9 +152,13 @@ var CraterImpact;
 	// Deal with a change in language - update the DOM
 	CraterImpact.prototype.updateLanguage = function(){
 		this.log('updateLanguage');
-		E('#AppTitle a').html(this.dict.lblTitle)
-		E('#ACK a').html(this.dict.lbAcknow);
+		E('#AppTitle a').html(this.str('lblTitle'))
+		E('#ACK a').html(this.str('lbAcknow'));
 		return this;
+	}
+	
+	CraterImpact.prototype.str = function(str){
+		return (this.dict[str]) ? this.dict[str] : "UNKNOWN KEY";
 	}
 	
 	// Log messages
