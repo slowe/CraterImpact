@@ -87,7 +87,7 @@
 <projectile4>Cyflymder darnau o’r taflegryn ar ôl y ffrwydrad yw </projectile4>
 <projectile5>Egni’r ffrwydrad awyr yw </projectile5>
 <projectile6>Mae darnau mawr yn taro’r wyneb, gan greu craterau yma a thraw. Mae angen ystyried sut y daw i’r atmosffer yn fwy gofalus er mwyn amcangyfrif dosbarthiad a maint y darnau meteoritau a rhagweld nifer a maint y craterau a ffurfir.</projectile6>
-<projectile7>Mae’r taflegryn wedi torri wrth gyrraedd y llawr.  Mae’r taflegryn yn taro’r wyneb ar gyflymder o </projectile7>
+<projectile7>Mae’r taflegryn wedi torri wrth gyrraedd y llawr.  Mae’r taflegryn yn taro’r wyneb ar gyflymder o %VELOCITY%</projectile7>
 
 <expos1>Dillad yn mynd ar dân</expos1>
 <expos2>Rhan helaeth o’r corff wedi dioddef llosgiadau gradd 3</expos2>
@@ -115,8 +115,7 @@
 
 <incrater>Rydych chi’n sefyll y tu mewn i’r crater</incrater>
 
-<damage1>Difrod </damage1>
-<damage2> o safle’r gwrthdrawiad</damage2>
+<damage>Difrod %DISTANCE% o safle’r gwrthdrawiad</damage>
 
 <!--New additions-->
 <help_title>Help Mewnbwn</help_title>

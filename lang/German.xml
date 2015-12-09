@@ -96,7 +96,7 @@ Arizona.</lbCreds>
 <projectile4>Die Geschwindigkeit der einzelnen Stücke des Geschosses nach dem Auseinanderbrechen beträgt</projectile4>
 <projectile5>Die Energie der Druckwelle beträgt</projectile5>
 <projectile6>Große Teile schlagen auf der Erdoberfläche ein und könnten ein Krater-Streufeld erzeugen. Um die Anzahl und Größe der Bruchstücke des Geschosses zu berechnen, und auch um die Größe und Anzahl der Krater des Streufeldes zu berechnen, ist eine genauere Analyse des Eintritts in die Atmosphäre erforderlich.</projectile6>
-<projectile7>Das Geschoss schlägt zersplittert ein. Das Geschoss trifft auf die Oberfläche mit einer Geschwindigkeit von </projectile7>
+<projectile7>Das Geschoss schlägt zersplittert ein. Das Geschoss trifft auf die Oberfläche mit einer Geschwindigkeit von %VELOCITY%</projectile7>
 
 <expos1>Kleidung fängt Feuer</expos1>
 <expos2>Menschen erleiden großflächige Verbrennungen 3. Grades</expos2>
@@ -124,8 +124,7 @@ Arizona.</lbCreds>
 
 <incrater>Sie stehen im Inneren des Kraters</incrater>
 
-<damage1>Welche Schäden entstehen </damage1>
-<damage2>von der Einschlagstelle entfernt?</damage2>
+<damage>Welche Schäden entstehen %DISTANCE% von der Einschlagstelle entfernt?</damage>
 
 <!--new additions-->
 <help_title>Eingabehilfe</help_title>

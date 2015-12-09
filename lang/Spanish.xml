@@ -86,7 +86,7 @@
 <projectile4>La velocidad de los fragmentos del proyectil después de la explosión es de</projectile4>
 <projectile5>La energía de la explosión en el aire es </projectile5>	
 <projectile6>Los fragmentos grandes colisionan contra la superficie y pueden crear un campo cubierto de cráteres. Un estudio más cuidadoso de la entrada a la atmósfera es necesario para estimar con precisión la distribución del tamaño y frecuencia de los fragmentos del meteoro y así predecir el número y el tamaño de los cráteres formados.</projectile6>
-<projectile7>El proyectil llega a la tierra ya quebrado. La masa del proyectil colisiona la superficie con una velocidad de</projectile7>
+<projectile7>El proyectil llega a la tierra ya quebrado. La masa del proyectil colisiona la superficie con una velocidad de %VELOCITY%</projectile7>
 
 <expos1>La ropa se enciende</expos1>
 <expos2>Gran parte del cuerpo sufre quemaduras de tercer grado</expos2>
@@ -114,8 +114,7 @@
 
 <incrater>Estás parado dentro del cráter</incrater>
 
-<damage1>Daños a </damage1>
-<damage2>del area de desplome</damage2>
+<damage>Daños a %DISTANCE% del area de desplome</damage>
 
 <!--new additions-->
 <help_title>Ayuda</help_title>

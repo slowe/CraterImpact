@@ -87,7 +87,7 @@
 <projectile4>La vitesse du projectile après l'explosion est de</projectile4>
 <projectile5>L'énergie de l'explosion aérienne est de:</projectile5>
 <projectile6>De gros fragments frappent la surface de la terre et peuvent créer des impacts secondaires. Un traitement plus précis de l'entrée dans l'atmosphère est nécessaire pour estimer précisément la distribution taille-fréquence  des fragments de météorites et pour prédire le nombre et la taille des cratères formés.</projectile6>
-<projectile7>Le projectile atteint la surface de la terre en morceaux. Le projectile frappe la Terre à la vitesse </projectile7>
+<projectile7>Le projectile atteint la surface de la terre en morceaux. Le projectile frappe la Terre à la vitesse %VELOCITY%</projectile7>
 
 <expos1>Les vêtements prennent feu</expos1>
 <expos2>Brûlures au troisième degré sur la majeure partie du corps</expos2>
@@ -115,8 +115,7 @@
 
 <incrater>Vous êtes à l'intérieur du cratère</incrater>
 
-<damage1>Dégâts à</damage1>
-<damage2>de l'impact</damage2>
+<damage>Dégâts à %DISTANCE% de l'impact</damage2>
 
 <!-- Newly Added -->
 <help_title>Aide à la Saisie</help_title>

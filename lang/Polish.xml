@@ -87,7 +87,7 @@
 <projectile4>Prędkość fragmentów pocisku po wybuchu to </projectile4>
 <projectile5>Energia wybuchu w powietrzu to </projectile5>
 <projectile6>Duże fragmenty uderzają w powierzchnię i mogą spowodować powstanie pola kraterów. Wymagane jest ostrożniejsze określenie parametrów wejścia w atmosferę w celu dokładniejszego oszacowania rozkładu fragmentów oraz liczby i rozmiarów kraterów.</projectile6>
-<projectile7>Pocisk osiąga powierzchnię ziemi po rozpadzie. Pozostałości pocisku uderzają z prędkością </projectile7>
+<projectile7>Pocisk osiąga powierzchnię ziemi po rozpadzie. Pozostałości pocisku uderzają z prędkością %VELOCITY%</projectile7>
 
 <expos1>Odzież zaczyna się palić</expos1>
 <expos2>Większość powierzchni ciała ulega oparzeniom trzeciego stopnia</expos2>
@@ -115,8 +115,7 @@
 
 <incrater>Znajdujesz się w środku krateru</incrater>
 
-<damage1>Zniszczenia</damage1>
-<damage2>od miejsca upadku</damage2>
+<damage>Zniszczenia %DISTANCE% od miejsca upadku</damage>
 
 <!--new additions-->
 <help_title>Wejście Pomoc</help_title>
