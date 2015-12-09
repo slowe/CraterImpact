@@ -113,7 +113,7 @@ projectile7:           "El proyectil llega a la tierra ya quebrado. La masa del 
 result:                "Resultados del Cálculo"
 showCrater:            "Show Crater"
 txtWaterDepth:         "Profundidad del Agua (m) :"
-bodyEarth:             "Earth"
-bodyMoon:              "Moon"
-bodyMars:              "Mars"
+bodyEarth:             "Tierra"
+bodyMoon:              "Luna"
+bodyMars:              "Marte"
 ---

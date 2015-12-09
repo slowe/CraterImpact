@@ -113,7 +113,7 @@ projectile7:           "Le projectile atteint la surface de la terre en morceaux
 result:                "Résultats du calcul"
 showCrater:            "Show Crater"
 txtWaterDepth:         "Profondeur (m) :"
-bodyEarth:             "Earth"
-bodyMoon:              "Moon"
+bodyEarth:             "Terre"
+bodyMoon:              "Lune"
 bodyMars:              "Mars"
 ---

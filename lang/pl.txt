@@ -113,7 +113,7 @@ projectile7:           "Pocisk osiąga powierzchnię ziemi po rozpadzie. Pozosta
 result:                "Wyniki obliczeń"
 showCrater:            "Show Crater"
 txtWaterDepth:         "Głębokość wody (m):"
-bodyEarth:             "Earth"
-bodyMoon:              "Moon"
+bodyEarth:             "Ziemia"
+bodyMoon:              "Księżyc"
 bodyMars:              "Mars"
 ---

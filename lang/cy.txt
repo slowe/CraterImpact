@@ -113,7 +113,7 @@ projectile7:           "Mae’r taflegryn wedi torri wrth gyrraedd y llawr.  Mae
 result:                "Canlyniadau cyfrifiad"
 showCrater:            "Show Crater"
 txtWaterDepth:         "Dyfnder y dŵr (m) :"
-bodyEarth:             "Earth"
-bodyMoon:              "Moon"
-bodyMars:              "Mars"
+bodyEarth:             "Y Ddaear"
+bodyMoon:              "Lleuad"
+bodyMars:              "Mawrth"
 ---

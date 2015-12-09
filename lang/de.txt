@@ -113,7 +113,7 @@ projectile7:           "Das Geschoss schlägt zersplittert ein. Das Geschoss tri
 result:                "Ergebnis"
 showCrater:            "Show Crater"
 txtWaterDepth:         "Wassertiefe (m):"
-bodyEarth:             "Earth"
-bodyMoon:              "Moon"
+bodyEarth:             "Erde"
+bodyMoon:              "Mond"
 bodyMars:              "Mars"
 ---
