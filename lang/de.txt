@@ -1,9 +1,9 @@
 --- 
 brz_warn:              "Ihr Internet Browser unterstützt nicht die HTML5-Funktionen für Crater Auswirkungen erforderlich."
-btBack:                "Go Back"
-btReset:               "Reset"
-btStart:               "Start"
-btSubmit:              "Submit"
+btBack:                "Zurück"
+btReset:               "Zurücksetzen"
+btStart:               "Starten"
+btSubmit:              "Versuch starten"
 cmdHelp:               "Help"
 cvsData:               "Data View"
 cvsDepth:              "Crater Depth"
