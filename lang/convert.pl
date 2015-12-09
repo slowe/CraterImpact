@@ -20,6 +20,8 @@ foreach $line (@xmllines){
 
 foreach $line (@lines){
 	if($line =~ /^([^\:]*)\:([\s\t]*)\"(.*)\"$/){
-		print "$1\:$2\"$dict{$1}\"\n";
+		print "$1\:$2\"".($dict{$1} ? $dict{$1} : $3)."\"\n";
+	}else{
+		print $line;
 	}
 }
