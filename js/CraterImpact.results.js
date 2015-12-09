@@ -150,16 +150,7 @@
 
 		this.log('initialising map');
 		var _obj = this;
-		if(typeof google==="undefined"){
-			if(!this.gmap){
-				var JS = document.createElement('script');
-				JS.setAttribute('src','http://maps.google.com/maps/api/js?sensor=false&language='+this.lang);
-				document.head.appendChild(JS);
-				this.gmap = true;
-			}
-			setTimeout(function(){ _obj.initializeMap() },50);
-			return this;
-		}
+
 		planet = this.value.planet;
 
 		this.resultTab(1);
@@ -169,7 +160,7 @@
 		this.setValues();
 
 		this.mapTypeIds = new Array();
-
+		this.mapTypes = {};
 
 		// set up the map types
 		this.mapTypes['moon'] = {
@@ -398,7 +389,6 @@
 
 		this.prepareView();
 		this.selectLocation();
-		this.mapTypes = {};
 
 		// Normalizes the tile URL so that tiles repeat across the x axis (horizontally) like the
 		// standard Google map tiles.
