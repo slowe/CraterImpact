@@ -2,5 +2,5 @@
 btStart:                "Starten"
 lblTitle:               "Einschlagsrechner"
 lblLanguage:            "Sprache:"
-lblTranslation:         "Übersetzung:"
+lblTranslation:         "bersetzung:"
 ---
