@@ -146,7 +146,7 @@ var CraterImpact;
 			this.updateLanguage();
 			if(typeof this.onload==="function") this.onload.call(this);
 		}
-		E().loadFile('lang/'+l+'.yaml',updateLang,{'this':this});
+		E().ajax('lang/'+l+'.yaml',{'complete':updateLang,'this':this});
 	}
 
 	// Deal with a change in language - update the DOM
