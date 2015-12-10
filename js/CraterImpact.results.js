@@ -9,6 +9,8 @@
 	images.cnTower = { 'img': new Image(), 'w':77, 'h':554 };
 	images.burj = { 'img': new Image(), 'w':170, 'h':800 };
 	
+	var USGSOverlay;
+	
 	//================================================================================
 	// Prepares the view for displaying the results.
 	CraterImpact.prototype.prepareView = function(){
@@ -48,8 +50,9 @@
 	// Called when the building comobo box is selected on the crater screen
 	CraterImpact.prototype.drawCrater = function(building){
 
-		this.log('drawCrater',building)
-		//selectedBuilding = building;
+		this.log('drawCrater',building);
+		this.selectedBuilding = parseInt(building);
+
 		var c = document.getElementById("Crater_Area");
 		var ctx = c.getContext("2d");
 
@@ -117,7 +120,7 @@
 		if(!select) return this;
 		option = select.options[select.selectedIndex];
 		if(!option) return this;
-		this.drawCrater(E(option).attr('data-key'))
+		this.drawCrater(E(option).attr('data-key'));
 		return this;
 	}
 
@@ -131,7 +134,7 @@
 		if(!select) return this;
 		option = select.options[select.selectedIndex];
 		if(!option) return this;
-		cmbLocation = parseInt(E(option).attr('value'));
+		this.cmbLocation = parseInt(E(option).attr('value'));
 
 		var lat = parseFloat(E(option).attr('data-lat'));
 		var lon = parseFloat(E(option).attr('data-lon'));
@@ -307,7 +310,7 @@
 		}
 
 		// Listen for mouse clicks.
-		google.maps.event.addListener(this.map, 'click', function(event) { addCrater(event.latLng); });
+		google.maps.event.addListener(this.map, 'click', function(event) { _obj.addCrater(event.latLng); });
 		
 		if(planet != 'Earth'){
 			this.map.setMapTypeId(planetCode);
@@ -317,6 +320,8 @@
 
 			// Photograph courtesy of the U.S. Geological Survey
 			var srcImage = 'craterimpact.png';
+			USGSOverlay.prototype = new google.maps.OverlayView();
+
 			overlay = new USGSOverlay(bounds, srcImage, this.map);
 		}
 		return this;
@@ -328,6 +333,64 @@
 		window.location = "input.html?" + (this.lang ? 'lang='+this.lang : '') + (this.value.dist ? '&dist='+this.value.dist : '') + (this.value.diam ? '&diam='+this.value.diam : '')+(this.value.trag ? '&trag='+this.value.trag : '') + (this.value.velo ? '&velo='+this.value.velo : '') + (this.value.pjd ? '&pjd='+this.value.pjd : '') + (this.value.tgd ? '&tgd='+this.value.tgd : '') + (this.value.wlvl ? '&wlvl='+this.value.wlvl : '') + (this.value.planet ? '&planet='+this.value.planet : '');
 	}
 
+
+
+	//==================================================================================
+	// Adds a crater on the map at the selected location to the calculated size.
+	CraterImpact.prototype.addCrater = function(location_){
+		var location1 = location_;
+		this.dataProvider.setCbSelectDepthObject(this.selectedBuilding);
+		var lat = location1.lat();
+		var lng = location1.lng();
+		this.dataProvider.setLatitude(parseFloat(lat));
+		this.dataProvider.setLongitude( parseFloat(lng));
+		this.dataProvider.setCbLocation(parseInt(this.cmbLocation));
+
+		lox = location_;
+
+		// if crater exists remove from map.
+		if(this.crater != null) this.crater.setMap(null);
+
+		var zoom = this.map.getZoom();
+
+		var lat = lox.lat();
+		var lng = lox.lng();
+
+		//===================================================================================
+		// Calculate the crater bounds.
+		function craterBounds(lat_, lon_ ,craterDiameter){
+			var lat1 = lat_;
+			var lon1 = lon_;
+			var d  = Math.SQRT2*craterDiameter/2.0;
+			var R = 6370000;
+			var brng1 = 45*Math.PI/180;
+			var brng2 = 225*Math.PI/180;
+			lat1 = lat1*Math.PI/180;
+			lon1 = lon1*Math.PI/180;
+
+			var lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng1) );
+			var lon2 = lon1 + Math.atan2(Math.sin(brng1)*Math.sin(d/R)*Math.cos(lat1), Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
+
+			var lat3 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng2) );
+			var lon3 = lon1 + Math.atan2(Math.sin(brng2)*Math.sin(d/R)*Math.cos(lat1), Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
+
+			lat2 = lat2/(Math.PI/180);
+			lon2 = lon2/(Math.PI/180);
+			lat3 = lat3/(Math.PI/180);
+			lon3 = lon3/(Math.PI/180);
+
+			var bound = new google.maps.LatLngBounds( new google.maps.LatLng(lat3, lon3), new google.maps.LatLng(lat2,lon2));		
+
+			return bound;
+		}
+
+		var imageBounds =  craterBounds(lat,lng, this.dataProvider.impactor.crDiam);
+		this.crater = new google.maps.GroundOverlay('imgs/craterImpact.png',imageBounds);
+		// Add new ground overlay for the crater.
+		this.crater.setMap(this.map);
+	}
+	
+	//=================================================================================
 	CraterImpact.prototype.processResults = function(){
 
 		lang = "en";
@@ -366,8 +429,8 @@
 		images.cnTower.img.src = 'imgs/cn_tower.png';
 		images.burj.img.src = 'imgs/burj_dubai.png';
 
-		var cmbLocation = 0;	/**The location combo box**/
-		var selectedBuilding = 0;	/**The selected building**/
+		this.cmbLocation = 0;	// The location combo box
+		this.selectedBuilding = 0;	// The selected building
 
 		//input values from previous screen
 		var dist = this.value.dist;
@@ -378,13 +441,13 @@
 		var tgd = this.value.tgd;
 		var wlvl = this.value.wlvl;
 
-		var crater = null;	/**Hold the map crater overlay object**/
+		var crater = null;	// Hold the map crater overlay object
 		var calcs; // Will do the calcs
 
-		/**Locations for crater placement**/
+		// Locations for crater placement
 		var lox;
 
-		/**For drawing scale on crater screen**/
+		// For drawing scale on crater screen
 		var leftArrow = new Image();
 		var rightArrow = new Image();
 		leftArrow.src = 'imgs/arrowL.png';
@@ -392,54 +455,6 @@
 
 		this.prepareView();
 		this.selectLocation();
-
-		// Normalizes the tile URL so that tiles repeat across the x axis (horizontally) like the
-		// standard Google map tiles.
-		function getHorizontallyRepeatingTileUrl(coord, zoom, urlfunc) {
-			var y = coord.y;
-			var x = coord.x;
-
-			// tile range in one direction range is dependent on zoom level
-			// 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc
-			var tileRange = 1 << zoom;
-
-			// don't repeat across y-axis (vertically)
-			if (y < 0 || y >= tileRange) return null;
-
-			// repeat across x-axis
-			if (x < 0 || x >= tileRange) x = (x % tileRange + tileRange) % tileRange;
-
-			return urlfunc({x:x,y:y}, zoom);
-		}
-
-		function getMarsTileUrl(baseUrl, coord, zoom) {
-			var bound = Math.pow(2, zoom);
-			var x = coord.x;
-			var y = coord.y;
-			var quads = ['t'];
-
-			for(var z = 0; z < zoom; z++){
-				bound = bound / 2;
-				if(y < bound){
-					if(x < bound){
-						quads.push('q');
-					}else{
-						quads.push('r');
-						x -= bound;
-					}
-				}else{
-					if(x < bound){
-						quads.push('t');
-						y -= bound;
-					}else{
-						quads.push('s');
-						x -= bound;
-						y -= bound;
-					}
-				}
-			}
-			return baseUrl + quads.join('') + ".jpg";
-		}
 
 		this.map;
 		var mapTypeIds = [];
@@ -450,155 +465,15 @@
 		}
 
 		var _obj = this;
-		function init(){
-			var mc_1 = new MC();
-			var mc_2 = new MC();
-			var mc_3 = new MC();
-			var mc_4 = new MC();
-			var mc_5 = new MC();
-			var mc_6 = new MC();
+		//var mc_1 = new MC();
+		//var mc_2 = new MC();
+		//var mc_3 = new MC();
+		//var mc_4 = new MC();
+		//var mc_5 = new MC();
+		//var mc_6 = new MC();
 
+		google.maps.event.addDomListener(window, 'load', _obj.initializeMap);
 
-			//==================================================================================
-			/**
-			Adds a crater on the map at the selected location to the calculated size.
-			**/
-			//==================================================================================
-			function addCrater(location_){
-				var location1 = location_;
-				dataProvider.setCbSelectDepthObject(parseInt(selectedBuilding));
-				var lat = location1.lat();
-				var lng = location1.lng();
-				dataProvider.setLatitude(parseFloat(lat));
-				dataProvider.setLongitude( parseFloat(lng));
-				dataProvider.setCbLocation(parseInt(cmbLocation));
-
-				lox = location_;
-
-				//if crater exists remove from map.
-				if (crater != null ) crater.setMap(null);
- 
-				var zoom = map.getZoom();
-
-				var lat = lox.lat();
-				var lng = lox.lng();
-
-				var imageBounds =  craterBounds(lat,lng, dataProvider.impactor.crDiam);
-				crater = new google.maps.GroundOverlay('imgs/craterImpact.png',imageBounds);
-				//
-				//Add new ground overlay for the crater.
-
-
-				crater.setMap(map);
-			}//=================================================================================
-
-			//===================================================================================
-			/**
-			Calculate the crater bounds.
-			**/
-			//===================================================================================
-			function craterBounds(lat_, lon_ ,craterDiameter){
-
-				var lat1 = lat_;
-				var lon1 = lon_;
-				var d  = Math.SQRT2*craterDiameter/2.0;
-				var R = 6370000;
-				var brng1 = 45*Math.PI/180;
-				var brng2 = 225*Math.PI/180;
-				lat1 = lat1*Math.PI/180;
-				lon1 = lon1*Math.PI/180;
-
-				var lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng1) );
-				var lon2 = lon1 + Math.atan2(Math.sin(brng1)*Math.sin(d/R)*Math.cos(lat1), Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
-
-				var lat3 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng2) );
-				var lon3 = lon1 + Math.atan2(Math.sin(brng2)*Math.sin(d/R)*Math.cos(lat1), Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
-
-				lat2 = lat2/(Math.PI/180);
-				lon2 = lon2/(Math.PI/180);
-				lat3 = lat3/(Math.PI/180);
-				lon3 = lon3/(Math.PI/180);
-
-			   var bound = new google.maps.LatLngBounds( new google.maps.LatLng(lat3, lon3), new google.maps.LatLng(lat2,lon2));		
-
-				return bound;
-			}//=======================================================================================
-
-
-			/** @constructor */
-			function USGSOverlay(bounds, image, map) {
-
-				// Now initialize all properties.
-				this.bounds_ = bounds;
-				this.image_ = image;
-				this.map_ = map;
-
-				// We define a property to hold the image's div. We'll
-				// actually create this div upon receipt of the onAdd()
-				// method so we'll leave it null for now.
-				this.div_ = null;
-
-				// Explicitly call setMap on this overlay
-				this.setMap(map);
-			}
-
-			USGSOverlay.prototype.onAdd = function() {
-
-				// Note: an overlay's receipt of onAdd() indicates that
-				// the map's panes are now available for attaching
-				// the overlay to the map via the DOM.
-
-				// Create the DIV and set some basic attributes.
-				var div = document.createElement('div');
-				div.style.borderStyle = 'none';
-				div.style.borderWidth = '0px';
-				div.style.position = 'absolute';
-
-				// Create an IMG element and attach it to the DIV.
-				var img = document.createElement('img');
-				img.src = this.image_;
-				img.style.width = '100%';
-				img.style.height = '100%';
-				img.style.position = 'absolute';
-				div.appendChild(img);
-
-				// Set the overlay's div_ property to this DIV
-				this.div_ = div;
-
-				// We add an overlay to a map via one of the map's panes.
-				// We'll add this overlay to the overlayLayer pane.
-				var panes = this.getPanes();
-				panes.overlayLayer.appendChild(div);
-			}
-
-			USGSOverlay.prototype.draw = function() {
-				// Size and position the overlay. We use a southwest and northeast
-				// position of the overlay to peg it to the correct position and size.
-				// We need to retrieve the projection from this overlay to do this.
-				var overlayProjection = this.getProjection();
-
-				// Retrieve the southwest and northeast coordinates of this overlay
-				// in latlngs and convert them to pixels coordinates.
-				// We'll use these coordinates to resize the DIV.
-				var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
-				var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
-
-				// Resize the image's DIV to fit the indicated dimensions.
-				var div = this.div_;
-				div.style.left = sw.x + 'px';
-				div.style.top = ne.y + 'px';
-				div.style.width = (ne.x - sw.x) + 'px';
-				div.style.height = (sw.y - ne.y) + 'px';
-			}
-
-			USGSOverlay.prototype.onRemove = function() {
-				this.div_.parentNode.removeChild(this.div_);
-				this.div_ = null;
-			}
-
-			google.maps.event.addDomListener(window, 'load', _obj.initializeMap);
-
-		}
 	}
 	
 	// Deal with a change in language - update the DOM
@@ -747,6 +622,125 @@
 		updateTables();
 
 		return this;
+	}
+
+
+	// @constructor
+	function USGSOverlay(bounds, image, map) {
+
+		// Now initialize all properties.
+		this.bounds_ = bounds;
+		this.image_ = image;
+		this.map_ = map;
+
+		// We define a property to hold the image's div. We'll
+		// actually create this div upon receipt of the onAdd()
+		// method so we'll leave it null for now.
+		this.div_ = null;
+
+		// Explicitly call setMap on this overlay
+		this.setMap(map);
+	}
+
+	// onAdd is called when the map's panes are ready and the overlay has been
+	// added to the map.
+	USGSOverlay.prototype.onAdd = function() {
+
+		// Create the DIV and set some basic attributes.
+		var div = document.createElement('div');
+		div.style.borderStyle = 'none';
+		div.style.borderWidth = '0px';
+		div.style.position = 'absolute';
+
+		// Create an IMG element and attach it to the DIV.
+		var img = document.createElement('img');
+		img.src = this.image_;
+		img.style.width = '100%';
+		img.style.height = '100%';
+		img.style.position = 'absolute';
+		div.appendChild(img);
+
+		// Set the overlay's div_ property to this DIV
+		this.div_ = div;
+
+		// We add an overlay to a map via one of the map's panes.
+		// We'll add this overlay to the overlayLayer pane.
+		var panes = this.getPanes();
+		panes.overlayLayer.appendChild(div);
+	}
+
+	USGSOverlay.prototype.draw = function() {
+		// We use the south-west and north-east
+		// coordinates of the overlay to peg it to the correct position and size.
+		// To do this, we need to retrieve the projection from the overlay.
+		var overlayProjection = this.getProjection();
+
+		// Retrieve the south-west and north-east coordinates of this overlay
+		// in LatLngs and convert them to pixel coordinates.
+		// We'll use these coordinates to resize the div.
+		var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+		var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+
+		// Resize the image's div to fit the indicated dimensions.
+		var div = this.div_;
+		div.style.left = sw.x + 'px';
+		div.style.top = ne.y + 'px';
+		div.style.width = (ne.x - sw.x) + 'px';
+		div.style.height = (sw.y - ne.y) + 'px';
+
+	}
+
+	USGSOverlay.prototype.onRemove = function() {
+		this.div_.parentNode.removeChild(this.div_);
+		this.div_ = null;
+	}
+
+	// Normalizes the tile URL so that tiles repeat across the x axis (horizontally) like the
+	// standard Google map tiles.
+	function getHorizontallyRepeatingTileUrl(coord, zoom, urlfunc) {
+		var y = coord.y;
+		var x = coord.x;
+
+		// tile range in one direction range is dependent on zoom level
+		// 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc
+		var tileRange = 1 << zoom;
+
+		// don't repeat across y-axis (vertically)
+		if (y < 0 || y >= tileRange) return null;
+
+		// repeat across x-axis
+		if (x < 0 || x >= tileRange) x = (x % tileRange + tileRange) % tileRange;
+
+		return urlfunc({x:x,y:y}, zoom);
+	}
+
+	function getMarsTileUrl(baseUrl, coord, zoom) {
+		var bound = Math.pow(2, zoom);
+		var x = coord.x;
+		var y = coord.y;
+		var quads = ['t'];
+
+		for(var z = 0; z < zoom; z++){
+			bound = bound / 2;
+			if(y < bound){
+				if(x < bound){
+					quads.push('q');
+				}else{
+					quads.push('r');
+					x -= bound;
+				}
+			}else{
+				if(x < bound){
+					quads.push('t');
+					y -= bound;
+				}else{
+					quads.push('s');
+					x -= bound;
+					y -= bound;
+				}
+			}
+		}
+		return baseUrl + quads.join('') + ".jpg";
 	}
 
 })(E);	// Self-closing function

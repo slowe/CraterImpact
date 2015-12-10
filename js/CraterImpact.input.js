@@ -291,7 +291,6 @@
 		
 		var img;
 		if(str.length > 1){
-			console.log(projVelVal,n1)
 			img = speedImgs[parseInt(n1)];
 			//if(n1 != 9)
 			ctx.drawImage(img,63,105);
