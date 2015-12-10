@@ -148,6 +148,7 @@ var CraterImpact;
 	CraterImpact.prototype.loadLanguage = function(l){
 		this.log('setLanguage',l);
 		this.lang = l;
+		var ul = E('#MenuLanguage ul');
 		function updateLang(data,attr){
 			this.log('updating with',data,attr)
 			this.dict = YAML2JSON(data);
@@ -163,11 +164,11 @@ var CraterImpact;
 				// Remove current event
 				E('#MenuLanguage li').off('click');
 				// Update list
-				E('#MenuLanguage ul').html(list);
+				ul.html(list);
 				// Add events to list items
 				E('#MenuLanguage li').on('click',{me:this},function(e){
 					// Hide the menu
-					E('#MenuLanguage ul').css({'display':''});
+					ul.css({'display':''});
 					// Load the new language
 					e.data.me.loadLanguage(E(e.currentTarget).attr('id'));
 				});

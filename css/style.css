@@ -60,15 +60,27 @@ body {
 	background: #202020;
 }
 #header  h1 {
- color: #ffffff;
- font-size: 1.4em;
+	color: #ffffff;
+	font-size: 1.4em;
 }
 #header a { color: inherit; text-decoration: none; }
 #header .right { float: right; color: white; }
-#header .right button { text-align: center; padding: 0 1em; cursor: pointer; background-color: transparent; color: white; }
+#header .right button {
+	text-align: center;
+	padding: 0 1em;
+	line-height: auto;
+	border: 0px;
+	height: 3em;
+	width: 100%;
+	line-height: 3em;
+	cursor: pointer;
+	font-size: 1em;
+	background-color: transparent;
+	color: white;
+}
 #header .dropdown ul { margin-top: -1px; display: none; }
 #header .dropdown li { background-color: #202020; padding: 0 1em; }
-#header .dropdown li:hover { background-color: #404040; padding: 0 1em; cursor: pointer; }
+#header .right button:hover, #header .dropdown li:hover { background-color: #404040; cursor: pointer; }
 #footer {
 	position: fixed;
 	bottom: 0;
@@ -100,7 +112,7 @@ body {
 	overflow-y: auto;
 }
 
-#impactCalc, .close button, #LanguageList li, button, .input_table td {
+#impactCalc, .close button, #LanguageList li, #content button, .input_table td {
 	border-radius: 5px;
 }
 
@@ -185,7 +197,7 @@ h1{
 	color: #ffffff;
 }
 
-button {
+#content button {
 	border: 0px;
 	background-color: #efefef;
 	cursor: pointer;

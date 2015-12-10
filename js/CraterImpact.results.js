@@ -325,7 +325,7 @@
 	//==========================================================================================
 	// Called when the go back button is pressed.
 	CraterImpact.prototype.goBack = function(){
-		window.location = "input.html?" + (this.value.lang ? 'lang='+this.value.lang : '') + (this.value.dist ? '&dist='+this.value.dist : '') + (this.value.diam ? '&diam='+this.value.diam : '')+(this.value.trag ? '&trag='+this.value.trag : '') + (this.value.velo ? '&velo='+this.value.velo : '') + (this.value.pjd ? '&pjd='+this.value.pjd : '') + (this.value.tgd ? '&tgd='+this.value.tgd : '') + (this.value.wlvl ? '&wlvl='+this.value.wlvl : '') + (this.value.planet ? '&planet='+this.value.planet : '');
+		window.location = "input.html?" + (this.lang ? 'lang='+this.lang : '') + (this.value.dist ? '&dist='+this.value.dist : '') + (this.value.diam ? '&diam='+this.value.diam : '')+(this.value.trag ? '&trag='+this.value.trag : '') + (this.value.velo ? '&velo='+this.value.velo : '') + (this.value.pjd ? '&pjd='+this.value.pjd : '') + (this.value.tgd ? '&tgd='+this.value.tgd : '') + (this.value.wlvl ? '&wlvl='+this.value.wlvl : '') + (this.value.planet ? '&planet='+this.value.planet : '');
 	}
 
 	CraterImpact.prototype.processResults = function(){
