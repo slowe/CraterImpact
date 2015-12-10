@@ -154,6 +154,7 @@ var CraterImpact;
 		this.log('updateLanguage');
 		E('#AppTitle a').html(this.str('lblTitle'))
 		E('#ACK a').html(this.str('lbAcknow'));
+		
 		return this;
 	}
 	

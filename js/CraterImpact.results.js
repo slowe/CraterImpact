@@ -251,6 +251,7 @@
 				center: new google.maps.LatLng(62.281819, -150.287132),
 				mapTypeControl:false,
 				streetViewControl:false,
+				scaleControl: true,
 				draggableCursor: 'url(imgs/crosshairsS.png) 32 32, crosshair',
 				mapTypeControlOptions: {
 					mapTypeIds: this.mapTypeIds,
@@ -265,6 +266,7 @@
 				center: new google.maps.LatLng(62.281819, -150.287132),
 				mapTypeControl:false,
 				streetViewControl:false,
+				scaleControl: true,
 				draggableCursor: 'url(imgs/crosshairsS.png) 32 32, crosshair',
 				mapTypeControlOptions: {
 					mapTypeIds: this.mapTypeIds,
@@ -280,6 +282,7 @@
 				center: new google.maps.LatLng(51.390209,-3.179855),
 				mapTypeId: google.maps.MapTypeId.SATELLITE,
 				draggableCursor: 'url(imgs/crosshairsS.png) 32 32, crosshair',
+				scaleControl: true,
 				streetViewControl: false
 			};
 		}
