@@ -64,7 +64,11 @@ body {
  font-size: 1.4em;
 }
 #header a { color: inherit; text-decoration: none; }
-
+#header .right { float: right; color: white; }
+#header .right button { text-align: center; padding: 0 1em; cursor: pointer; background-color: transparent; color: white; }
+#header .dropdown ul { margin-top: -1px; display: none; }
+#header .dropdown li { background-color: #202020; padding: 0 1em; }
+#header .dropdown li:hover { background-color: #404040; padding: 0 1em; cursor: pointer; }
 #footer {
 	position: fixed;
 	bottom: 0;

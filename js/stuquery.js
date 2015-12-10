@@ -228,9 +228,10 @@ function E(e){
 		return E(this.e);
 	}
 	stuQuery.prototype.css = function(css){
+		var styles;
 		for(var i = 0; i < this.e.length; i++){
 			// Read the currently set style
-			var styles = {};
+			styles = {};
 			var style = this.e[i].getAttribute('style');
 			if(style){
 				var bits = this.e[i].getAttribute('style').split(";");
@@ -239,17 +240,20 @@ function E(e){
 					if(pairs.length==2) styles[pairs[0]] = pairs[1];
 				}
 			}
-			// Add the user-provided style to what was there
-			for(key in css) styles[key] = css[key];
-			// Build the CSS string
-			var newstyle = '';
-			for(key in styles){
-				if(newstyle) newstyle += ';';
-				if(styles[key]) newstyle += key+':'+styles[key];
+			if(typeof css==="object"){
+				// Add the user-provided style to what was there
+				for(key in css) styles[key] = css[key];
+				// Build the CSS string
+				var newstyle = '';
+				for(key in styles){
+					if(newstyle) newstyle += ';';
+					if(styles[key]) newstyle += key+':'+styles[key];
+				}
+				// Update style
+				this.e[i].setAttribute('style',newstyle);
 			}
-			// Update style
-			this.e[i].setAttribute('style',newstyle);
 		}
+		if(this.e.length==1 && typeof css==="string") return styles[css];
 		return E(this.e);
 	}
 	stuQuery.prototype.parent = function(){

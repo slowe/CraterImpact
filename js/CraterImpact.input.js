@@ -538,22 +538,13 @@
 			msg +="<li>" + input_error_water + "</li>";
 		}
 		
-		
 		if(passed == false){
-			console.log("More Details Required","More Details Required/n/nTest");
-		/*
-			$( "#dialog-modal" ).dialog({
-				  height: 220,
-				  modal: true	  
-			});
-			*/
-		
 			E('#dialog_text').html("<ul>" + msg + "</ul>");
 			E('#validation').css({'display':'block'});
 			E("#validation .title").html(input_error_title); 
 			this.resize();
 		}else{
-			window.location = "results.html?lang=" + lang +"&dist=" +"&planet=" + planet +"&dist=" + distVal +"&diam=" + diameterVal + "&trag=" + tragAngleVal + "&velo=" + projVelVal + "&pjd=" + pjDens + "&tgd=" + tgDens + "&wlvl=" + waterLevel;
+			window.location = "results.html?lang=" + this.lang +"&dist=" +"&planet=" + planet +"&dist=" + distVal +"&diam=" + diameterVal + "&trag=" + tragAngleVal + "&velo=" + projVelVal + "&pjd=" + pjDens + "&tgd=" + tgDens + "&wlvl=" + waterLevel;
 		}
 	}
 	

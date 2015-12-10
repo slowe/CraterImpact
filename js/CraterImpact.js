@@ -37,6 +37,7 @@ var CraterImpact;
 		this.dict = {};
 		this.lang = "en";
 		this.gmap = false;
+		this.languages = { "cy": "Cymraeg", "de": "Deutsch", "en": "English", "es": "Espa&ntilde;ol", "fr": "Fran&ccedil;ais", "pl": "Polski" };
 
 		this.parseQueryString();
 		this.setValues();
@@ -67,6 +68,12 @@ var CraterImpact;
 			E(e.currentTarget).parent().parent().parent().css({'display': 'none'});
 		});
 		
+		// Deal with the language menu
+		E('#MenuLanguage .choice').on('click',{},function(e){
+			var ul = E('#MenuLanguage ul');
+			ul.css({'display':(ul.css('display')=='block' ? 'none' : 'block')});
+		});
+
 		var _obj = this;
 		// We'll need to change the sizes when the window changes size
 		window.addEventListener('resize',function(e){ _obj.resize(); });
@@ -140,11 +147,31 @@ var CraterImpact;
 	// Load a language file
 	CraterImpact.prototype.loadLanguage = function(l){
 		this.log('setLanguage',l);
+		this.lang = l;
 		function updateLang(data,attr){
 			this.log('updating with',data,attr)
 			this.dict = YAML2JSON(data);
 			if(typeof this.updateLanguage==="function") this.updateLanguage();
 			if(typeof this.onload==="function") this.onload();
+
+			// Update current language
+			if(E('#MenuLanguage').e.length > 0){
+				E('#MenuLanguage .choice').html(this.languages[this.lang])
+				// Update choices
+				var list = "";
+				for(var l in this.languages) if(l != this.lang) list += '<li id="'+l+'">'+this.languages[l]+'</li>';
+				// Remove current event
+				E('#MenuLanguage li').off('click');
+				// Update list
+				E('#MenuLanguage ul').html(list);
+				// Add events to list items
+				E('#MenuLanguage li').on('click',{me:this},function(e){
+					// Hide the menu
+					E('#MenuLanguage ul').css({'display':''});
+					// Load the new language
+					e.data.me.loadLanguage(E(e.currentTarget).attr('id'));
+				});
+			}
 		}
 		E().ajax('lang/'+l+'.txt',{'complete':updateLang,'this':this});
 	}
