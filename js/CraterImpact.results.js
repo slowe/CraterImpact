@@ -146,10 +146,13 @@
 		var z = E(option).attr('data-z');
 		if(z) z = parseInt(z);
 		
-		// Ignore parameter in html and use our crater size
-		var n = Math.log(2e6/this.dataProvider.impactor.crDiam)/Math.log(2);
-		goodz = Math.floor(5+n); // ~2000000 m
-		if(goodz > z) z = goodz;
+		// Work out the best fit map size for our crater
+		var h = height(E('#map_canvas').e[0]);
+		var angle = 0.1;
+		var circ = 2*Math.PI*this.planets[this.value.planet].R*1000;
+		var d = this.dataProvider.impactor.crDiam;
+		var goodzoom = Math.round(-1 + Math.log(h * circ / d / 256) / Math.LN2);
+		if(goodzoom > z) z = goodzoom;
 
 		if(!lat || !lon || !z) return this;
 
@@ -537,11 +540,15 @@
 		this.dataProvider.setCbTgDens(this.value.tgd);
 		this.dataProvider.setSlTgDepth(this.value.wlvl);
 
-		// Setup the calculations
-		if(this.value.planet == 'Earth') calcs = new CraterCalcs();			
-		else if (this.value.planet == 'Moon') calcs = new CraterCalcs({'Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':0.0020,'scaleHeight':65000});
-		else if (this.value.planet == 'Mars') calcs = new CraterCalcs({'Name':'Mars','G':3711,'R':3390,'V':1.6318*Math.pow(10,11),'l':3.0 * Math.pow(10,44),'p':1.5* Math.pow(10,25),'rhoSurface':0.020,'scaleHeight':11100});
+		this.planets = {
+			'Earth': {'Name':'Earth','R':6370},
+			'Moon': {'Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':0.0020,'scaleHeight':65000},
+			'Mars': {'Name':'Mars','G':3711,'R':3390,'V':1.6318*Math.pow(10,11),'l':3.0 * Math.pow(10,44),'p':1.5* Math.pow(10,25),'rhoSurface':0.020,'scaleHeight':11100}
+		}
 
+		// Setup the calculations
+		calcs = new CraterCalcs(this.planets[this.value.planet]);			
+		
 		// Do calculation
 		calcs = calcs.getData(this.dataProvider,this.dict);	// From CraterImpact.calculations.js
 		this.dataProvider = calcs.dataProvider;
@@ -738,6 +745,11 @@
 		var bound = new google.maps.LatLngBounds( new google.maps.LatLng(lat3, lon3), new google.maps.LatLng(lat2,lon2));		
 
 		return bound;
+	}
+	function height(el){
+		if(!el) return 0;
+		if('getComputedStyle' in window) return parseInt(window.getComputedStyle(el, null).getPropertyValue('height'));
+		else return parseInt(el.currentStyle.height);	
 	}
 
 })(E);	// Self-closing function
