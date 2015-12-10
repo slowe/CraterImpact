@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Crater Impact</title>
+	<meta name="viewport" content="width=device-width" />
 	<meta http-equiv="Content-type" content="text/html;charset=utf-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="js/stuquery.js"></script>
@@ -12,9 +13,8 @@
 		//============================================
 		// Post-process the language file for this page
 		CraterImpact.prototype.onload = function(){
-
 			E("#StartButton").html(this.dict.btStart);
-	
+			return this;	
 		}
 
 		// Make the crater object
@@ -22,16 +22,6 @@
 
 		E('#LanguageList li').on('click',{},function(e){
 			go(E(e.currentTarget).attr('id'));
-/*
-			// Clear any existing selection
-			E('#LanguageList .selected').removeClass('selected');
-			// Select this language
-			E(e.currentTarget).addClass('selected');
-			// Show the start button
-			E('#StartButton').css({'display':''});
-			// Update this language
-			crater.loadLanguage(E(e.currentTarget).attr('id'));
-*/
 		});
 		function go(lang){
 			if(!lang){
