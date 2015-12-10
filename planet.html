@@ -10,10 +10,10 @@
 	E(document).ready(function(){
 		//============================================
 		// Post-process the language file for this page
-		CraterImpact.prototype.onload = function(){
+		CraterImpact.prototype.updateLanguage = function(){
 
 			E("#StartButton").html(this.dict.btStart);
-			E("#lang_warn").html(this.dict.brz_wrn);
+			E("#lang_warn p").html(this.dict.brz_warn);
 			E('#Earth p').html(this.dict.bodyEarth);
 			E('#Moon p').html(this.dict.bodyMoon);
 			E('#Mars p').html(this.dict.bodyMars);
@@ -59,13 +59,6 @@
 		});
 	
 	});
-	//========================================================
-	// Returns true of the browser supporte the Canvas feature
-	function isCanvasSupported(){
-		var elem = document.createElement('canvas');
-		return !!(elem.getContext && elem.getContext('2d'));
-	}
-	
 	//=========================================================
 	// Check browser support for canvas.
 	function isCanvasSupported(){
@@ -80,7 +73,6 @@
 
 		<div id="header">
 			 <div id="AppTitle"><a href="index.html">Down 2 Earth - Crater Impact</a></div>
-	  		 <div id="ACK"><a href="#acknowledgements">Acknowledgements</a></div>
 			<div class="spacer"></div>
 		</div><!--end header-->
 	
@@ -111,7 +103,10 @@
 		</div><!--end content-->
 	
 		<div id="footer">
-			<p>&copy; 2013 - University of Glamorgan</p>
+			<ul>
+				<li>&copy; 2013 University of Glamorgan</li>
+				<li id="ACK"><a href="#acknowledgements">Acknowledgements</a></li>
+			</ul>
 		</div><!--end footer-->
 
 	</div><!--end container-->

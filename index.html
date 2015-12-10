@@ -14,47 +14,42 @@
 		CraterImpact.prototype.onload = function(){
 
 			E("#StartButton").html(this.dict.btStart);
-			E("#lang_warn").html(this.dict.brz_wrn);
 	
-			if(isCanvasSupported()) E('#lang_warn').css({'display':'none'});
-			else E('#lang_warn').css({'display':'block'});
-
 		}
 
 		// Make the crater object
 		var crater = new CraterImpact({});
 
 		E('#LanguageList li').on('click',{},function(e){
-
+			go(E(e.currentTarget).attr('id'));
+/*
 			// Clear any existing selection
 			E('#LanguageList .selected').removeClass('selected');
-
 			// Select this language
 			E(e.currentTarget).addClass('selected');
-
 			// Show the start button
 			E('#StartButton').css({'display':''});
-
 			// Update this language
 			crater.loadLanguage(E(e.currentTarget).attr('id'));
+*/
 		});
-
+		function go(lang){
+			if(!lang){
+				// Get the selected button
+				var btn = E('#LanguageList .selected');
+				// Determine the selected language
+				if(btn.e.length > 0) lang = E(btn.e[0]).attr('id');
+			}
+			//Launch next screen and pass selected language to it.
+			window.location ="planet.html?lang=" + lang;
+		}
 		E('#StartButton').css({'display':'none'});
 		E('#StartButton').on('mousedown',{},function(e){
 			E(e.currentTarget).attr('class','StartButtonClicked');
 		}).on('mouseout',{},function(e){
 			E(e.currentTarget).attr('class','StartButton');
 		}).on('click',{},function(e){
-			// Get the selected button
-			var btn = E('#LanguageList .selected');
-			if(btn.e.length > 0){
-
-				// Determine the selected language
-				var lang = E(btn.e[0]).attr('id');
-
-				//Launch next screen and pass selected language to it.
-				window.location ="planet.html?lang=" + lang;
-			}
+			go();
 		});
 	
 	});
@@ -62,16 +57,11 @@
 	//========================================================
 	// Returns true of the browser supporte the Canvas feature
 	function isCanvasSupported(){
+		return false;
 		var elem = document.createElement('canvas');
 		return !!(elem.getContext && elem.getContext('2d'));
 	}
 	
-	//=========================================================
-	// Check browser support for canvas.
-	function isCanvasSupported(){
-		var elem = document.createElement('canvas');
-		return !!(elem.getContext && elem.getContext('2d'));
-	}
 	</script> 
 </head>
 <body>
@@ -80,7 +70,6 @@
 
 		<div id="header">
 			 <div id="AppTitle"><a href="index.html">Down 2 Earth - Crater Impact</a></div>
-	  		 <div id="ACK"><a href="#acknowledgements">Acknowledgements</a></div>
 			<div class="spacer"></div>
 		</div><!--end header-->
 		
@@ -94,21 +83,14 @@
 			
 				<button id="StartButton" class="StartButton">Start</button>
 		
-				<div id="lang_warn">
-					<p>Your internet browser does not support the HTML5 features required for Crater Impact. Consider installing one of the following bowsers.</p>
-					<ul>
-						<li>Internet Explorer 9+</li>
-						<li>Firefox</li>
-						<li>Chrome</li>
-						<li>Safari</li>
-						<li>Opera</li>
-					</ul>
-				</div>
 			</div><!--end impactCalc-->
 		</div><!--end content-->
 	
 		<div id="footer">
-			<p>&copy; 2013 - University of Glamorgan</p>
+			<ul>
+				<li>&copy; 2013 University of Glamorgan</li>
+				<li id="ACK"><a href="#acknowledgements">Acknowledgements</a></li>
+			</ul>
 		</div><!--end footer-->
 
 	</div><!--end container-->

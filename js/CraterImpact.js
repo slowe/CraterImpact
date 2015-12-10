@@ -143,21 +143,12 @@ var CraterImpact;
 		function updateLang(data,attr){
 			this.log('updating with',data,attr)
 			this.dict = YAML2JSON(data);
-			this.updateLanguage();
-			if(typeof this.onload==="function") this.onload.call(this);
+			if(typeof this.updateLanguage==="function") this.updateLanguage();
+			if(typeof this.onload==="function") this.onload();
 		}
 		E().ajax('lang/'+l+'.txt',{'complete':updateLang,'this':this});
 	}
 
-	// Deal with a change in language - update the DOM
-	CraterImpact.prototype.updateLanguage = function(){
-		this.log('updateLanguage');
-		E('#AppTitle a').html(this.str('lblTitle'))
-		E('#ACK a').html(this.str('lbAcknow'));
-		
-		return this;
-	}
-	
 	CraterImpact.prototype.str = function(str){
 		return (this.dict[str]) ? this.dict[str] : "UNKNOWN KEY";
 	}

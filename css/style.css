@@ -77,24 +77,31 @@ body {
 
 #footer {
 	position: fixed;
-	display: none;
 	bottom: 0;
-	left:0;
-	width: 100%;
-	height: 2%;
+	right:0;
+	padding: 0 0.5em;
+	height: 1.5em;
+	line-height: 1.5em;
 	min-height: 20px;
-	font-size: 0.8em;
+	font-size: 0.7em;
 }
 
-
-#footer p
-{
-  color: #acacac;
-  text-align: center;
+#footer li {
+	display: inline-block;
+	color: #acacac;
+	text-align: center;
+}
+#footer li:after {
+	content: " /";
+}
+#footer li:last-child:after {
+	content: "";
+}
+#footer li a {
+	color: inherit;
 }
 
-#content
-{
+#content {
  height: 100%;
  background-color: #000000;
  overflow-y: scr;
@@ -184,7 +191,6 @@ h1
 #lang_warn ul{
 	margin-top: 20px;
 	color: #ffffff;
-	margin-left: 300px;
 }
 
 button {
@@ -625,7 +631,7 @@ DATA Output
    padding-top: 2px;
 }
 
-#ACK {
+div#ACK {
 	color: #d0d0d0;
 	float: right;
 	margin-right: 20px;

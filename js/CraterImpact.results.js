@@ -601,11 +601,13 @@
 		}
 	}
 	
-	//============================================
-	// Parse the XML for this page
-	CraterImpact.prototype.onload = function(){
+	// Deal with a change in language - update the DOM
+	CraterImpact.prototype.updateLanguage = function(){
 
-		this.log('onload',this.dataProvider,this.dict);
+		this.log('updateLanguage',this.dict);
+
+		E('#AppTitle a').html(this.str('lblTitle'))
+		E('#ACK a').html(this.str('lbAcknow'));
 
 		var x = this.str('result');
 		E("#Crater_Size_Title").html(x);
@@ -674,12 +676,14 @@
 		x = this.str('lblFireball');
 		E("#LB_Fireball").html(x);
 
-		this.onLoadComplete();
+		return this;
 	}
 
-	//===============================================
-	// Once loadinf is complete calculate results.
-	CraterImpact.prototype.onLoadComplete = function(){
+	//============================================
+	// Parse the XML for this page
+	CraterImpact.prototype.onload = function(){
+
+		this.log('onload',this.dataProvider,this.dict);
 
 		// Pass values to data provider
 		// Values from prev screen.

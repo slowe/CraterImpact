@@ -651,8 +651,9 @@
 
 	//============================================
 	// Parse the XML for this page
-	CraterImpact.prototype.onload = function(){
-		this.log('onload');
+	CraterImpact.prototype.updateLanguage = function(){
+
+		this.log('updateLanguage');
 		var x = this.str('inputs');
 		E("#Title").html(this.str('inputs'));
 
@@ -698,7 +699,6 @@
 		input_error_water = this.str('input_error_water');
 		
 		return this;
-
 	}
 
 	//============================================
