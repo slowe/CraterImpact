@@ -27,9 +27,9 @@
 		}
 
 		// Make the crater object
-		var crater = new CraterImpact({});
+		var craterimpact = new CraterImpact({});
 		// Update this language
-		crater.loadLanguage(crater.lang);
+		craterimpact.loadLanguage(craterimapact.lang);
 
 		E('#LanguageList li').on('click',{},function(e){
 
@@ -57,7 +57,7 @@
 				var planet = E(btn.e[0]).attr('id');
 
 				//Launch next screen and pass selected language to it.
-				window.location ="input.html?lang=" + crater.lang + "&planet=" + planet;
+				window.location ="input.html?lang=" + craterimapact.lang + "&planet=" + planet;
 			}
 		});
 	

@@ -9,7 +9,9 @@
 	images.cnTower = { 'img': new Image(), 'w':77, 'h':554 };
 	images.burj = { 'img': new Image(), 'w':170, 'h':800 };
 	
-	var USGSOverlay;
+	var overlay;
+	var crater = null;	// Hold the map crater overlay object
+	USGSOverlay.prototype = new google.maps.OverlayView();
 	
 	//================================================================================
 	// Prepares the view for displaying the results.
@@ -25,6 +27,8 @@
 
 		// Add events
 		E('#cpLocation').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
+		E('#cpLocationMoon').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
+		E('#cpLocationMars').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
 		E('#cpLandmark').on('change',{me:this},function(e){ e.data.me.selectLandmark(e.currentTarget); });
 		E('#BT_Back').on('click',{me:this},function(e){ e.data.me.goBack(); });
 		E('#BT_Data').on('click',{me:this},function(e){ e.data.me.resultTab(3); });
@@ -32,7 +36,6 @@
 		E('#BT_CraterPlace').on('click',{me:this},function(e){ e.data.me.resultTab(1); });
 
 		this.drawCrater("");	// nothing has been selected yet.
-
 
 		return this;
 	}
@@ -127,22 +130,33 @@
 	//======================================================================================
 	// Scroll the map to a predefined location on the map
 	CraterImpact.prototype.selectLocation = function(select){
-		this.log('selectLocation',select)
+		this.log('selectLocation',select,this.value.planet)
 
 		if(this.map == null) this.initializeMap();
 
 		if(!select) return this;
-		option = select.options[select.selectedIndex];
+		var i = select.selectedIndex;
+		if(i == 0) i++;	// If no option is selected, we use the first one
+		option = select.options[i];
 		if(!option) return this;
 		this.cmbLocation = parseInt(E(option).attr('value'));
-
 		var lat = parseFloat(E(option).attr('data-lat'));
 		var lon = parseFloat(E(option).attr('data-lon'));
-		var z = parseInt(E(option).attr('data-z'));
+		
+		var z = E(option).attr('data-z');
+		if(z) z = parseInt(z);
+		
+		// Ignore parameter in html and use our crater size
+		var n = Math.log(2e6/this.dataProvider.impactor.crDiam)/Math.log(2);
+		goodz = Math.floor(5+n); // ~2000000 m
+		if(goodz > z) z = goodz;
 
 		if(!lat || !lon || !z) return this;
 
-		if(this.map) this.map.setCenter(new google.maps.LatLng(lat,lon),z);
+		if(this.map){
+			this.map.setZoom(z);
+			this.map.setCenter(new google.maps.LatLng(lat,lon));
+		}
 
 		return this;
 	}
@@ -312,18 +326,8 @@
 		// Listen for mouse clicks.
 		google.maps.event.addListener(this.map, 'click', function(event) { _obj.addCrater(event.latLng); });
 		
-		if(planet != 'Earth'){
-			this.map.setMapTypeId(planetCode);
-			var swBound = new google.maps.LatLng(62.281819, -150.287132);
-			var neBound = new google.maps.LatLng(62.400471, -150.005608);
-			var bounds = new google.maps.LatLngBounds(swBound, neBound);
+		if(planet != 'Earth') this.map.setMapTypeId(planetCode);
 
-			// Photograph courtesy of the U.S. Geological Survey
-			var srcImage = 'craterimpact.png';
-			USGSOverlay.prototype = new google.maps.OverlayView();
-
-			overlay = new USGSOverlay(bounds, srcImage, this.map);
-		}
 		return this;
 	}
 
@@ -338,6 +342,7 @@
 	//==================================================================================
 	// Adds a crater on the map at the selected location to the calculated size.
 	CraterImpact.prototype.addCrater = function(location_){
+		this.log('addCrater',location_,this.dataProvider.impactor.crDiam)
 		var location1 = location_;
 		this.dataProvider.setCbSelectDepthObject(this.selectedBuilding);
 		var lat = location1.lat();
@@ -347,47 +352,22 @@
 		this.dataProvider.setCbLocation(parseInt(this.cmbLocation));
 
 		lox = location_;
-
+		this.log(crater,lox)
 		// if crater exists remove from map.
-		if(this.crater != null) this.crater.setMap(null);
+		if(crater != null) crater.setMap(null);
 
 		var zoom = this.map.getZoom();
 
 		var lat = lox.lat();
 		var lng = lox.lng();
 
-		//===================================================================================
-		// Calculate the crater bounds.
-		function craterBounds(lat_, lon_ ,craterDiameter){
-			var lat1 = lat_;
-			var lon1 = lon_;
-			var d  = Math.SQRT2*craterDiameter/2.0;
-			var R = 6370000;
-			var brng1 = 45*Math.PI/180;
-			var brng2 = 225*Math.PI/180;
-			lat1 = lat1*Math.PI/180;
-			lon1 = lon1*Math.PI/180;
-
-			var lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng1) );
-			var lon2 = lon1 + Math.atan2(Math.sin(brng1)*Math.sin(d/R)*Math.cos(lat1), Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
-
-			var lat3 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng2) );
-			var lon3 = lon1 + Math.atan2(Math.sin(brng2)*Math.sin(d/R)*Math.cos(lat1), Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
-
-			lat2 = lat2/(Math.PI/180);
-			lon2 = lon2/(Math.PI/180);
-			lat3 = lat3/(Math.PI/180);
-			lon3 = lon3/(Math.PI/180);
-
-			var bound = new google.maps.LatLngBounds( new google.maps.LatLng(lat3, lon3), new google.maps.LatLng(lat2,lon2));		
-
-			return bound;
-		}
-
-		var imageBounds =  craterBounds(lat,lng, this.dataProvider.impactor.crDiam);
-		this.crater = new google.maps.GroundOverlay('imgs/craterImpact.png',imageBounds);
+		var imageBounds = craterBounds(lat, lng, this.dataProvider.impactor.crDiam);
+		crater = new google.maps.GroundOverlay('imgs/craterImpact.png', imageBounds);
 		// Add new ground overlay for the crater.
-		this.crater.setMap(this.map);
+		crater.setMap(this.map);
+
+		this.log(crater, this.map, imageBounds)
+
 	}
 	
 	//=================================================================================
@@ -399,6 +379,9 @@
 
 		var planetname = this.query.planet;
 		this.log(planetname)
+
+		var _obj = this;
+		if(google) google.maps.event.addDomListener(window, 'load', _obj.initializeMap);
 
 		// Remove unwanted DOM elements
 		if(planetname == "Earth"){
@@ -418,7 +401,6 @@
 		var mapTypes = {};
 		var lang;
 		var planet;
-		var overlay;
 
 		/* Images for the crater screen*/
 		images.crater.img.src = 'imgs/crater1.png';
@@ -441,7 +423,6 @@
 		var tgd = this.value.tgd;
 		var wlvl = this.value.wlvl;
 
-		var crater = null;	// Hold the map crater overlay object
 		var calcs; // Will do the calcs
 
 		// Locations for crater placement
@@ -454,26 +435,11 @@
 		rightArrow.src = 'imgs/arrowR.png';
 
 		this.prepareView();
-		this.selectLocation();
 
 		this.map;
 		var mapTypeIds = [];
 
-		function MC(){
-			this._height = 0.0;
-			this._width = 0.0;
-		}
-
-		var _obj = this;
-		//var mc_1 = new MC();
-		//var mc_2 = new MC();
-		//var mc_3 = new MC();
-		//var mc_4 = new MC();
-		//var mc_5 = new MC();
-		//var mc_6 = new MC();
-
-		google.maps.event.addDomListener(window, 'load', _obj.initializeMap);
-
+		return this;
 	}
 	
 	// Deal with a change in language - update the DOM
@@ -621,6 +587,9 @@
 		// Update the tables
 		updateTables();
 
+		this.selectLocation(E('#cpLocation'+(this.value.planet=="Earth" ? "": this.value.planet )).e[0]);
+
+
 		return this;
 	}
 
@@ -741,6 +710,34 @@
 			}
 		}
 		return baseUrl + quads.join('') + ".jpg";
+	}
+
+	//===================================================================================
+	// Calculate the crater bounds.
+	function craterBounds(lat_, lon_ ,craterDiameter){
+		var lat1 = lat_;
+		var lon1 = lon_;
+		var d  = Math.SQRT2*craterDiameter/2.0;
+		var R = 6370000;
+		var brng1 = 45*Math.PI/180;
+		var brng2 = 225*Math.PI/180;
+		lat1 = lat1*Math.PI/180;
+		lon1 = lon1*Math.PI/180;
+
+		var lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng1) );
+		var lon2 = lon1 + Math.atan2(Math.sin(brng1)*Math.sin(d/R)*Math.cos(lat1), Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
+
+		var lat3 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng2) );
+		var lon3 = lon1 + Math.atan2(Math.sin(brng2)*Math.sin(d/R)*Math.cos(lat1), Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
+
+		lat2 = lat2/(Math.PI/180);
+		lon2 = lon2/(Math.PI/180);
+		lat3 = lat3/(Math.PI/180);
+		lon3 = lon3/(Math.PI/180);
+
+		var bound = new google.maps.LatLngBounds( new google.maps.LatLng(lat3, lon3), new google.maps.LatLng(lat2,lon2));		
+
+		return bound;
 	}
 
 })(E);	// Self-closing function

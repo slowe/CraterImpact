@@ -29,10 +29,9 @@
 		this.initialiseInput();
 
 		// Update this language
-		crater.loadLanguage(crater.lang);
+		this.loadLanguage(this.lang);
 
-		var planetname = crater.query.planet;
-		console.log(planetname,E("#cpTgDensMarsMoon").e[0])
+		var planetname = this.query.planet;
 		if(planetname == "Earth") E("#cpTgDensMarsMoon").css({'display':'none'});
 		else E("#cpTgDens").css({'display':'none'});
 

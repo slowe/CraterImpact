@@ -10,8 +10,7 @@
  */
 //###########################################################################
 
-function DataProvider()
-{
+function DataProvider(){
 
 	
 	this.LANGUAGE_UK = "uk";/**For UK locale**/
@@ -51,16 +50,12 @@ function DataProvider()
 	
 	this.impactor;/**The populated impact data model**/
 
-
-	
-/**
+	/**
 	 * Sets the projectile density selected index.
-	 * @return An  value.
+	 * @return A value.
 	 */
 	this.getCbPjDens = getCbPjDens;
-	function getCbPjDens() {
-		return this.cbPjDens;
-	}
+	function getCbPjDens(){ return this.cbPjDens; }
 
 	/**
 	 * Sets the projectile density selected index.
@@ -314,7 +309,7 @@ function DataProvider()
 	 * Get the selected depth
 	 * @return
 	 */
-	 this.getCbSelectDepthObject = getCbSelectDepthObject;
+	this.getCbSelectDepthObject = getCbSelectDepthObject;
 	function  getCbSelectDepthObject() {
 		return this.cbSelectDepthObject;
 	}
@@ -323,7 +318,7 @@ function DataProvider()
 	 * Set the selected depth 
 	 * @param cbSelectDepthObject
 	 */
-	 this.setCbSelectDepthObject = setCbSelectDepthObject;
+	this.setCbSelectDepthObject = setCbSelectDepthObject;
 	function setCbSelectDepthObject( cbSelectDepthObject) {
 		this.cbSelectDepthObject = cbSelectDepthObject;
 	}
@@ -333,7 +328,7 @@ function DataProvider()
 	 * Gets the selected location id. The id is an eger that related to the selected place.
 	 * @return The selected place type as an eger.
 	 */
-	 this.getCbLocation = getCbLocation;
+	this.getCbLocation = getCbLocation;
 	function  getCbLocation() {
 		return this.cbLocation;
 	}
