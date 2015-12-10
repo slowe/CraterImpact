@@ -51,29 +51,19 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: #404040;
 	width: 100%;
-	margin-bottom:300px;
+	height: 3em;
+	line-height: 3em;
+	border-bottom: 1px solid #404040;
 }
 #header, #footer {
-	height: 2em;
-	line-height: 1.5em;
 	background: #202020;
 }
-#header a { color: inherit; text-decoration: none; }
 #header  h1 {
  color: #ffffff;
  font-size: 1.4em;
 }
-
-#header p {
-	margin-top: 10px;
-	margin-bottom: 2px;
-	color: #fff0c0;
-}
-#header .spacer {
-	height: 10px;
-}
+#header a { color: inherit; text-decoration: none; }
 
 #footer {
 	position: fixed;
@@ -85,7 +75,6 @@ body {
 	min-height: 20px;
 	font-size: 0.7em;
 }
-
 #footer li {
 	display: inline-block;
 	color: #acacac;
@@ -619,11 +608,10 @@ DATA Output
  ACK DIALOG
 ============================== */
 #AppTitle {
-   color: #d0d0d0;
-   float: left;
-   margin-left: 20px;
-   font-size: 1em;
-   padding-top: 2px;
+	color: #d0d0d0;
+	float: left;
+	margin-left: 20px;
+	font-size: 1em;
 }
 
 div#ACK {

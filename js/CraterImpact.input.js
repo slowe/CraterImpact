@@ -654,6 +654,9 @@
 	CraterImpact.prototype.updateLanguage = function(){
 
 		this.log('updateLanguage');
+
+		E('#AppTitle a').html(this.str('lblTitle'));
+
 		var x = this.str('inputs');
 		E("#Title").html(this.str('inputs'));
 

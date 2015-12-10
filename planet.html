@@ -12,11 +12,12 @@
 		// Post-process the language file for this page
 		CraterImpact.prototype.updateLanguage = function(){
 
-			E("#StartButton").html(this.dict.btStart);
-			E("#lang_warn p").html(this.dict.brz_warn);
-			E('#Earth p').html(this.dict.bodyEarth);
-			E('#Moon p').html(this.dict.bodyMoon);
-			E('#Mars p').html(this.dict.bodyMars);
+			E('#AppTitle a').html(this.str('lblTitle'))
+			E("#StartButton").html(this.str('btStart'));
+			E("#lang_warn p").html(this.str('brz_warn'));
+			E('#Earth p').html(this.str('bodyEarth'));
+			E('#Moon p').html(this.str('bodyMoon'));
+			E('#Mars p').html(this.str('bodyMars'));
 	
 			if(isCanvasSupported()) E('#lang_warn').css({'display':'none'});
 			else E('#lang_warn').css({'display':'block'});
