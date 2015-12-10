@@ -647,7 +647,8 @@
 		this.log('updateLanguage');
 
 		E('#AppTitle a').html(this.str('lblTitle'));
-
+		E('#ACK a').html(this.str('lbAcknow'))
+			
 		var x = this.str('inputs');
 		E("#Title").html(this.str('inputs'));
 

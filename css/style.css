@@ -89,7 +89,7 @@ body {
 	height: 1.5em;
 	line-height: 1.5em;
 	min-height: 20px;
-	font-size: 0.7em;
+	font-size: 0.8em;
 }
 #footer li {
 	display: inline-block;
@@ -207,7 +207,7 @@ h1{
 	margin-right: 0.25em;
 	padding: 0 0.5em;
 }
-button:hover {
+#content button:hover {
 	background-color: #bbeeff;
 }
 .StartButton, .StartButtonClicked {
@@ -729,19 +729,6 @@ div#ACK {
 	right: 1em;
 }
 
-
-
-
-
-
-.ack_sect
-{
+.ack_sect{
 	margin-bottom: 10px
 }
-
-
-
-
-
-
-
