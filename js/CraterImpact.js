@@ -43,12 +43,6 @@ var CraterImpact;
 		this.setValues();
 		if(this.query.lang) this.lang = this.query.lang;
 		this.log('new crater',this.query);
-
-		// Hide header and footer if screen is too small
-		if(tall < 600){
-		//	E('#header').css({'display':'none'});
-		//	E('#footer').css({'display':'none'});
-		}
 		
 		// Open the acknowledgements
 		E('#ACK a').on('click',{me:this},function(e){

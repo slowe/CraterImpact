@@ -8,18 +8,15 @@
 	<script type="text/javascript" src="js/CraterImpact.js"></script> 
 	<script>
 	E(document).ready(function(){
-	
 		//============================================
 		// Post-process the language file for this page
-		CraterImpact.prototype.updateLanguage = function(){
+		CraterImpact.prototype.onload = function(){
 
-			E('#AppTitle a').html(this.str('lblTitle'))
-			E('#ACK a').html(this.str('lbAcknow'))
-			E("#StartButton").html(this.str('btStart'));
-			E("#lang_warn p").html(this.str('brz_warn'));
-			E('#Earth p').html(this.str('bodyEarth'));
-			E('#Moon p').html(this.str('bodyMoon'));
-			E('#Mars p').html(this.str('bodyMars'));
+			E("#StartButton").html(this.dict.btStart);
+			E("#lang_warn").html(this.dict.brz_wrn);
+			E('#Earth p').html(this.dict.bodyEarth);
+			E('#Moon p').html(this.dict.bodyMoon);
+			E('#Mars p').html(this.dict.bodyMars);
 	
 			if(isCanvasSupported()) E('#lang_warn').css({'display':'none'});
 			else E('#lang_warn').css({'display':'block'});
@@ -29,7 +26,7 @@
 		// Make the crater object
 		var craterimpact = new CraterImpact({});
 		// Update this language
-		craterimpact.loadLanguage(craterimapact.lang);
+		craterimpact.loadLanguage(craterimpact.lang);
 
 		E('#LanguageList li').on('click',{},function(e){
 
@@ -57,11 +54,18 @@
 				var planet = E(btn.e[0]).attr('id');
 
 				//Launch next screen and pass selected language to it.
-				window.location ="input.html?lang=" + craterimapact.lang + "&planet=" + planet;
+				window.location ="input.html?lang=" + craterimpact.lang + "&planet=" + planet;
 			}
 		});
 	
 	});
+	//========================================================
+	// Returns true of the browser supporte the Canvas feature
+	function isCanvasSupported(){
+		var elem = document.createElement('canvas');
+		return !!(elem.getContext && elem.getContext('2d'));
+	}
+	
 	//=========================================================
 	// Check browser support for canvas.
 	function isCanvasSupported(){
@@ -75,12 +79,9 @@
 	<div  id="container">
 
 		<div id="header">
-			<div id="AppTitle"><a href="index.html">Down 2 Earth - Crater Impact</a></div>
-			<div id="MenuLanguage" class="dropdown right">
-				<button class="choice">English</button>
-				<ul>
-				</ul>
-			</div>
+			 <div id="AppTitle"><a href="index.html">Down 2 Earth - Crater Impact</a></div>
+	  		 <div id="ACK"><a href="#acknowledgements">Acknowledgements</a></div>
+			<div class="spacer"></div>
 		</div><!--end header-->
 	
 		<div id="content">
@@ -110,10 +111,7 @@
 		</div><!--end content-->
 	
 		<div id="footer">
-			<ul>
-				<li>&copy; 2013 University of Glamorgan</li>
-				<li id="ACK"><a href="#acknowledgements">Acknowledgements</a></li>
-			</ul>
+			<p>&copy; 2013 - University of Glamorgan</p>
 		</div><!--end footer-->
 
 	</div><!--end container-->
