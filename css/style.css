@@ -38,7 +38,7 @@ body {
 	width: 100%;
 	min-height: 600px;
 	min-width: 800px;
-	font-size: 1em;
+	font-size: 14px;
 	font-family: Arial, Verdana, Sans-serif;
 }
 
@@ -102,24 +102,22 @@ body {
 }
 
 #content {
- height: 100%;
- background-color: #000000;
- overflow-y: scr;
- 
-
+	height: 100%;
+	background-color: #000000;
+	overflow-y: auto;
 }
 
+#impactCalc, .close button, #LanguageList li, button, .input_table td {
+	border-radius: 5px;
+}
 
-
-h1
-{
+h1{
 	text-align: center;
 }
 
 #map_canvas { 
 	height: 782px; width: 548px; background: #dfdfdf;
 }
-
 
 .screen_title {
 	background-color: #c3c3c3;
@@ -135,6 +133,7 @@ h1
 /*/////////////////////////////////////////////////*/
 
 #impactCalc {
+	border: 1px solid #202020;
 	background-color: #000000;
 	background-image:url('../imgs/bkg3.jpg');
 	background-size: contain;
@@ -162,8 +161,8 @@ h1
 	border-color: #ffffff;
 	text-align: center;
 	background-color: transparent;
-	border-radius: 5px;
 }
+
 #LanguageList li a { color: inherit; text-decoration: none; line-height: 2em; padding: 10px; display: inline-block; width: 100%; }
 #LanguageList li:hover {
 	cursor: pointer;
@@ -195,7 +194,6 @@ h1
 
 button {
 	border: 0px;
-	border-radius: 5px;
 	background-color: #efefef;
 	cursor: pointer;
 	line-height: 2em;
@@ -222,7 +220,6 @@ button:hover {
 }
 
 .screen_title {
-	font-size: 0.8em;
 	text-align: left;
 	font-weight: bold;
 	padding-left: 10px;
@@ -339,10 +336,11 @@ button:hover {
 	border-color: #b0b0b0;
 	padding: 5px;
 	vertical-align: top;
-	border-radius: 5px;
 	border-bottom: 0px;
 	width: 33.3%;
 }
+
+
 
 .input_table td.input_area {
 	width: 50%;
@@ -502,9 +500,6 @@ DATA Output
 	font-weight: bold;
 	font-size: 1.2em;
 }
-#Results_Table_Area h4 {
-	margin-top: 15px;
-}
 
 #Crater_Area {
 	height: 400px;
@@ -601,8 +596,8 @@ DATA Output
 	margin-left: 40px;
 }
 
+.datagrid { font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #006699; border-radius: 3px; margin: 0.5em 0; }
 .datagrid table { border-collapse: collapse; text-align: left; width: 100%;}
-.datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #006699; border-radius: 3px; }
 .datagrid table td, .datagrid table th {  padding: 5px 10px; }
 .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; color:#FFFFFF; font-size: 1em; font-weight: bold; border-left: 1px solid #0070A8; } 
 .datagrid table thead th:first-child { border: none; }
@@ -682,13 +677,13 @@ div#ACK {
 	padding: 0.25em;
 	line-height: 1.5em;
 	width: 2.5em;
-	border-radius: 5px;
 	background-color: #dfdfdf;
 	border: 1px solid #cccccc;
 	color: black;
 	margin-left: 1em;
 	margin-bottom: 1em;
 }
+
 .modal h2 {
 	font-size: 1.2em;
 	line-height: 2.4em;
