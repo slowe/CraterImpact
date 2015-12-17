@@ -261,7 +261,6 @@
 		
 		if (angleVal >= 10) ctx.fillText(htmlEncode(angleVal+'&deg;'), 125, 40);
 		else ctx.fillText(''+angleVal, 130, 40);
-		ctx.font = '12pt Arial';
 		
 		tragAngleVal = angleVal;
 		return this;
