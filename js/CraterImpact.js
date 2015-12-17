@@ -37,6 +37,7 @@ var CraterImpact;
 		this.dict = {};
 		this.lang = "en";
 		this.gmap = false;
+		this.scaling = 13;	// Factor to downsize asteroid by for display
 		this.languages = { "cy": "Cymraeg", "de": "Deutsch", "gr": "E&lambda;&lambda;&eta;&nu;&iota;&kappa;&#x3AC;", "en": "English", "es": "Espa&ntilde;ol", "fr": "Fran&ccedil;ais", "it": "Italiano", "pl": "Polski", "pt": "Portugu&ecirc;s", "ro": "Rom&acirc;n&#x103;" };
 
 		this.parseQueryString();

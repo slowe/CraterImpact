@@ -1,6 +1,6 @@
 (function(E) {
 
-	function makeSlider(input,html,callback){
+	function makeSlider(input,html,callback,_obj){
 		var inp = E(input);
 		var html5Slider = E(html);
 		html5Slider.addClass('noUi-target noUi-ltr noUi-horizontal noUi-background');
@@ -14,7 +14,7 @@
 		});
 		html5Slider.e[0].noUiSlider.on('update', function(values, handle) {
 			var value = values[handle];
-			if(typeof callback==="function") callback.call(inp.e[0],value)
+			if(typeof callback==="function") callback.call((_obj ? _obj : inp.e[0]),value)
 			if(handle) inp.e[0].value = value;
 			else inp.e[0].value = Math.round(value);
 		});
@@ -38,11 +38,11 @@
 		this.prepareView();
 	
 		// Make sliders
-		makeSlider('#ProjectileSize','#ProjectileSizeSlider',this.updateDiameter);
-		makeSlider('#ProjectileAngle','#ProjectileAngleSlider',this.updateAngle);
-		makeSlider('#ProjectileVelocity','#ProjectileVelocitySlider',this.updateVelocity);
-		makeSlider('#ImpactDistance','#ImpactDistanceSlider',this.updateDistance);
-		makeSlider('#WaterDepth','#WaterDepthSlider',this.updateWater);
+		makeSlider('#ProjectileSize','#ProjectileSizeSlider',this.updateDiameter,this);
+		makeSlider('#ProjectileAngle','#ProjectileAngleSlider',this.updateAngle,this);
+		makeSlider('#ProjectileVelocity','#ProjectileVelocitySlider',this.updateVelocity,this);
+		makeSlider('#ImpactDistance','#ImpactDistanceSlider',this.updateDistance,this);
+		makeSlider('#WaterDepth','#WaterDepthSlider',this.updateWater,this);
 
 		// Add events
 		E('#cpPjDens').on('change',{me:this},function(e){ e.data.me.selectPjDensity(e.currentTarget); });
@@ -151,14 +151,11 @@
 		E('#ProjectileValue').html(diameterVal + '&thinsp;m');
 		
 		var dv = diameterVal/10;
-		var y = (dv/13);
-		var x =  (dv/13);
-		var cY =  153.0;
-		var cX =  131.0;
+		var s = dv/this.scaling;
 		
-		E('#Projectile_Img').css({'height':x+'px','width':y+'px','top':(cY/2 - y/2)+'px'})
+		E('#Projectile_Img').css({'height':s+'px','width':s+'px','top':(159/2 - s/2)+'px'})
 	
-		DrawDiameterLine(dv,cX);
+		DrawDiameterLine(dv,131);
 		return this;
 	}
 
@@ -170,7 +167,7 @@
 
 		canvasReset(ctx,c);
 
-		width = width/13.0;
+		width = width/this.scaling;
 
 		var L = c.width/2 - width/2;
 		var E = c.width/2 + width/2;
@@ -211,7 +208,7 @@
 	CraterImpact.prototype.updateAngle = function(e){
 		if(!e) e = E('#ProjectileAngle').attr('value');
 		if(isNaN(e)) e = 90;
-		console.log('updateAngle',e)
+		this.log('updateAngle',e)
 		var angleVal = parseFloat(e);
 		var angleValI = 90 - angleVal; //Invert value
 
