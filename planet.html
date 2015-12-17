@@ -7,6 +7,8 @@
 	<script type="text/javascript" src="js/stuquery.js"></script> 
 	<script type="text/javascript" src="js/CraterImpact.js"></script> 
 	<script>
+	// Hide the main panel initially
+	document.write('<style>.main { display: none; }</style>');
 	S(document).ready(function(){
 		//============================================
 		// Post-process the language file for this page
@@ -27,6 +29,9 @@
 		var craterimpact = new CraterImpact({});
 		// Update this language
 		craterimpact.loadLanguage(craterimpact.lang);
+		// Now that things are set up, re-display the main panel
+		S('.main').css({'display':'block'});
+		craterimpact.resize();
 
 		S('#LanguageList li').on('click',{},function(e){
 
@@ -59,13 +64,6 @@
 		});
 	
 	});
-	//========================================================
-	// Returns true of the browser supporte the Canvas feature
-	function isCanvasSupported(){
-		var elem = document.createElement('canvas');
-		return !!(elem.getContext && elem.getContext('2d'));
-	}
-	
 	//=========================================================
 	// Check browser support for canvas.
 	function isCanvasSupported(){
