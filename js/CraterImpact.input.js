@@ -578,10 +578,14 @@
 		this.log('resetValues');
 
 		// Reset values to defaults		
-		for(var v in this.defaults) this.values[v] = (this.query[v]) ? this.query[v] : this.defaults[v];
+		for(var v in this.defaults) this.values[v] = this.defaults[v];
 		
-		this.selectTgDensity(S("#cpPjDens").e[0]);
-		this.selectPjDensity(S("#cpTgDens").e[0]);
+		var el = S("#cpPjDens");
+		el.e[0].selectedIndex = 0;
+		this.selectTgDensity(el.e[0]);
+		var el = S("#cpTgDens");
+		el.e[0].selectedIndex = 0;
+		this.selectPjDensity(el.e[0]);
 
 		S('#TargetFeature').css({'display':"block"});
 		S('#WaterFeature').css({'display':"none"});
