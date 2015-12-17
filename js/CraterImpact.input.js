@@ -569,7 +569,7 @@
 			S("#validation .title").html(input_error_title); 
 			this.resize();
 		}else{
-			window.location = "results.html?lang=" + this.lang +"&dist=" +"&planet=" + planet +"&dist=" + distVal +"&diam=" + diameterVal + "&trag=" + tragAngleVal + "&velo=" + projVelVal + "&pjd=" + pjDens + "&tgd=" + tgDens + "&wlvl=" + waterLevel;
+			window.location = "results.html?lang=" + this.lang +"&dist=" +"&planet=" + planet +"&dist=" + distVal +"&diam=" + diameterVal + "&traj=" + tragAngleVal + "&velo=" + projVelVal + "&pjd=" + pjDens + "&tgd=" + tgDens + "&wlvl=" + waterLevel;
 		}
 	}
 	
@@ -624,7 +624,7 @@
 		param = this.query.diam;
 		diameterVal = (param) ? parseInt(param) : 0;
 		
-		param = this.query.trag;
+		param = this.query.traj;
 		tragAngleVal = (param) ? parseInt(param) : 90;
 		
 		param = this.query.velo;
