@@ -156,10 +156,7 @@
 		var cY =  153.0;
 		var cX =  131.0;
 		
-		var img = E('#Projectile_Img').e[0];
-		img.style.height = x+"px";
-		img.style.width = y+"px";
-		img.style.top = (cY/2 - y/2) + "px";
+		E('#Projectile_Img').css({'height':x+'px','width':y+'px','top':(cY/2 - y/2)+'px'})
 	
 		DrawDiameterLine(dv,cX);
 		return this;
