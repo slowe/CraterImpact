@@ -279,7 +279,7 @@
 			ctx.drawImage(img,68,105);
 		}
 		
-		drawImageRot(images.speedNeedle.img,65,65,32,64,r,ctx);
+		drawImageRot(images.speedNeedle.img,62,65,32,64,r,ctx);
 		ctx.restore();
 		return this;
 	}
