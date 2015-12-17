@@ -450,9 +450,6 @@
 
 		this.log('updateLanguage',this.dict);
 
-		E('#AppTitle a').html(this.str('lblTitle'))
-		E('#ACK a').html(this.str('lbAcknow'));
-
 		var x = this.str('result');
 		E("#Crater_Size_Title").html(x);
 		E("#Crater_Depth_Title").html(x);
@@ -493,7 +490,7 @@
 
 		x = this.str('cvsData');
 		E("#BT_Data").html(x);
-		E("#Data_Title").append(" - " + x);
+		E("#Data_View_Title").append(" - " + x);
 
 		x = this.str('cvsDepth');
 		E("#BT_CraterDepth").html(x);
@@ -503,23 +500,12 @@
 		E("#BT_CraterPlace").html(x);
 		E("#Crater_Size_Title").append(" - " +x);
 
-		x = this.str('lblLandmark');
-		E("#LB_SelectLandmark").html(x);
-
-		x = this.str('lblInVals');
-		E("#LB_InpactValues").html(x);
-
-		x = this.str('damage').replace(/%DISTANCE%/,this.value.dist);
-		E("#LB_Damage").html(x);
-
-		x = this.str('lblImpEnergy');
-		E("#LB_InputEnergy").html(x);
-
-		x = this.str('lblWhatImpactor');
-		E("#LB_Impactor").html(x);
-
-		x = this.str('lblFireball');
-		E("#LB_Fireball").html(x);
+		E("#LB_SelectLandmark").html(this.str('lblLandmark'));
+		E("#LB_InpactValues").html(this.str('lblInVals'));
+		E("#LB_Damage").html(this.str('damage').replace(/%DISTANCE%/,this.value.dist));
+		E("#LB_InputEnergy").html(this.str('lblImpEnergy'));
+		E("#LB_Impactor").html(this.str('lblWhatImpactor'));
+		E("#LB_Fireball").html(this.str('lblFireball'));
 
 		return this;
 	}
