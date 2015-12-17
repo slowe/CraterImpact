@@ -347,12 +347,12 @@
 	CraterImpact.prototype.addCrater = function(location_){
 		this.log('addCrater',location_,this.dataProvider.impactor.crDiam)
 		var location1 = location_;
-		this.dataProvider.setCbSelectDepthObject(this.selectedBuilding);
+		this.dataProvider.set('cbSelectDepthObject',this.selectedBuilding);
 		var lat = location1.lat();
 		var lng = location1.lng();
-		this.dataProvider.setLatitude(parseFloat(lat));
-		this.dataProvider.setLongitude( parseFloat(lng));
-		this.dataProvider.setCbLocation(parseInt(this.cmbLocation));
+		this.dataProvider.set('latitude',parseFloat(lat));
+		this.dataProvider.set('longitude',parseFloat(lng));
+		this.dataProvider.set('cbLocation',parseInt(this.cmbLocation));
 
 		lox = location_;
 		this.log(crater,lox)
@@ -513,14 +513,14 @@
 
 		// Pass values to data provider
 		// Values from prev screen.
-		this.dataProvider.setSelected_language(this.value.lang);
-		this.dataProvider.setImpactDist(this.value.dist);
-		this.dataProvider.setProjDiam(this.value.diam);
-		this.dataProvider.setProjAngle(this.value.traj);
-		this.dataProvider.setProjVel(this.value.velo);
-		this.dataProvider.setCbPjDens(this.value.pjd);
-		this.dataProvider.setCbTgDens(this.value.tgd);
-		this.dataProvider.setSlTgDepth(this.value.wlvl);
+		this.dataProvider.set('selected_language',this.value.lang);
+		this.dataProvider.set('impactDist',this.value.dist);
+		this.dataProvider.set('projDiam',this.value.diam);
+		this.dataProvider.set('projAngle',this.value.traj);
+		this.dataProvider.set('projVel',this.value.velo);
+		this.dataProvider.set('cbPjDens',this.value.pjd);
+		this.dataProvider.set('cbTgDens',this.value.tgd);
+		this.dataProvider.set('slTgDepth',this.value.wlvl);
 
 		this.planets = {
 			'Earth': {'Name':'Earth','R':6370},

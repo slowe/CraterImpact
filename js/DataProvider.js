@@ -58,15 +58,6 @@ function DataProvider(){
 	function getCbPjDens(){ return this.cbPjDens; }
 
 	/**
-	 * Sets the projectile density selected index.
-	 * @param cbPjDens An .
-	 */
-	this.setCbPjDens = setCbPjDens;
-	function setCbPjDens( cbPjDens_) {
-		this.cbPjDens = cbPjDens_;
-	}
-
-	/**
 	 * Gets the target density selected index.
 	 * @return An  value.
 	 */
@@ -75,31 +66,14 @@ function DataProvider(){
 		return this.cbTgDens;
 	}
 
-	/**
-	 * Sets the target density selected index.
-	 * @param cbTgDens An  value.
-	 */
-	 this.setCbTgDens = setCbTgDens;
-	function setCbTgDens( cbTgDens_) {
-		this.cbTgDens = cbTgDens_;
-	}
 
 	/**
 	 * Gets the selected depth for when water is the target.
 	 * @return Stored as an eger.
 	 */
-	 this.getSlTgDepth = getSlTgDepth;
+	this.getSlTgDepth = getSlTgDepth;
 	function  getSlTgDepth() {
 		return this.slTgDepth;
-	}
-
-	/**
-	 * Sets the selected depth when water is the target.
-	 * @param slTgDepth The depth as an eger value.
-	 */
-	 this.setSlTgDepth = setSlTgDepth;
-	function setSlTgDepth( slTgDepth_) {
-		this.slTgDepth = slTgDepth_;
 	}
 
 	/**
@@ -225,15 +199,6 @@ function DataProvider(){
 	}
 
 	/**
-	 * Set the impactor data model object.
-	 * @param impactor The impactor object.
-	 */
-	 this.setImpactor = setImpactor;
-	function setImpactor(impactor_) {
-		this.impactor = impactor_;
-	}
-
-	/**
 	 * Get the selected projectile diameter
 	 * @return
 	 */
@@ -242,14 +207,6 @@ function DataProvider(){
 		return this.projDiam;
 	}
 
-	/**
-	 * Set the projectile diameter
-	 * @param projDiam
-	 */
-	 this.setProjDiam = setProjDiam;
-	function setProjDiam( projDiam) {
-		this.projDiam = projDiam;
-	}
 
 	/**
 	 * Get the projectile angle.
@@ -258,15 +215,6 @@ function DataProvider(){
 	 this.getProjAngle = getProjAngle;
 	function  getProjAngle() {
 		return this.projAngle;
-	}
-
-	/**
-	 * Set the projectile angle.
-	 * @param projAngle
-	 */
-	 this.setProjAngle = setProjAngle;
-	function setProjAngle( projAngle) {
-		this.projAngle = projAngle;
 	}
 
 	/**
@@ -279,15 +227,6 @@ function DataProvider(){
 	}
 
 	/**
-	 * Set the projectile velocity.
-	 * @param projVel
-	 */
-	 this.setProjVel = setProjVel;
-	function setProjVel( projVel) {
-		this.projVel = projVel;
-	}
-
-	/**
 	 * Get the distance from impact.
 	 * @return
 	 */
@@ -296,13 +235,8 @@ function DataProvider(){
 		return this.impactDist;
 	}
 
-	/**
-	 * Set the distance from impact.
-	 * @param impactDist
-	 */
-	 this.setImpactDist = setImpactDist;
-	function setImpactDist( impactDist) {
-		this.impactDist = impactDist;
+	this.set = function set(key,value){
+		this[key] = value;
 	}
 
 	/**
@@ -312,15 +246,6 @@ function DataProvider(){
 	this.getCbSelectDepthObject = getCbSelectDepthObject;
 	function  getCbSelectDepthObject() {
 		return this.cbSelectDepthObject;
-	}
-
-	/**
-	 * Set the selected depth 
-	 * @param cbSelectDepthObject
-	 */
-	this.setCbSelectDepthObject = setCbSelectDepthObject;
-	function setCbSelectDepthObject( cbSelectDepthObject) {
-		this.cbSelectDepthObject = cbSelectDepthObject;
 	}
 	
 	
@@ -361,24 +286,6 @@ function DataProvider(){
 		return this.longitude;
 	}
 
-	/**
-	 * Sets the map longitude.
-	 * @param longitude A .
-	 */
-	 this.setLongitude = setLongitude;
-	function setLongitude( longitude) {
-		this.longitude = longitude;
-	}
-
-	/**
-	 * Sets the selected location id. The id is an eger that related to the selected place.
-	 * zero indicates no selection.
-	 * @param The new selected place type as an eger.
-	 */
-	 this.setCbLocation = setCbLocation;
-	function setCbLocation( cbLocation) {
-		this.cbLocation = cbLocation;
-	}
 
 	/**
 	 * Though this method the back end will instruct the front end to display
@@ -402,15 +309,5 @@ function DataProvider(){
 		return this.selected_language;
 	}
 
-	/**
-	 * Sets the selected language and also updates the locale via the
-	 * contol class.
-	 * @param selected_language
-	 */
-	this.setSelected_language = setSelected_language;
-    function setSelected_language( selected_language_) 
-	{
-		selected_language = selected_language_;
-	}
 		
 }//###########################################################################

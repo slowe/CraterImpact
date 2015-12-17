@@ -116,7 +116,7 @@ CraterCalcs.prototype.getData = function(dataProvider_,dict,callback){
 	this.dict = dict;
 	this.callback = callback;
 	this.dataProvider = dataProvider_;
-	this.dataProvider.setImpactor(this.impactor);
+	this.dataProvider.set('impactor',this.impactor);
 	this.doCalcs();
 	return this;	
 }
@@ -271,12 +271,10 @@ CraterCalcs.prototype.sentData = function(){
 	energyarray.put(this.getString("lbImE"), this.standform(this.impactor.imEnergy)+" J");
 	energyarray.put(this.getString("lbFreq"), nbFormat(this.impactor.imFreq)+" yrs");
 	
-	this.dataProvider.setDgInputs(InArray);
-	this.dataProvider.setDgOutputs(Outarray);
-	this.dataProvider.setDgEnergy(energyarray);
-	
-	if(this.impactor.fbRadius > 0.01) this.dataProvider.setDgFirevall(firearray);
-	else this.dataProvider.setDgFirevall(nodata);
+	this.dataProvider.set('dgInputs',InArray);
+	this.dataProvider.set('dgOutputs',Outarray);
+	this.dataProvider.set('dgEnergy',energyarray);
+	this.dataProvider.set('dgFirevall',(this.impactor.fbRadius > 0.01 ? firearray : nodata));
 
 	// Projectile travelling through the atmosphere
 	this.impactor.imDesc = "";
@@ -345,9 +343,9 @@ CraterCalcs.prototype.sentData = function(){
 	
 	this.trace("Im Dist"+this.impactor.imDist);
 	
-	this.dataProvider.setTxtDamage(this.impactor.smDesc);
+	this.dataProvider.set('txtDamage',this.impactor.smDesc);
 	//txDamage.text = this.impactor.smDesc;
-	this.dataProvider.setTxtImpactor(this.impactor.imDesc);
+	this.dataProvider.set('txtImpactor',this.impactor.imDesc);
 	//txthis.impactor.text = this.impactor.imDesc;
 	
 	
