@@ -46,26 +46,26 @@ var CraterImpact;
 		this.log('new crater',this.query);
 		
 		// Open the acknowledgements
-		E('#ACK a').on('click',{me:this},function(e){
-			E('#acknowledgements').css({'display': 'block'});
-			var h = height(E('#ACK_inner').e[0]);
-			E('#ACK_inner').css({'top':((tall-h)/2)+'px'});
+		S('#ACK a').on('click',{me:this},function(e){
+			S('#acknowledgements').css({'display': 'block'});
+			var h = height(S('#ACK_inner').e[0]);
+			S('#ACK_inner').css({'top':((tall-h)/2)+'px'});
 		});
 
 		// Add close buttons to modal dialogs
-		var m = E('.modal-inner');
+		var m = S('.modal-inner');
 		for(var i = 0; i < m.e.length; i++){
-			var el = E(m.e[i]);
+			var el = S(m.e[i]);
 			el.html('<div class="close"><button>&times;</button></div>'+el.html())
 		}
 		// Attach events to close buttons
-		E('.modal-inner .close button').on('click',function(e){
-			E(e.currentTarget).parent().parent().parent().css({'display': 'none'});
+		S('.modal-inner .close button').on('click',function(e){
+			S(e.currentTarget).parent().parent().parent().css({'display': 'none'});
 		});
 		
 		// Deal with the language menu
-		E('#MenuLanguage .choice').on('click',{},function(e){
-			var ul = E('#MenuLanguage ul');
+		S('#MenuLanguage .choice').on('click',{},function(e){
+			var ul = S('#MenuLanguage ul');
 			ul.css({'display':(ul.css('display')=='block' ? 'none' : 'block')});
 		});
 
@@ -85,16 +85,16 @@ var CraterImpact;
 		// Update main panel
 		var els = ['#impactCalc','#ImpactCalc_Input','#Content_Wrapper','.modal-inner']
 		for(var i = 0; i < els.length; i++){
-			el = E(els[i]);
+			el = S(els[i]);
 			for(var j = 0; j < el.e.length; j++){
 				h = height(el.e[j]);
 				if(isNaN(h)) h = 10;
-				if(h > 0 && tall > h) E(el.e[j]).css({'top':((tall-h)/2)+'px'});
+				if(h > 0 && tall > h) S(el.e[j]).css({'top':((tall-h)/2)+'px'});
 			}
 		}
 
 		// Update acknowledgement popup
-		el = E('#ACK_inner');
+		el = S('#ACK_inner');
 		h = height(el.e[0]);
 		if(h > 0 && tall > h) el.css({'top':((tall-h)/2)+'px'});
 		
@@ -143,38 +143,38 @@ var CraterImpact;
 	CraterImpact.prototype.loadLanguage = function(l){
 		this.log('setLanguage',l);
 		this.lang = l;
-		var ul = E('#MenuLanguage ul');
+		var ul = S('#MenuLanguage ul');
 		function updateLang(data,attr){
 			this.log('updating with',data,attr)
 			this.dict = YAML2JSON(data);
 
 			// Update common elements
-			E('#AppTitle a').html(this.str('lblTitle'));
-			E('#ACK a').html(this.str('lbAcknow'));
+			S('#AppTitle a').html(this.str('lblTitle'));
+			S('#ACK a').html(this.str('lbAcknow'));
 
 			if(typeof this.updateLanguage==="function") this.updateLanguage();
 			if(typeof this.onload==="function") this.onload();
 
 			// Update current language
-			if(E('#MenuLanguage').e.length > 0){
-				E('#MenuLanguage .choice').html(this.languages[this.lang])
+			if(S('#MenuLanguage').e.length > 0){
+				S('#MenuLanguage .choice').html(this.languages[this.lang])
 				// Update choices
 				var list = "";
 				for(var l in this.languages) if(l != this.lang) list += '<li id="'+l+'">'+this.languages[l]+'</li>';
 				// Remove current event
-				E('#MenuLanguage li').off('click');
+				S('#MenuLanguage li').off('click');
 				// Update list
 				ul.html(list);
 				// Add events to list items
-				E('#MenuLanguage li').on('click',{me:this},function(e){
+				S('#MenuLanguage li').on('click',{me:this},function(e){
 					// Hide the menu
 					ul.css({'display':''});
 					// Load the new language
-					e.data.me.loadLanguage(E(e.currentTarget).attr('id'));
+					e.data.me.loadLanguage(S(e.currentTarget).attr('id'));
 				});
 			}
 		}
-		E().ajax('lang/'+l+'.txt',{'complete':updateLang,'this':this});
+		S().ajax('lang/'+l+'.txt',{'complete':updateLang,'this':this});
 	}
 
 	CraterImpact.prototype.str = function(str){
@@ -191,4 +191,4 @@ var CraterImpact;
 	}
 
 
-})(E);	// Self-closing function
+})(S);	// Self-closing function

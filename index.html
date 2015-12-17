@@ -7,12 +7,12 @@
 	<script src="js/stuquery.js"></script>
 	<script type="text/javascript" src="js/CraterImpact.js"></script>
 	<script>
-	E(document).ready(function(){
+	S(document).ready(function(){
 
 		//============================================
 		// Post-process the language file for this page
 		CraterImpact.prototype.onload = function(){
-			E("#StartButton").html(this.dict.btStart);
+			S("#StartButton").html(this.dict.btStart);
 			return this;	
 		}
 
@@ -22,18 +22,18 @@
 		function go(lang){
 			if(!lang){
 				// Get the selected button
-				var btn = E('#LanguageList .selected');
+				var btn = S('#LanguageList .selected');
 				// Determine the selected language
-				if(btn.e.length > 0) lang = E(btn.e[0]).attr('id');
+				if(btn.e.length > 0) lang = S(btn.e[0]).attr('id');
 			}
 			//Launch next screen and pass selected language to it.
 			window.location ="planet.html?lang=" + lang;
 		}
-		E('#StartButton').css({'display':'none'});
-		E('#StartButton').on('mousedown',{},function(e){
-			E(e.currentTarget).attr('class','StartButtonClicked');
+		S('#StartButton').css({'display':'none'});
+		S('#StartButton').on('mousedown',{},function(e){
+			S(e.currentTarget).attr('class','StartButtonClicked');
 		}).on('mouseout',{},function(e){
-			E(e.currentTarget).attr('class','StartButton');
+			S(e.currentTarget).attr('class','StartButton');
 		}).on('click',{},function(e){
 			go();
 		});

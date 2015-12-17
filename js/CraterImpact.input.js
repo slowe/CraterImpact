@@ -1,8 +1,8 @@
 (function(E) {
 
 	function makeSlider(input,html,callback,_obj){
-		var inp = E(input);
-		var html5Slider = E(html);
+		var inp = S(input);
+		var html5Slider = S(html);
 		html5Slider.addClass('noUi-target noUi-ltr noUi-horizontal noUi-background');
 		noUiSlider.create(html5Slider.e[0], {
 			start: parseFloat(inp.attr('value')),
@@ -32,8 +32,8 @@
 		this.loadLanguage(this.lang);
 
 		var planetname = this.query.planet;
-		if(planetname == "Earth") E("#cpTgDensMarsMoon").css({'display':'none'});
-		else E("#cpTgDens").css({'display':'none'});
+		if(planetname == "Earth") S("#cpTgDensMarsMoon").css({'display':'none'});
+		else S("#cpTgDens").css({'display':'none'});
 
 		this.prepareView();
 	
@@ -45,12 +45,12 @@
 		makeSlider('#WaterDepth','#WaterDepthSlider',this.updateWater,this);
 
 		// Add events
-		E('#cpPjDens').on('change',{me:this},function(e){ e.data.me.selectPjDensity(e.currentTarget); });
-		E('#cpTgDens').on('change',{me:this},function(e){ e.data.me.selectTgDensity(e.currentTarget); });
-		E('#cpTgDensMarsMoon').on('change',{me:this},function(e){ e.data.me.selectTgDensityMarsMoon(e.currentTarget); });
-		E('#BT_Reset').on('click',{me:this},function(e){ e.data.me.resetValues(); });
-		E('#BT_Submit').on('click',{me:this},function(e){ e.data.me.validateAndSumbit(); });
-		E('#BT_Help').on('click',{me:this},function(e){ e.data.me.help(); });
+		S('#cpPjDens').on('change',{me:this},function(e){ e.data.me.selectPjDensity(e.currentTarget); });
+		S('#cpTgDens').on('change',{me:this},function(e){ e.data.me.selectTgDensity(e.currentTarget); });
+		S('#cpTgDensMarsMoon').on('change',{me:this},function(e){ e.data.me.selectTgDensityMarsMoon(e.currentTarget); });
+		S('#BT_Reset').on('click',{me:this},function(e){ e.data.me.resetValues(); });
+		S('#BT_Submit').on('click',{me:this},function(e){ e.data.me.validateAndSumbit(); });
+		S('#BT_Help').on('click',{me:this},function(e){ e.data.me.help(); });
 		return this;
 	};
 
@@ -132,28 +132,28 @@
 	// Called when the distance slider is moved to a new 
 	// value.
 	CraterImpact.prototype.updateDistance = function(e){
-		if(!e) e = E('#ImpactDistance').attr('value');
+		if(!e) e = S('#ImpactDistance').attr('value');
 		if(isNaN(e)) e = 0;
 		distVal = parseFloat(e);
-		E('#DistanceAMT').html(distVal +'&thinsp;km');
+		S('#DistanceAMT').html(distVal +'&thinsp;km');
 	}
 	
 	//==============================================
 	// Called when the diameter slider is moved to a new 
 	// value.
 	CraterImpact.prototype.updateDiameter = function(e){
-		if(!e) e = E('#ProjectileSize').attr('value');
+		if(!e) e = S('#ProjectileSize').attr('value');
 		if(isNaN(e)) e = 0;
 		// Set global value
 		diameterVal = parseFloat(e);
 		
 		// Update displayed value
-		E('#ProjectileValue').html(diameterVal + '&thinsp;m');
+		S('#ProjectileValue').html(diameterVal + '&thinsp;m');
 		
 		var dv = diameterVal/10;
 		var s = dv/this.scaling;
 		
-		E('#Projectile_Img').css({'height':s+'px','width':s+'px','top':(159/2 - s/2)+'px'})
+		S('#Projectile_Img').css({'height':s+'px','width':s+'px','top':(159/2 - s/2)+'px'})
 	
 		DrawDiameterLine(dv,131);
 		return this;
@@ -206,7 +206,7 @@
 	// Called when the angle slider is moved to a new 
 	// value.
 	CraterImpact.prototype.updateAngle = function(e){
-		if(!e) e = E('#ProjectileAngle').attr('value');
+		if(!e) e = S('#ProjectileAngle').attr('value');
 		if(isNaN(e)) e = 90;
 		this.log('updateAngle',e)
 		var angleVal = parseFloat(e);
@@ -250,7 +250,7 @@
 	// Called when the velocity slider is moved to a new 
 	// value.
 	CraterImpact.prototype.updateVelocity = function(e){
-		if(!e) e = E('#ProjectileVelocity').attr('value');
+		if(!e) e = S('#ProjectileVelocity').attr('value');
 		if(isNaN(e)) e = 0;
 		projVelVal = parseFloat(e);
 		
@@ -291,35 +291,35 @@
 		this.log('updateLanguage');
 			
 		var x = this.str('inputs');
-		E("#Title").html(this.str('inputs'));
+		S("#Title").html(this.str('inputs'));
 
 		x = this.str('lblValue');
-		E("#Slider1_Text").html(x);
-		E("#Slider2_Text").html(x);
-		E("#Slider3_Text").html(x);
-		E("#Slider4_Text").html(x);
+		S("#Slider1_Text").html(x);
+		S("#Slider2_Text").html(x);
+		S("#Slider3_Text").html(x);
+		S("#Slider4_Text").html(x);
 
-		E("#Slider5_Text").html(this.str('lblDistance'));
-		E("#titleProjectile").html(this.str('lblAstDiam'));
-		E("#titleAngle").html(this.str('lbPjAng'));
-		E("#titleVelocity").html(this.str('lbPjVel'));
-		E("#titlePJDensity").html(this.str('lbPjDens'));
-		E("#titleTGDensity").html(this.str('lbTgDens'));
-		E("#BT_Reset").html(this.str('btReset'));
-		E("#BT_Submit").html(this.str('btSubmit'));
+		S("#Slider5_Text").html(this.str('lblDistance'));
+		S("#titleProjectile").html(this.str('lblAstDiam'));
+		S("#titleAngle").html(this.str('lbPjAng'));
+		S("#titleVelocity").html(this.str('lbPjVel'));
+		S("#titlePJDensity").html(this.str('lbPjDens'));
+		S("#titleTGDensity").html(this.str('lbTgDens'));
+		S("#BT_Reset").html(this.str('btReset'));
+		S("#BT_Submit").html(this.str('btSubmit'));
 
 		x = this.str('lblSelect');
-		E("#pjd_op0").html(x);
-		E("#tgd_op0").html(x);
+		S("#pjd_op0").html(x);
+		S("#tgd_op0").html(x);
 
-		E("#pjd_op1").html(this.str('lblIce'));
-		E("#pjd_op2").html(this.str('lblPorRock'));
-		E("#pjd_op3").html(this.str('lblDensRock'));
-		E("#pjd_op4").html(this.str('lblIron'));
+		S("#pjd_op1").html(this.str('lblIce'));
+		S("#pjd_op2").html(this.str('lblPorRock'));
+		S("#pjd_op3").html(this.str('lblDensRock'));
+		S("#pjd_op4").html(this.str('lblIron'));
 
-		E("#tgd_op1").html(this.str('lblWater'));
-		E("#tgd_op2").html(this.str('lblSedRock'));
-		E("#tgd_op3").html(this.str('lblIgRock'));
+		S("#tgd_op1").html(this.str('lblWater'));
+		S("#tgd_op2").html(this.str('lblSedRock'));
+		S("#tgd_op3").html(this.str('lblIgRock'));
 
 		help_title = this.str('help_title');
 		help_text = this.str('help_text');
@@ -374,19 +374,19 @@
 
 		switch(idx){
 			case 1:
-				E('#TargetFeature').css({'display':"none"});
-				E('#WaterFeature').css({'display':"block"});
+				S('#TargetFeature').css({'display':"none"});
+				S('#WaterFeature').css({'display':"block"});
 				this.updateWater();
 				tgImg.src = images.tgd3.img.src;
 				break;
 			case 2:
-				E('#TargetFeature').css({'display':"block"});
-				E('#WaterFeature').css({'display':"none"});
+				S('#TargetFeature').css({'display':"block"});
+				S('#WaterFeature').css({'display':"none"});
 				tgImg.src = images.tgd1.img.src;
 				break;
 			case 3:
-				E('#TargetFeature').css({'display':"block"});
-				E('#WaterFeature').css({'display':"none"});
+				S('#TargetFeature').css({'display':"block"});
+				S('#WaterFeature').css({'display':"none"});
 				tgImg.src = images.tgd2.img.src;
 				break;
 			default:
@@ -403,8 +403,8 @@
 		 
 		switch(idx){
 				case 1:
-				E('#TargetFeature').css({'display':"block"});
-				E('#WaterFeature').css({'display':"none"});
+				S('#TargetFeature').css({'display':"block"});
+				S('#WaterFeature').css({'display':"none"});
 				tgImg.src = images.tgd2.img.src;
 				break;
 	
@@ -424,19 +424,19 @@
 
 		switch(idx){
 			case 1:
-				E('#TargetFeature').css({'display':"none"});
-				E('#WaterFeature').css({'display':"block"});
+				S('#TargetFeature').css({'display':"none"});
+				S('#WaterFeature').css({'display':"block"});
 				this.updateWater();
 				tgImg.src = images.tgd3.img.src;
 				break;
 			case 2:
-				E('#TargetFeature').css({'display':"block"});
-				E('#WaterFeature').css({'display':"none"});
+				S('#TargetFeature').css({'display':"block"});
+				S('#WaterFeature').css({'display':"none"});
 				tgImg.src = images.tgd1.img.src;
 				break;
 			case 3:
-				E('#TargetFeature').css({'display':"block"});
-				E('#WaterFeature').css({'display':"none"});
+				S('#TargetFeature').css({'display':"block"});
+				S('#WaterFeature').css({'display':"none"});
 				tgImg.src = images.tgd2.img.src;
 				break;
 			default:
@@ -505,7 +505,7 @@
 	//=============================================
 	// Whe the water slider has been moved.
 	CraterImpact.prototype.updateWater = function(e){
-		if(!e) e = E('#WaterDepth').attr('value');
+		if(!e) e = S('#WaterDepth').attr('value');
 		waterLevel = parseFloat(e);
 		var level = waterLevel/20;
 
@@ -564,9 +564,9 @@
 		}
 		
 		if(passed == false){
-			E('#dialog_text').html("<ul>" + msg + "</ul>");
-			E('#validation').css({'display':'block'});
-			E("#validation .title").html(input_error_title); 
+			S('#dialog_text').html("<ul>" + msg + "</ul>");
+			S('#validation').css({'display':'block'});
+			S("#validation .title").html(input_error_title); 
 			this.resize();
 		}else{
 			window.location = "results.html?lang=" + this.lang +"&dist=" +"&planet=" + planet +"&dist=" + distVal +"&diam=" + diameterVal + "&trag=" + tragAngleVal + "&velo=" + projVelVal + "&pjd=" + pjDens + "&tgd=" + tgDens + "&wlvl=" + waterLevel;
@@ -576,9 +576,9 @@
 	//============================================
 	// Display the help window.
 	CraterImpact.prototype.help = function(){
-		E("#help .title").html(this.str("help_title")); 
-		E('#dialog_text2').html(this.str("help_text") + "<br/><br/>" + this.str("help_text2"));
-		E('#help').css({'display':'block'});
+		S("#help .title").html(this.str("help_title")); 
+		S('#dialog_text2').html(this.str("help_text") + "<br/><br/>" + this.str("help_text2"));
+		S('#help').css({'display':'block'});
 		this.resize();
 		return this;
 	}
@@ -595,11 +595,11 @@
 		tgDens = 0;
 		waterLevel = 0;
 		
-		this.selectTgDensity(E("#cpPjDens").e[0]);
-		this.selectPjDensity(E("#cpTgDens").e[0]);
+		this.selectTgDensity(S("#cpPjDens").e[0]);
+		this.selectPjDensity(S("#cpTgDens").e[0]);
 
-		E('#TargetFeature').css({'display':"block"});
-		E('#WaterFeature').css({'display':"none"});
+		S('#TargetFeature').css({'display':"block"});
+		S('#WaterFeature').css({'display':"none"});
 		
 		this.updateControls();
 
@@ -649,16 +649,16 @@
 	
 		this.log('updateControls');
 
-		E("#ImpactDistance").attr("value", distVal).trigger('change');
-		E("#ProjectileSize").attr("value", diameterVal).trigger('change');
-		E("#ProjectileAngle").attr("value", tragAngleVal).trigger('change');
-		E("#ProjectileVelocity").attr("value", projVelVal).trigger('change');
-		E("#WaterDepth").attr("value", waterLevel).trigger('change');
-		E("#cpPjDens").attr('value', pjDens).trigger('change'); 
-		E("#cpTgDens").attr('value', tgDens).trigger('change');
+		S("#ImpactDistance").attr("value", distVal).trigger('change');
+		S("#ProjectileSize").attr("value", diameterVal).trigger('change');
+		S("#ProjectileAngle").attr("value", tragAngleVal).trigger('change');
+		S("#ProjectileVelocity").attr("value", projVelVal).trigger('change');
+		S("#WaterDepth").attr("value", waterLevel).trigger('change');
+		S("#cpPjDens").attr('value', pjDens).trigger('change'); 
+		S("#cpTgDens").attr('value', tgDens).trigger('change');
 
-		if(pjDens) E('#cpPjDens option:eq('+(pjDens+1)+')').attr('selected','selected');
-		if(pjDens) E('#cpTgDens option:eq('+(tgDens+1)+')').attr('selected','selected');
+		if(pjDens) S('#cpPjDens option:eq('+(pjDens+1)+')').attr('selected','selected');
+		if(pjDens) S('#cpTgDens option:eq('+(tgDens+1)+')').attr('selected','selected');
 		this.selectTgDensity2(parseInt(tgDens));
 		this.selectPjDensity2(parseInt(pjDens));
 		
@@ -675,4 +675,4 @@
 		return;
 	}
 	
-})(E);	// Self-closing function
+})(S);	// Self-closing function

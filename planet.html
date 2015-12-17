@@ -7,19 +7,19 @@
 	<script type="text/javascript" src="js/stuquery.js"></script> 
 	<script type="text/javascript" src="js/CraterImpact.js"></script> 
 	<script>
-	E(document).ready(function(){
+	S(document).ready(function(){
 		//============================================
 		// Post-process the language file for this page
 		CraterImpact.prototype.onload = function(){
 
-			E("#StartButton").html(this.dict.btStart);
-			E("#lang_warn").html(this.dict.brz_wrn);
-			E('#Earth p').html(this.dict.bodyEarth);
-			E('#Moon p').html(this.dict.bodyMoon);
-			E('#Mars p').html(this.dict.bodyMars);
+			S("#StartButton").html(this.dict.btStart);
+			S("#lang_warn").html(this.dict.brz_wrn);
+			S('#Earth p').html(this.dict.bodyEarth);
+			S('#Moon p').html(this.dict.bodyMoon);
+			S('#Mars p').html(this.dict.bodyMars);
 	
-			if(isCanvasSupported()) E('#lang_warn').css({'display':'none'});
-			else E('#lang_warn').css({'display':'block'});
+			if(isCanvasSupported()) S('#lang_warn').css({'display':'none'});
+			else S('#lang_warn').css({'display':'block'});
 
 		}
 
@@ -28,30 +28,30 @@
 		// Update this language
 		craterimpact.loadLanguage(craterimpact.lang);
 
-		E('#LanguageList li').on('click',{},function(e){
+		S('#LanguageList li').on('click',{},function(e){
 
 			// Clear any existing selection
-			E('#LanguageList .selected').removeClass('selected');
+			S('#LanguageList .selected').removeClass('selected');
 
 			// Select this language
-			E(e.currentTarget).addClass('selected');
+			S(e.currentTarget).addClass('selected');
 
 			// Show the start button
-			E('#StartButton').css({'display':''});
+			S('#StartButton').css({'display':''});
 
 		});
 
-		E('#StartButton').css({'display':'none'}).on('mousedown',{},function(e){
-			E(e.currentTarget).attr('class','StartButtonClicked');
+		S('#StartButton').css({'display':'none'}).on('mousedown',{},function(e){
+			S(e.currentTarget).attr('class','StartButtonClicked');
 		}).on('mouseout',{},function(e){
-			E(e.currentTarget).attr('class','StartButton');
+			S(e.currentTarget).attr('class','StartButton');
 		}).on('click',{},function(e){
 			// Get the selected button
-			var btn = E('#LanguageList .selected');
+			var btn = S('#LanguageList .selected');
 			if(btn.e.length > 0){
 
 				// Determine the selected language
-				var planet = E(btn.e[0]).attr('id');
+				var planet = S(btn.e[0]).attr('id');
 
 				//Launch next screen and pass selected language to it.
 				window.location ="input.html?lang=" + craterimpact.lang + "&planet=" + planet;

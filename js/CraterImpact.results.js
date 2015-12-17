@@ -736,4 +736,4 @@
 
 
 
-})(E);	// Self-closing function
+})(S);	// Self-closing function
