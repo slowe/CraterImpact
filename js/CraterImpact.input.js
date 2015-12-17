@@ -143,20 +143,18 @@
 		var s = dv/this.scaling;
 		
 		S('#Projectile_Img').css({'height':s+'px','width':s+'px','top':(159/2 - s/2)+'px'})
-	
-		DrawDiameterLine(dv,131);
+
+		DrawDiameterLine(s,131);
 		return this;
 	}
 
 	//================================================
 	// Draws the diameter lines for the Asteroid diameter.
-	function DrawDiameterLine(width,cX){
+	function DrawDiameterLine(width,cX,scaling){
 		var c=document.getElementById("ProjectileWidth");
 		var ctx=c.getContext("2d");
 
 		canvasReset(ctx,c);
-
-		width = width/this.scaling;
 
 		var L = c.width/2 - width/2;
 		var E = c.width/2 + width/2;
@@ -166,7 +164,6 @@
 
 		ctx.lineWidth = 5;
 		ctx.stroke();
-
 		ctx.drawImage(images.leftArrow.img, L-10, 0);
 		ctx.drawImage(images.rightArrow.img, E-3, 0);
 	}

@@ -59,6 +59,7 @@ body {
 	line-height: 3em;
 	border-bottom: 1px solid #404040;
 	color: #d0d0d0;
+	z-index: 1000;
 }
 #header, #footer {
 	background: #202020;
@@ -363,7 +364,7 @@ h1{
 	border-style: solid;
 	border-width: 1px;
 	border-color: #b0b0b0;
-	padding: 5px;
+	padding: 1em;
 	vertical-align: top;
 	border-bottom: 0px;
 	width: 33.3%;
@@ -384,7 +385,7 @@ h1{
 
 .input_short .input_panel {
 	width: auto;
-	margin: 0.5em 0;
+	margin: 0;
 }
 .input_panel_w {
 	width: 340px;
