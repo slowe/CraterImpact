@@ -259,17 +259,20 @@
 		
 		ctx.font = '14pt Arial';
 		
-		if (angleVal >= 10) ctx.fillText(''+angleVal, 125, 40);
+		if (angleVal >= 10) ctx.fillText(htmlEncode(angleVal+'&deg;'), 125, 40);
 		else ctx.fillText(''+angleVal, 130, 40);
 		ctx.font = '12pt Arial';
 		
-		if(angleVal >= 10) ctx.fillText('o', 150, 35);
-		else ctx.fillText('o', 142, 35);
-			
 		tragAngleVal = angleVal;
 		return this;
-	 }
-	 
+	}
+	//==============================================
+	// Encode some HTML and get the resulting string
+	function htmlEncode(txt){
+		var span = document.createElement('div');
+		span.innerHTML = txt;
+		return span.innerHTML;
+	}
 	//==============================================
 	// Called when the velocity slider is moved to a new 
 	// value.
