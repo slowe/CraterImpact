@@ -734,4 +734,6 @@
 		else return parseInt(el.currentStyle.height);	
 	}
 
+
+
 })(E);	// Self-closing function
