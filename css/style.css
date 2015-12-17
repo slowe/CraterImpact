@@ -45,7 +45,7 @@ body {
 #container {
 	height: 100%;
 	width: 100%;
-	background-image:url('../imgs/background.jpg');
+	background-image:url('../imgs/background_sm.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 } 
@@ -129,7 +129,7 @@ body {
 	height: 100%;
 }
 
-#impactCalc, .close button, #LanguageList li, #content button, .input_table td {
+.close button, #LanguageList li, #content button, .input_table td {
 	border-radius: 5px;
 }
 
@@ -516,12 +516,12 @@ DATA Output
 #Results_Table_Area {
 	background: #f0f0f0;
 	float: left;
-	width:257px;
-	padding: 10px;
+	width:270px;
+	padding: 1em;
 }
 
 #map_canvas {
-	width: 525px;
+	width: 512px;
 	float: right;
 }
  
