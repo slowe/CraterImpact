@@ -150,7 +150,14 @@ h1{
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d3d3d3), color-stop(1, #939393) );
 	background:-moz-linear-gradient( center top, #d3d3d3 5%, #939393 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d3d3d3', endColorstr='#939393');
+	height: 0px;
 }
+.main {
+	overflow: hidden;
+	border-radius: 8px;
+}
+
+.heading div { display: none; }
 .screen_title {
 	text-align: left;
 	font-weight: bold;
@@ -541,7 +548,7 @@ DATA Output
 	height: 488px;
 }
 #Results_Table_Area, #map_canvas {
-	height: 460px; 
+	height: 488px; 
 }
 
 
