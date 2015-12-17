@@ -97,16 +97,19 @@ var CraterImpact;
 	}
 
 	CraterImpact.prototype.resize = function(){
-		var el,h;
+		var el,h, t, head;
 		wide = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 		tall = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
+		head = height(S('#header').e[0]);
+console.log(head)
 		// Update main panel
 		var els = [S('.main'),S('.modal-inner')];
 		for(var i = 0; i < els.length; i++){
 			for(var j = 0; j < els[i].e.length; j++){
 				h = height(els[i].e[j]);
-				S(els[i].e[j]).css({'top':((!isNaN(h) && h > 0 && tall > h) ? ((tall-h)/2)+'px' : '')});
+				t = ((tall-h)/2);
+				if(t < head) t = head;
+				S(els[i].e[j]).css({'top':((!isNaN(h) && h > head && tall > h) ? t+'px' : head+'px')});
 			}
 		}
 

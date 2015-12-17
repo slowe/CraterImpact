@@ -59,10 +59,10 @@ body {
 	line-height: 3em;
 	border-bottom: 1px solid #404040;
 	color: #d0d0d0;
-	z-index: 1000;
 }
 #header, #footer {
 	background: #202020;
+	z-index: 999;
 }
 #AppTitle {
 	float: left;
@@ -127,7 +127,6 @@ body {
 
 #content {
 	height: 100%;
-	overflow-y: auto;
 }
 
 #impactCalc, .close button, #LanguageList li, #content button, .input_table td {
