@@ -124,7 +124,7 @@ h1{
 	height: 782px; width: 548px; background: #dfdfdf;
 }
 
-.input_head {
+.heading {
 	text-align: left;
 	height: 2em;
 	background-color: #c3c3c3;
@@ -137,14 +137,13 @@ h1{
 .screen_title {
 	display: inline-block;
 }
-#content button.left_footer_button_s {
+#content button.help_button {
 	background-color: transparent;
 	width: auto;
 	float: right;
 	margin-right: 0px;
 	font-weight: 700;
 }
-
 
 /*//////////////////////////////////////////////////*/
 /* Language Selection Screen */
@@ -348,6 +347,10 @@ h1{
 	border-spacing: 10px 5px;
 }
 
+.input_short {
+	height: 2em;
+}
+
 .input_table td {
 	border-style: solid;
 	border-width: 1px;
@@ -371,10 +374,10 @@ h1{
 	padding-bottom: 5px;
 }
 
-.input_panel {
-	width: 200px;
+.input_short .input_panel {
+	width: auto;
+	margin: 0.5em 0;
 }
-
 .input_panel_w {
 	width: 340px;
 }
@@ -406,9 +409,6 @@ h1{
 
 .input_bottom_buttons {
 	display: inline-block;
-}
-
-.input_bottom_buttons button {
 }
 
 
@@ -485,11 +485,9 @@ DATA Output
 }
 
 #Output_Footer, #Input_Footer {
-	line-height: 32px;
 	background-color: #c3c3c3;
 	text-align: left;
 	padding: 1em;
-	height: 66px;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #939393), color-stop(1, #d3d3d3) );

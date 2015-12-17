@@ -36,9 +36,9 @@
 		
 			<div id="ImpactCalc_Input">	
 		
-				<div class="input_head">
+				<div class="heading">
 					<div id="Title" class="screen_title">Input Parameters</div>
-					<button id="BT_Help" class="left_footer_button_s">?</button>
+					<button id="BT_Help" class="help_button">?</button>
 				</div>
 				<table class="input_table">
 				<tr>
@@ -107,17 +107,22 @@
 						</div>
 					</td></tr>
 				</table>
-			
+				<table class="input_table input_short">
+					<!--PROJECTILE DENSITTY-->
+					<tr>
+						<td class="input_area">
+							<div class="input_panel">
+								<input type="number" id="ImpactDistance" min="0" max="500" step="1" required="required" value="0" />
+								<div id="Slider5_Text" class="slider_text_l">Distance from Crash Site:</div><div id="ImpactDistanceSlider"></div>
+								<div class="slider_text_r" id="DistanceAMT">0km</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+
 				<div id="Input_Footer">
-					<div class="input_bottom_buttons">
-						<button id="BT_Reset" class="left_footer_button">Reset</button>
-						<button id="BT_Submit" class="left_footer_button">Submit</button>
-					</div>
-					<div class="input_panel_right">
-						<input type="number" id="ImpactDistance" min="0" max="500" step="1" required="required" value="0" />
-						<div id="Slider5_Text" class="slider_text_l">Distance from Crash Site:</div><div id="ImpactDistanceSlider"></div>
-						<div class="slider_text_r" id="DistanceAMT">0km</div>
-					</div>
+					<button id="BT_Reset" class="left_footer_button">Reset</button>
+					<button id="BT_Submit" class="right_footer_button">Submit</button>
 				</div>
 		
 		 
