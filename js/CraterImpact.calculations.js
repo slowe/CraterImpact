@@ -8,7 +8,6 @@
 //###############################################################################
 
 var str = new HashMap();
-var craterCals;
 
 // Format to 0dp.
 function nbFormat(number){ return number_format(number, 0, ".",","); }
@@ -845,64 +844,63 @@ CraterCalcs.prototype.trace = function(s){
  * Constructor for the impact model which sets all values to zero.
  */
 //=========================================================================
-function  ImpactModel() 
-{
+function  ImpactModel() {
 	//target
-	 this.tgDens= 0;
-	 this.tgDepth = 0;
-	 this.tgDist = 0;
-	 this.tgType = 0;
+	this.tgDens= 0;
+	this.tgDepth = 0;
+	this.tgDist = 0;
+	this.tgType = 0;
 	// Projectile
-	 this.pjDens = 0;
-	 this.pjVel = 0;
-	 this.pjAngle = 0;
-	 this.pjDiam = 0;
-	 this.pjMass = 0;
-	 this.pjEnergy = 0;
+	this.pjDens = 0;
+	this.pjVel = 0;
+	this.pjAngle = 0;
+	this.pjDiam = 0;
+	this.pjMass = 0;
+	this.pjEnergy = 0;
 	// ---- Output variables
 	// Crater calculated values
-	 this.crHeight = 0;
-	 this.crDiam = 0;
-	 this.crDepth = 0;
-	 this.crMass = 0;
-	 this.crWatermass = 0;
-	 this.crVol = 0;
-	 this.crVolMelt = 0;
-	 this.crBrecThick = 0;
-	 // Transient crater dimensions
-	 this.crTsDiam = 0;
-	 this.crTsDepth = 0;
+	this.crHeight = 0;
+	this.crDiam = 0;
+	this.crDepth = 0;
+	this.crMass = 0;
+	this.crWatermass = 0;
+	this.crVol = 0;
+	this.crVolMelt = 0;
+	this.crBrecThick = 0;
+	// Transient crater dimensions
+	this.crTsDiam = 0;
+	this.crTsDepth = 0;
 	// Fireball 
-	 this.fbRadius = 0;
-	 this.fbDuration = 0;
-	 this.fbExposure = 0;
-	 this.fbFlux = 0;
-	 this.fbPeaktime = 0;
-	 this.fbEnergy = 0;
+	this.fbRadius = 0;
+	this.fbDuration = 0;
+	this.fbExposure = 0;
+	this.fbFlux = 0;
+	this.fbPeaktime = 0;
+	this.fbEnergy = 0;
 	// Ejecta
-	 this.ejFalltime = 0;
-	 this.ejThickness = 0;
-	 this.ejFragsize = 0;
+	this.ejFalltime = 0;
+	this.ejThickness = 0;
+	this.ejFragsize = 0;
 	// Air blast
-	 this.abAmpl = 0;
-	 this.abWindvel = 0;
-	 this.abOpressure = 0;
-	 this.abDesc = "";
-	 this.abShockTime = 0;
-	 this.abAltBreak = 0;
-	 this.abAltBurst = 0;
+	this.abAmpl = 0;
+	this.abWindvel = 0;
+	this.abOpressure = 0;
+	this.abDesc = "";
+	this.abShockTime = 0;
+	this.abAltBreak = 0;
+	this.abAltBurst = 0;
 	// Seismic 
-	 this.smRichter = 0;
-	 this.smArrival = 0;
-	 this.smEffMag = 0;
-	 this.smDesc = "";
+	this.smRichter = 0;
+	this.smArrival = 0;
+	this.smEffMag = 0;
+	this.smDesc = "";
 	// Impact
-	 this.imEnergy = 0;
-	 this.imMegaton = 0;
-	 this.imFreq = 0;
-	 this.imDesc = "";
-	 this.imDist = 0;
-	 this.imVel = 0;
+	this.imEnergy = 0;
+	this.imMegaton = 0;
+	this.imFreq = 0;
+	this.imDesc = "";
+	this.imDist = 0;
+	this.imVel = 0;
 
 }//========================================================================
 
@@ -911,64 +909,63 @@ function  ImpactModel()
  * Resets all the model values to zero
  */
 //=========================================================================
-ImpactModel.prototype.reset = function()
-{
-		//target
-	 this.tgDens=0;
-	 this.tgDepth = 0;
-	 this.tgDist = 0;
-	 this.tgType = 0;
+ImpactModel.prototype.reset = function(){
+	//target
+	this.tgDens=0;
+	this.tgDepth = 0;
+	this.tgDist = 0;
+	this.tgType = 0;
 	// Projectile
-	 this.pjDens = 0;
-	 this.pjVel = 0;
-	 this.pjAngle = 0;
-	 this.pjDiam = 0;
-	 this.pjMass = 0;
-	 this.pjEnergy = 0;
+	this.pjDens = 0;
+	this.pjVel = 0;
+	this.pjAngle = 0;
+	this.pjDiam = 0;
+	this.pjMass = 0;
+	this.pjEnergy = 0;
 	// ---- Output variables
 	// Crater calculated values
-	 this.crHeight = 0;
-	 this.crDiam = 0;
-	 this.crDepth = 0;
-	 this.crMass = 0;
-	 this.crWatermass = 0;
-	 this.crVol = 0;
-	 this.crVolMelt = 0;
-	 this.crBrecThick = 0;
-	 // Transient crater dimensions
-	 this.crTsDiam = 0;
-	 this.crTsDepth = 0;
+	this.crHeight = 0;
+	this.crDiam = 0;
+	this.crDepth = 0;
+	this.crMass = 0;
+	this.crWatermass = 0;
+	this.crVol = 0;
+	this.crVolMelt = 0;
+	this.crBrecThick = 0;
+	// Transient crater dimensions
+	this.crTsDiam = 0;
+	this.crTsDepth = 0;
 	// Fireball 
-	 this.fbRadius = 0;
-	 this.fbDuration = 0;
-	 this.fbExposure = 0;
-	 this.fbFlux = 0;
-	 this.fbPeaktime = 0;
-	 this.fbEnergy = 0;
+	this.fbRadius = 0;
+	this.fbDuration = 0;
+	this.fbExposure = 0;
+	this.fbFlux = 0;
+	this.fbPeaktime = 0;
+	this.fbEnergy = 0;
 	// Ejecta
-	 this.ejFalltime = 0;
-	 this.ejThickness = 0;
-	 this.ejFragsize = 0;
+	this.ejFalltime = 0;
+	this.ejThickness = 0;
+	this.ejFragsize = 0;
 	// Air blast
-	 this.abAmpl = 0;
-	 this.abWindvel = 0;
-	 this.abOpressure = 0;
-	 this.abDesc = "";
-	 this.abShockTime = 0;
-	 this.abAltBreak = 0;
-	 this.abAltBurst = 0;
+	this.abAmpl = 0;
+	this.abWindvel = 0;
+	this.abOpressure = 0;
+	this.abDesc = "";
+	this.abShockTime = 0;
+	this.abAltBreak = 0;
+	this.abAltBurst = 0;
 	// Seismic 
-	 this.smRichter = 0;
-	 this.smArrival = 0;
-	 this.smEffMag = 0;
-	 this.smDesc = "";
+	this.smRichter = 0;
+	this.smArrival = 0;
+	this.smEffMag = 0;
+	this.smDesc = "";
 	// Impact
-	 this.imEnergy = 0;
-	 this.imMegaton = 0;
-	 this.imFreq = 0;
-	 this.imDesc = "";
-	 this.imDist = 0;
-	 this.imVel = 0;
+	this.imEnergy = 0;
+	this.imMegaton = 0;
+	this.imFreq = 0;
+	this.imDesc = "";
+	this.imDist = 0;
+	this.imVel = 0;
 
 }//=========================================================================
 
@@ -981,114 +978,97 @@ the behaviour of Hash maps. Hence this library does.
 **/
 //##############################################################
 
-function HashMap(obj)
-{
-    this.length = 0;
-    this.items = {};
-    for (var p in obj) {
-        if (obj.hasOwnProperty(p)) {
-            this.items[p] = obj[p];
-            this.length++;
-        }
-    }
+function HashMap(obj){
+	this.length = 0;
+	this.items = {};
+	for (var p in obj) {
+		if (obj.hasOwnProperty(p)) {
+			this.items[p] = obj[p];
+			this.length++;
+		}
+	}
 
 	/**
 	Put an item in the hash tablle
 	**/
-     HashMap.prototype.put = function(key, value)
-    {
-        var previous = undefined;
-        if (this.hasItem(key)) {
-            previous = this.items[key];
-        }
-        else {
-            this.length++;
-        }
-        this.items[key] = value;
+	HashMap.prototype.put = function(key, value){
+		var previous = undefined;
+		if (this.hasItem(key)) previous = this.items[key];
+		else this.length++;
+		
+		this.items[key] = value;
 		var ky = this.hasItem(key) ? this.items[key] : undefined;
-        return previous;
-    }
+		return previous;
+	}
 
 	/**
 	Get an item from the hash table.
 	**/
-    HashMap.prototype.get = function(key) {
+	HashMap.prototype.get = function(key) {
 		var itm = this.items[key];
-       var ky = this.hasItem(key) ? this.items[key] : undefined;
-	   return ky;
-    }
+		var ky = this.hasItem(key) ? this.items[key] : undefined;
+		return ky;
+	}
 
 	/**
 	Check if hash has item allready.
 	**/
-    HashMap.prototype.hasItem = function(key)
-    {
-        return this.items.hasOwnProperty(key);
-    }
-   
-   /**
-   Remove an item from the table.
-   **/
-    HashMap.prototype.remove = function(key)
-    {
-        if (this.hasItem(key)) {
-            previous = this.items[key];
-            this.length--;
-            delete this.items[key];
-            return previous;
-        }
-        else {
-            return undefined;
-        }
-    }
+	HashMap.prototype.hasItem = function(key){
+		return this.items.hasOwnProperty(key);
+	}
+
+	/**
+	Remove an item from the table.
+	**/
+	HashMap.prototype.remove = function(key){
+		if (this.hasItem(key)) {
+			previous = this.items[key];
+			this.length--;
+			delete this.items[key];
+			return previous;
+		}else{
+			return undefined;
+		}
+	}
 
 	/**
 	Return the keys in an array.
 	**/
-    HashMap.prototype.keys = function()
-    {
-        var keys = [];
-        for (var k in this.items) {
-            if (this.hasItem(k)) {
-                keys.push(k);
-            }
-        }
-        return keys;
-    }
+	HashMap.prototype.keys = function(){
+		var keys = [];
+		for (var k in this.items) {
+			if (this.hasItem(k)) keys.push(k);
+		}
+		return keys;
+	}
 
 	/**
 	Return the values in an array.
 	**/
-    HashMap.prototype.values = function()
-    {
-        var values = [];
-        for (var k in this.items) {
-            if (this.hasItem(k)) {
-                values.push(this.items[k]);
-            }
-        }
-        return values;
-    }
+    HashMap.prototype.values = function(){
+		var values = [];
+		for (var k in this.items) {
+			if (this.hasItem(k)) values.push(this.items[k]);
+		}
+		return values;
+	}
 
 	/**
 	Each function allows the object to be used in a for each loop.
 	**/
-    HashMap.prototype.each = function(fn) {
-        for (var k in this.items) {
-            if (this.hasItem(k)) {
-                fn(k, this.items[k]);
-            }
-        }
-    }
+	HashMap.prototype.each = function(fn) {
+		for (var k in this.items) {
+			if (this.hasItem(k)) fn(k, this.items[k]);
+		}
+	}
 
 	/**
 	Clears the contents of the HashMap table.
 	**/
-    HashMap.prototype.clear = function()
-    {
-        this.items = {}
-        this.length = 0;
-    }
+	HashMap.prototype.clear = function(){
+		this.items = {}
+		this.length = 0;
+	}
 }//##############################################################
 
 //###########################################################################
