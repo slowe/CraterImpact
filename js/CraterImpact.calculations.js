@@ -143,7 +143,7 @@ CraterCalcs.prototype.doCalcs = function(){
 CraterCalcs.prototype.loadParameters = function(){
 	//Alert.show(message, "Crater parameters");
 	this.impactor.reset();
-	var dp1 = this.dataProvider.getCbPjDens();
+	var dp1 = this.dataProvider.get('cbPjDens');
 	switch(dp1)
 	{
 		case 1:
@@ -160,14 +160,14 @@ CraterCalcs.prototype.loadParameters = function(){
 			break;
 	}//end switch
 	
-	var dp2 = this.dataProvider.getCbTgDens();
+	var dp2 = this.dataProvider.get('cbTgDens');
 	//Convert target density to a number
 	switch(dp2)
 	{
 		case 1:
 			this.impactor.tgDens = 1000.0;
 			//Only water is allowed a depth
-			this.impactor.tgDepth = this.dataProvider.getSlTgDepth();
+			this.impactor.tgDepth = this.dataProvider.get('slTgDepth');
 			break;
 		case 2:
 			this.impactor.tgDens = 2500.0;
@@ -179,16 +179,16 @@ CraterCalcs.prototype.loadParameters = function(){
 			break;
 	}//end switch
 
-	this.impactor.tgType = this.dataProvider.getCbTgDens();
+	this.impactor.tgType = this.dataProvider.get('cbTgDens');
 	
 	/////////////////////
 	//ADDED BY AS
 	///////////////////
-	this.impactor.imDist = this.dataProvider.getImpactDist();
-	this.impactor.tgDist =this.dataProvider.getImpactDist();
-	this.impactor.pjAngle = this.dataProvider.getProjAngle();
-	this.impactor.pjDiam = this.dataProvider.getProjDiam();
-	this.impactor.pjVel = this.dataProvider.getProjVel();
+	this.impactor.imDist = this.dataProvider.get('impactDist');
+	this.impactor.tgDist =this.dataProvider.get('impactDist');
+	this.impactor.pjAngle = this.dataProvider.get('projAngle');
+	this.impactor.pjDiam = this.dataProvider.get('projDiam');
+	this.impactor.pjVel = this.dataProvider.get('projVel');
 }
 
 //==================================================================

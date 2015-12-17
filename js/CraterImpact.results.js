@@ -552,24 +552,24 @@
 			_obj.log('updateTables',d)
 
 			// Sets the output array that falls on the map screeen.
-			E('#ImpactValuesTable').html(makeTable(d.getDgOutputs()));
+			E('#ImpactValuesTable').html(makeTable(d.get('dgOutputs')));
 
 			// Sets the input array that is the first table in the Data View.
-			E('#InputValuesTable').html(makeTable(d.getDgInputs()));
+			E('#InputValuesTable').html(makeTable(d.get('dgInputs')));
 	
 			// Sets the damage text which is the second table of the data view are.
 			E("#LB_Damage").html( _obj.str('damage').replace(/%DISTANCE%/,_obj.value.dist +" km "));
-			E('#DamageInfo').html(d.getTxtDamage());
+			E('#DamageInfo').html(d.get('txtDamage'));
 
 			// Sets the data for the energy table which is the third table of the data view.
-			E('#InputEnergyTable').html(makeTable(d.getDgEnergy()));
+			E('#InputEnergyTable').html(makeTable(d.get('dgEnergy')));
 
 			// Set the what happens to the impactor text.
-			E('#ImpactorInfo').html(d.getTxtImpactor());
+			E('#ImpactorInfo').html(d.get('txtImpactor'));
 
 			// Sets if a fireball has been seen which is the final table of the data view.
 			//if dist is 0 do not display the exposure, the last value in the fire array.
-			E('#FireballTable').html(makeTable( d.getDgFirevall() , _obj.value.dist == 0 ? 1 : 0 ));
+			E('#FireballTable').html(makeTable( d.get('dgFirevall') , _obj.value.dist == 0 ? 1 : 0 ));
 
 			_obj.drawScale();
 		}		
