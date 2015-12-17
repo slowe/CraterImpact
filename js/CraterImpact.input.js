@@ -507,33 +507,33 @@
 		var msg = "";
 	
 		if(diameterVal <= 0){
-			msg += "<li>" + input_error_diam + "</li>";
+			msg += "<li>" + this.str("input_error_diam") + "</li>";
 			passed = false;
 		}
 		
 		if(tragAngleVal <= 0){
-			msg += "<li>" + input_error_angle + "</li>";
+			msg += "<li>" + this.str("input_error_angle") + "</li>";
 			passed = false;
 		}
 		
 		if(projVelVal <= 0){
-			msg +="<li>" + input_error_vel + "</li>";
+			msg +="<li>" + this.str("input_error_vel") + "</li>";
 			passed = false;
 		}
 		
 		if(pjDens <= 0){
-			msg+= "<li>" + input_error_pjd + "</li>";
+			msg+= "<li>" + this.str("input_error_pjd") + "</li>";
 			passed = false;
 		}
 		
 		if(tgDens <= 0){
-			msg += "<li>" + input_error_tgd + "</li>";
+			msg += "<li>" + this.str("input_error_tgd") + "</li>";
 			passed = false;
 		}
 		
 		if(tgDens == 1 && waterLevel <= 0){
 			passed = false;
-			msg +="<li>" + input_error_water + "</li>";
+			msg +="<li>" + this.str("input_error_water") + "</li>";
 		}
 		
 		if(passed == false){

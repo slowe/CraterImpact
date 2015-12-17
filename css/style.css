@@ -126,7 +126,6 @@ h1{
 
 .heading {
 	text-align: left;
-	height: 2em;
 	background-color: #c3c3c3;
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
@@ -135,13 +134,21 @@ h1{
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d3d3d3', endColorstr='#939393');
 }
 .screen_title {
+	text-align: left;
+	font-weight: bold;
+	padding-left: 10px;
+	line-height: 28px;
 	display: inline-block;
 }
 #content button.help_button {
-	background-color: transparent;
+	background-color: #00b9e4;
+	color: white;
 	width: auto;
 	float: right;
+	border-radius: 0px;
+	border-top-right-radius: 5px;
 	margin-right: 0px;
+	line-height: 28px;
 	font-weight: 700;
 }
 
@@ -234,14 +241,6 @@ h1{
 .StartButtonClicked {
 	background-color: #FFbb00;
 	color: black;
-}
-
-.screen_title {
-	text-align: left;
-	font-weight: bold;
-	padding-left: 10px;
-	line-height: 28px;
-	border-bottom: 1px solid #888888;
 }
 
 /*///////////////////////////////////////////////////////*/
