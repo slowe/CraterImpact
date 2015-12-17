@@ -19,9 +19,6 @@
 		// Make the crater object
 		var craterimpact = new CraterImpact({});
 
-		E('#LanguageList li').on('click',{},function(e){
-			go(E(e.currentTarget).attr('id'));
-		});
 		function go(lang){
 			if(!lang){
 				// Get the selected button
@@ -67,9 +64,9 @@
 			<div id="impactCalc">	
 		
 				<ul id="LanguageList">
-					<li id="cy" class="Welsh"><a href="planet.html?lang=cy">Cymraeg</a></li><li id="de" class="German"><a href="planet.html?lang=de">Deutsch</a></li><li id="en" class="English"><a href="planet.html?lang=en">English</a></li><li id="es" class="Spanish"><a href="planet.html?lang=es">Espa&ntilde;ol</a></li><li id="fr" class="French"><a href="planet.html?lang=fr">Fran&ccedil;ais</a></li><li id="pl" class="Polish"><a href="planet.html?lang=pl">Polski</a></li>
+					<li><a href="planet.html?lang=cy">Cymraeg</a></li><li><a href="planet.html?lang=de">Deutsch</a></li><li><a href="planet.html?lang=gr">Ελληνικά</a></li><li><a href="planet.html?lang=en">English</a></li><li><a href="planet.html?lang=es">Espa&ntilde;ol</a></li><li><a href="planet.html?lang=fr">Fran&ccedil;ais</a></li><li><a href="planet.html?lang=it">Italiano</a></li><li><a href="planet.html?lang=pl">Polski</a></li><li><a href="planet.html?lang=pt">Portugu&ecirc;s</a></li><li><a href="planet.html?lang=ro">Rom&acirc;n&#x103;</a></li>
 				</ul>
-			
+
 				<button id="StartButton" class="StartButton">Start</button>
 		
 			</div><!--end impactCalc-->
