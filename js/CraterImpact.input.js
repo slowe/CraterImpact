@@ -549,8 +549,8 @@
 	//============================================
 	// Display the help window.
 	CraterImpact.prototype.help = function(){
-		E("#help .title").html(help_title); 
-		E('#dialog_text2').html(help_text + "<br/><br/>" + help_text2);
+		E("#help .title").html(this.str("help_title")); 
+		E('#dialog_text2').html(this.str("help_text") + "<br/><br/>" + this.str("help_text2"));
 		E('#help').css({'display':'block'});
 		this.resize();
 		return this;

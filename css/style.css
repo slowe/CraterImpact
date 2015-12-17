@@ -124,7 +124,9 @@ h1{
 	height: 782px; width: 548px; background: #dfdfdf;
 }
 
-.screen_title {
+.input_head {
+	text-align: left;
+	height: 2em;
 	background-color: #c3c3c3;
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
@@ -132,6 +134,17 @@ h1{
 	background:-moz-linear-gradient( center top, #d3d3d3 5%, #939393 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d3d3d3', endColorstr='#939393');
 }
+.screen_title {
+	display: inline-block;
+}
+#content button.left_footer_button_s {
+	background-color: transparent;
+	width: auto;
+	float: right;
+	margin-right: 0px;
+	font-weight: 700;
+}
+
 
 /*//////////////////////////////////////////////////*/
 /* Language Selection Screen */
@@ -201,7 +214,7 @@ h1{
 	border: 0px;
 	background-color: #efefef;
 	cursor: pointer;
-	line-height: 2em;
+	height: 2em;
 	font-size: 1em;
 	text-align: center;
 	margin-right: 0.25em;
@@ -297,7 +310,7 @@ h1{
 	display: inline-block;
 }
 #ImpactDistanceSlider {
-   width: 160px;
+   width: 150px;
    display: inline-block;
 }
 #impactDist, #WaterDepthSlider {
@@ -423,10 +436,6 @@ h1{
 }
 .input_panel input, .input_panel_right input, .input_panel_w input {
 	display: none;
-}
-
-.left_footer_button_s {
-	width: 50px;
 }
 
 .noUi-base {

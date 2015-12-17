@@ -36,8 +36,11 @@
 		
 			<div id="ImpactCalc_Input">	
 		
-				<div id="Title" class="screen_title">Input Parameters</div>
-				<table  class="input_table">
+				<div class="input_head">
+					<div id="Title" class="screen_title">Input Parameters</div>
+					<button id="BT_Help" class="left_footer_button_s">?</button>
+				</div>
+				<table class="input_table">
 				<tr>
 					<!--ASTEROID DIAMETER-->
 					<td>
@@ -109,7 +112,6 @@
 					<div class="input_bottom_buttons">
 						<button id="BT_Reset" class="left_footer_button">Reset</button>
 						<button id="BT_Submit" class="left_footer_button">Submit</button>
-						<button id="BT_Help" class="left_footer_button_s">?</button>
 					</div>
 					<div class="input_panel_right">
 						<input type="number" id="ImpactDistance" min="0" max="500" step="1" required="required" value="0" />
