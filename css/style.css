@@ -283,10 +283,8 @@ h1{
 
 #Projectile {
 	width: 100%;
-	width: 159px;
 	height: 131px;
 	position:relative;
-	left: 40px;
 	top: 0px;
 }
 
@@ -294,7 +292,8 @@ h1{
 }
 
 #Projectile_Img {
-	position:absolute;
+	position: relative;
+	margin: auto;
 }
 #ProjectileValue {
 	text-align: center;

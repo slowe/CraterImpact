@@ -135,7 +135,7 @@
 		if(!e) e = E('#ImpactDistance').attr('value');
 		if(isNaN(e)) e = 0;
 		distVal = parseFloat(e);
-		E('#DistanceAMT').html(distVal +'&nbsp;km');
+		E('#DistanceAMT').html(distVal +'&thinsp;km');
 	}
 	
 	//==============================================
@@ -148,7 +148,7 @@
 		diameterVal = parseFloat(e);
 		
 		// Update displayed value
-		E('#ProjectileValue').html(diameterVal + '&nbsp;m');
+		E('#ProjectileValue').html(diameterVal + '&thinsp;m');
 		
 		var dv = diameterVal/10;
 		var y = (dv/13);
@@ -156,7 +156,11 @@
 		var cY =  153.0;
 		var cX =  131.0;
 		
-		centerImage(E('#Projectile_Img').e[0], y, x, cY, cX);
+		var img = E('#Projectile_Img').e[0];
+		img.style.height = x+"px";
+		img.style.width = y+"px";
+		img.style.top = (cY/2 - y/2) + "px";
+	
 		DrawDiameterLine(dv,cX);
 		return this;
 	}
@@ -174,38 +178,14 @@
 		var L = c.width/2 - width/2;
 		var E = c.width/2 + width/2;
 
-		ctx.moveTo(L-12,6.5);
-		ctx.lineTo(E-12,6.5);
+		ctx.moveTo(L,6.5);
+		ctx.lineTo(E,6.5);
 
 		ctx.lineWidth = 5;
 		ctx.stroke();
 
-		ctx.drawImage(images.leftArrow.img, L-22, 0);
-		ctx.drawImage(images.rightArrow.img, E-15, 0);
-	}
-
-	//=============================================
-	/**
-	  Provides the ability to center an image within a
-	  absolute div.
-	  @param img The image to be centered.
-	  @param iy The native image height.
-	  @param ix The native image width.
-	  @param cY The canvas DIVs width.
-	  @param cX The canvas DIVs height.
-	  **/
-	function centerImage(img, iy, ix,cY,cX){
-		   	   
-	   var x = ix;
-	   var marx = cX/2 - x/2;
-	   img.style.height = x+"px";
-	   img.style.left = (marx) + "px";
-
-	   var y = iy;
-	   var mary = cY/2 - y/2;
-	   img.style.width = y+"px";
-	   img.style.top = (mary) + "px";
-	
+		ctx.drawImage(images.leftArrow.img, L-10, 0);
+		ctx.drawImage(images.rightArrow.img, E-3, 0);
 	}
 
 	//===============================================
