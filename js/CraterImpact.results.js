@@ -89,11 +89,11 @@
 
 		ctx.font = '10pt Arial';
 
-		 var diam = nbFormat(this.dataProvider.impactor.crDiam)+"m";
-		 var depth = nbFormat(this.dataProvider.impactor.crDepth)+"m"; 
+		var diam = this.calcs.nbFormat(this.dataProvider.impactor.crDiam)+"m";
+		var depth = this.calcs.nbFormat(this.dataProvider.impactor.crDepth)+"m"; 
 
-		 var dl =depth.length;
-		 var dil = diam.length;
+		var dl = depth.length;
+		var dil = diam.length;
 
 		ctx.fillText(diam, c.width/2 -(dil*4.2), c.height - 18);
 		ctx.fillText(depth, c.width -165 -(dl*4.2), c.height - 70);	   
@@ -130,7 +130,7 @@
 	//======================================================================================
 	// Scroll the map to a predefined location on the map
 	CraterImpact.prototype.selectLocation = function(select){
-		this.log('selectLocation',select,this.value.planet)
+		this.log('selectLocation',select,this.values.planet)
 
 		if(this.map == null) this.initializeMap();
 
@@ -149,7 +149,7 @@
 		// Work out the best fit map size for our crater
 		var h = height(S('#map_canvas').e[0]);
 		var angle = 0.1;
-		var circ = 2*Math.PI*this.planets[this.value.planet].R*1000;
+		var circ = 2*Math.PI*this.planets[this.values.planet].R*1000;
 		var d = this.dataProvider.impactor.crDiam;
 		var goodzoom = Math.round(-1 + Math.log(h * circ / d / 256) / Math.LN2);
 		if(goodzoom > z) z = goodzoom;
@@ -171,7 +171,7 @@
 		this.log('initialising map');
 		var _obj = this;
 
-		planet = this.value.planet;
+		planet = this.values.planet;
 
 		this.resultTab(1);
 
@@ -337,9 +337,8 @@
 	//==========================================================================================
 	// Called when the go back button is pressed.
 	CraterImpact.prototype.goBack = function(){
-		window.location = "input.html?" + (this.lang ? 'lang='+this.lang : '') + (this.value.dist ? '&dist='+this.value.dist : '') + (this.value.diam ? '&diam='+this.value.diam : '')+(this.value.traj ? '&traj='+this.value.traj : '') + (this.value.velo ? '&velo='+this.value.velo : '') + (this.value.pjd ? '&pjd='+this.value.pjd : '') + (this.value.tgd ? '&tgd='+this.value.tgd : '') + (this.value.wlvl ? '&wlvl='+this.value.wlvl : '') + (this.value.planet ? '&planet='+this.value.planet : '');
+		window.location = "input.html?" + (this.lang ? 'lang='+this.lang : '') + (this.values.dist ? '&dist='+this.values.dist : '') + (this.values.diam ? '&diam='+this.values.diam : '')+(this.values.traj ? '&traj='+this.values.traj : '') + (this.values.velo ? '&velo='+this.values.velo : '') + (this.values.pjd ? '&pjd='+this.values.pjd : '') + (this.values.tgd ? '&tgd='+this.values.tgd : '') + (this.values.wlvl ? '&wlvl='+this.values.wlvl : '') + (this.values.planet ? '&planet='+this.values.planet : '');
 	}
-
 
 
 	//==================================================================================
@@ -412,13 +411,13 @@
 		this.selectedBuilding = 0;	// The selected building
 
 		//input values from previous screen
-		var dist = this.value.dist;
-		var diam = this.value.diam;
-		var traj = this.value.traj;
-		var velo = this.value.velo;
-		var pjd = this.value.pjd;
-		var tgd = this.value.tgd;
-		var wlvl = this.value.wlvl;
+		var dist = this.values.dist;
+		var diam = this.values.diam;
+		var traj = this.values.traj;
+		var velo = this.values.velo;
+		var pjd = this.values.pjd;
+		var tgd = this.values.tgd;
+		var wlvl = this.values.wlvl;
 
 		this.calcs; // Will do the calcs
 
@@ -491,7 +490,7 @@
 
 		S("#LB_SelectLandmark").html(this.str('lblLandmark'));
 		S("#LB_InpactValues").html(this.str('lblInVals'));
-		S("#LB_Damage").html(this.str('damage').replace(/%DISTANCE%/,this.value.dist));
+		S("#LB_Damage").html(this.str('damage').replace(/%DISTANCE%/,this.values.dist));
 		S("#LB_InputEnergy").html(this.str('lblImpEnergy'));
 		S("#LB_Impactor").html(this.str('lblWhatImpactor'));
 		S("#LB_Fireball").html(this.str('lblFireball'));
@@ -507,23 +506,23 @@
 
 		// Pass values to data provider
 		// Values from prev screen.
-		this.dataProvider.set('selected_language',this.value.lang);
-		this.dataProvider.set('impactDist',this.value.dist);
-		this.dataProvider.set('projDiam',this.value.diam);
-		this.dataProvider.set('projAngle',this.value.traj);
-		this.dataProvider.set('projVel',this.value.velo);
-		this.dataProvider.set('cbPjDens',this.value.pjd);
-		this.dataProvider.set('cbTgDens',this.value.tgd);
-		this.dataProvider.set('slTgDepth',this.value.wlvl);
+		this.dataProvider.set('selected_language',this.values.lang);
+		this.dataProvider.set('impactDist',this.values.dist);
+		this.dataProvider.set('projDiam',this.values.diam);
+		this.dataProvider.set('projAngle',this.values.traj);
+		this.dataProvider.set('projVel',this.values.velo);
+		this.dataProvider.set('cbPjDens',this.values.pjd);
+		this.dataProvider.set('cbTgDens',this.values.tgd);
+		this.dataProvider.set('slTgDepth',this.values.wlvl);
 
 		this.planets = {
 			'Earth': {'Name':'Earth','R':6370},
-			'Moon': {'Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':4e-15,'scaleHeight':65000},//rhoSurface old value = 0.0020, replaced with value calculated using estimated composition from http://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html
+			'Moon': {'Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':4e-15,'scaleHeight':0},//rhoSurface old value = 0.0020, replaced with value calculated using estimated composition from http://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html. Scale height previously 65000
 			'Mars': {'Name':'Mars','G':3711,'R':3390,'V':1.6318*Math.pow(10,11),'l':3.0 * Math.pow(10,44),'p':1.5* Math.pow(10,25),'rhoSurface':0.020,'scaleHeight':11100}
 		}
 
 		// Setup the calculations
-		this.calcs = new CraterCalcs(this.planets[this.value.planet]);			
+		this.calcs = new CraterCalcs(this.planets[this.values.planet],this);			
 		
 		// Do calculation
 		this.calcs = this.calcs.getData(this.dataProvider,this.dict);	// From CraterImpact.calculations.js
@@ -554,7 +553,7 @@
 			S('#InputValuesTable').html(makeTable(d.get('dgInputs'),!_obj.hasAtmos));
 	
 			// Sets the damage text which is the second table of the data view are.
-			S("#LB_Damage").html( _obj.str('damage').replace(/%DISTANCE%/,_obj.value.dist +" km "));
+			S("#LB_Damage").html( _obj.str('damage').replace(/%DISTANCE%/,_obj.values.dist +" km "));
 			S('#DamageInfo').html(d.get('txtDamage'));
 
 			// Sets the data for the energy table which is the third table of the data view.
@@ -565,7 +564,7 @@
 
 			// Sets if a fireball has been seen which is the final table of the data view.
 			// if dist is 0 do not display the exposure, the last value in the fire array.
-			S('#FireballTable').html(makeTable( d.get('dgFirevall') , _obj.value.dist == 0 ? 1 : 0 ));
+			S('#FireballTable').html(makeTable( d.get('dgFirevall') , _obj.values.dist == 0 ? 1 : 0 ));
 			// Show or hide the fireball table depending on the existence of an atmosphere
 			S('#FireballTable').parent().parent().css({'display':(_obj.hasAtmos ? 'block' : 'none')})
 			S('#LB_Fireball').css({'display':(_obj.hasAtmos ? 'block' : 'none')})
@@ -575,7 +574,7 @@
 		// Update the tables
 		updateTables();
 
-		this.selectLocation(S('#cpLocation'+(this.value.planet=="Earth" ? "": this.value.planet )).e[0]);
+		this.selectLocation(S('#cpLocation'+(this.values.planet=="Earth" ? "": this.values.planet )).e[0]);
 
 
 		return this;

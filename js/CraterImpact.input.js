@@ -1,4 +1,4 @@
-(function(E) {
+(function(S) {
 
 	function makeSlider(input,html,callback,_obj){
 		var inp = S(input);
@@ -26,13 +26,12 @@
 
 	CraterImpact.prototype.processInput = function(){
 
-		this.initialiseInput();
+		this.updateControls();
 
 		// Update this language
 		this.loadLanguage(this.lang);
 
-		var planetname = this.query.planet;
-		if(planetname == "Earth") S("#cpTgDensMarsMoon").css({'display':'none'});
+		if(this.values.planet == "Earth") S("#cpTgDensMarsMoon").css({'display':'none'});
 		else S("#cpTgDens").css({'display':'none'});
 
 		this.prepareView();
@@ -60,13 +59,6 @@
 	which are a mixture of HTML5.0 compatible XHTML4.0
 	**/
 	//###############################################################
-	var distVal = 0;	/**Distance from impact zone**/
-	var diameterVal = 0;	/**Diamiter of projectile.**/
-	var tragAngleVal = 90;	/**Angle of impact**/
-	var projVelVal = 0;	/**Object velocity.**/
-	var pjDens = 0;	/**Projectile Density**/
-	var tgDens = 0;	/**Target Density**/
-	var waterLevel = 0;	/**The level in mtrs when water selected**/
 	
 	var images = {};
 	function loadImage(key,src){
@@ -101,9 +93,6 @@
 	loadImage('speedNeedle','imgs/speedNeedle1.png');
 	loadImage('speedo','imgs/speedo.png');
 
-	var lang = "en";
-	var planet = "Earth";
-	
 	var input_error_title;
 	var input_error_diam;
 	var input_error_angle;
@@ -134,8 +123,8 @@
 	CraterImpact.prototype.updateDistance = function(e){
 		if(!e) e = S('#ImpactDistance').attr('value');
 		if(isNaN(e)) e = 0;
-		distVal = parseFloat(e);
-		S('#DistanceAMT').html(distVal +'&thinsp;km');
+		this.values.dist = parseFloat(e);
+		S('#DistanceAMT').html(this.values.dist +'&thinsp;km');
 	}
 	
 	//==============================================
@@ -145,12 +134,12 @@
 		if(!e) e = S('#ProjectileSize').attr('value');
 		if(isNaN(e)) e = 0;
 		// Set global value
-		diameterVal = parseFloat(e);
+		this.values.diam = parseFloat(e);
 		
 		// Update displayed value
-		S('#ProjectileValue').html(diameterVal + '&thinsp;m');
+		S('#ProjectileValue').html(this.values.diam + '&thinsp;m');
 		
-		var dv = diameterVal/10;
+		var dv = this.values.diam/10;
 		var s = dv/this.scaling;
 		
 		S('#Projectile_Img').css({'height':s+'px','width':s+'px','top':(159/2 - s/2)+'px'})
@@ -236,7 +225,7 @@
 		if (angleVal >= 10) ctx.fillText(htmlEncode(angleVal+'&deg;'), 125, 40);
 		else ctx.fillText(''+angleVal, 130, 40);
 		
-		tragAngleVal = angleVal;
+		this.values.traj = angleVal;
 		return this;
 	}
 	//==============================================
@@ -252,16 +241,16 @@
 	CraterImpact.prototype.updateVelocity = function(e){
 		if(!e) e = S('#ProjectileVelocity').attr('value');
 		if(isNaN(e)) e = 0;
-		projVelVal = parseFloat(e);
+		this.values.velo = parseFloat(e);
 		
 		var c = document.getElementById("Speedo");
 		var ctx = c.getContext("2d");
-		var r = 60 + projVelVal*3;
+		var r = 60 + this.values.velo*3;
 	
 		ctx.drawImage(images.speedo.img,0,0);
 		
 		// Split speed into two values.
-		var str = "" + projVelVal;
+		var str = "" + this.values.velo;
 		var n1 = str.charAt(0);
 		
 		var img;
@@ -393,7 +382,7 @@
 				tgImg.src = images.imgBlank.img.src;
 		}
 		
-		tgDens = idx;
+		this.values.tgd = idx;
 		return this;
 	}
 
@@ -412,7 +401,7 @@
 				tgImg.src = images.imgBlank.img.src;
 		}
 		
-		tgDens = 3;
+		this.values.tgd = 3;
 		return this;
 	}
 	 
@@ -443,7 +432,7 @@
 				tgImg.src = images.imgBlank.img.src;
 		}
 		
-		tgDens = idx;
+		this.values.tgd = idx;
 		return this;
 	}
 
@@ -470,7 +459,7 @@
 				pjImg.src = images.imgBlank.img.src;
 		}
 		
-		pjDens = idx;
+		this.values.pjd = idx;
 		return this;
 	}
 	 	 
@@ -498,7 +487,7 @@
 				pjImg.src = images.imgBlank.img.src;
 		}//end switch
 		
-		pjDens = idx;
+		this.values.pjd = idx;
 		return this;
 	}
 	 
@@ -506,8 +495,8 @@
 	// Whe the water slider has been moved.
 	CraterImpact.prototype.updateWater = function(e){
 		if(!e) e = S('#WaterDepth').attr('value');
-		waterLevel = parseFloat(e);
-		var level = waterLevel/20;
+		this.values.wlvl = parseFloat(e);
+		var level = this.values.wlvl/20;
 
 		var c = document.getElementById("WaterVis");
 		var ctx = c.getContext("2d");
@@ -522,7 +511,7 @@
 		
 		ctx.font = '600 12pt Arial';
 		
-		ctx.fillText(waterLevel+"m", 280, 24);
+		ctx.fillText(this.values.wlvl+"m", 280, 24);
 		
 		return this;
 	 }
@@ -533,32 +522,32 @@
 		var passed = true;
 		var msg = "";
 	
-		if(diameterVal <= 0){
+		if(this.values.diameter <= 0){
 			msg += "<li>" + this.str("input_error_diam") + "</li>";
 			passed = false;
 		}
 		
-		if(tragAngleVal <= 0){
+		if(this.values.traj <= 0){
 			msg += "<li>" + this.str("input_error_angle") + "</li>";
 			passed = false;
 		}
 		
-		if(projVelVal <= 0){
+		if(this.values.velo <= 0){
 			msg +="<li>" + this.str("input_error_vel") + "</li>";
 			passed = false;
 		}
 		
-		if(pjDens <= 0){
+		if(this.values.pjd <= 0){
 			msg+= "<li>" + this.str("input_error_pjd") + "</li>";
 			passed = false;
 		}
 		
-		if(tgDens <= 0){
+		if(this.values.tgd <= 0){
 			msg += "<li>" + this.str("input_error_tgd") + "</li>";
 			passed = false;
 		}
 		
-		if(tgDens == 1 && waterLevel <= 0){
+		if(this.values.tgd == 1 && this.values.wlvl <= 0){
 			passed = false;
 			msg +="<li>" + this.str("input_error_water") + "</li>";
 		}
@@ -569,7 +558,7 @@
 			S("#validation .title").html(input_error_title); 
 			this.resize();
 		}else{
-			window.location = "results.html?lang=" + this.lang +"&dist=" +"&planet=" + planet +"&dist=" + distVal +"&diam=" + diameterVal + "&traj=" + tragAngleVal + "&velo=" + projVelVal + "&pjd=" + pjDens + "&tgd=" + tgDens + "&wlvl=" + waterLevel;
+			window.location = "results.html?lang=" + this.lang +"&dist=" +"&planet=" + this.values.planet +"&dist=" + this.values.dist +"&diam=" + this.values.diam + "&traj=" + this.values.traj + "&velo=" + this.values.velo + "&pjd=" + this.values.pjd + "&tgd=" + this.values.tgd + "&wlvl=" + this.values.wlvl;
 		}
 	}
 	
@@ -586,14 +575,10 @@
 	//==============================================
 	// Resets all the input fields and globals.
 	CraterImpact.prototype.resetValues = function(){
-		this.log('resetValues')
-		distVal = 0;
-		diameterVal = 0;
-		tragAngleVal = 90;
-		projVelVal = 0;
-		pjDens = 0;
-		tgDens = 0;
-		waterLevel = 0;
+		this.log('resetValues');
+
+		// Reset values to defaults		
+		for(var v in this.defaults) this.values[v] = (this.query[v]) ? this.query[v] : this.defaults[v];
 		
 		this.selectTgDensity(S("#cpPjDens").e[0]);
 		this.selectPjDensity(S("#cpTgDens").e[0]);
@@ -607,60 +592,23 @@
 	}
 
 	//============================================
-	// Can be called at any time to initialise the controls
-	// to that specified in the URL params.
-	CraterImpact.prototype.initialiseInput = function(){
-
-		this.log('initialiseInput')
-		lang = this.query.lang;
-		if(lang == "") lang = "en";
-		
-		planet = this.query.planet;
-		if (planet == "") planet = "Earth";
-		
-		var param = this.query.dist;
-		distVal = (param) ? parseInt(param) : 0;
-		
-		param = this.query.diam;
-		diameterVal = (param) ? parseInt(param) : 0;
-		
-		param = this.query.traj;
-		tragAngleVal = (param) ? parseInt(param) : 90;
-		
-		param = this.query.velo;
-		projVelVal = (param) ? parseInt(param) : 0;
-		
-		param = this.query.pjd;
-		pjDens = (param) ? parseInt(param) : 0;
-		
-	    param = this.query.tgd;
-		tgDens = (param) ? parseInt(param) : 0;
-		
-		param = this.query.wlvl;
-		waterLevel = (param) ? parseInt(param) : 0;
-
-		this.updateControls();
-		return this;
-	}
-
-	//============================================
 	// Set all the control values
 	CraterImpact.prototype.updateControls = function(){
 	
 		this.log('updateControls');
 
-		S("#ImpactDistance").attr("value", distVal).trigger('change');
-		S("#ProjectileSize").attr("value", diameterVal).trigger('change');
-		S("#ProjectileAngle").attr("value", tragAngleVal).trigger('change');
-		S("#ProjectileVelocity").attr("value", projVelVal).trigger('change');
-		S("#WaterDepth").attr("value", waterLevel).trigger('change');
-		S("#cpPjDens").attr('value', pjDens).trigger('change'); 
-		S("#cpTgDens").attr('value', tgDens).trigger('change');
+		S("#ImpactDistance").attr("value", this.values.dist).trigger('change');
+		S("#ProjectileSize").attr("value", this.values.diam).trigger('change');
+		S("#ProjectileAngle").attr("value", this.values.traj).trigger('change');
+		S("#ProjectileVelocity").attr("value", this.values.velo).trigger('change');
+		S("#WaterDepth").attr("value", this.values.wlvl).trigger('change');
+		S("#cpPjDens").attr('value', this.values.pjd).trigger('change'); 
+		S("#cpTgDens").attr('value', this.values.tgd).trigger('change');
 
-		if(pjDens) S('#cpPjDens option:eq('+(pjDens+1)+')').attr('selected','selected');
-		if(pjDens) S('#cpTgDens option:eq('+(tgDens+1)+')').attr('selected','selected');
-		this.selectTgDensity2(parseInt(tgDens));
-		this.selectPjDensity2(parseInt(pjDens));
+		if(this.values.pjd) S('#cpPjDens option:eq('+(this.values.pjd+1)+')').attr('selected','selected');
+		if(this.values.pjd) S('#cpTgDens option:eq('+(this.values.tgd+1)+')').attr('selected','selected');
+		this.selectTgDensity2(parseInt(this.values.tgd));
+		this.selectPjDensity2(parseInt(this.values.pjd));
 		
 		return this;
 	}

@@ -1,7 +1,7 @@
 // Define one global variable - constructor
 var CraterImpact;
 
-(function(E) {
+(function(S) {
 
 	var wide = 0;
 	var tall = 0;
@@ -41,6 +41,23 @@ var CraterImpact;
 		this.gmap = false;
 		this.scaling = 13;	// Factor to downsize asteroid by for display
 		this.languages = { "cy": "Cymraeg", "de": "Deutsch", "gr": "E&lambda;&lambda;&eta;&nu;&iota;&kappa;&#x3AC;", "en": "English", "es": "Espa&ntilde;ol", "fr": "Fran&ccedil;ais", "it": "Italiano", "pl": "Polski", "pt": "Portugu&ecirc;s", "ro": "Rom&acirc;n&#x103;" };
+		
+		this.defaults = {
+			"lang": "en",
+			"dist": 0,
+			"diam": 0,
+			"traj": 45,	// Most likely impact angle (Shoemaker 1965)
+			"velo": 0,
+			"pjd": 0,
+			"tgd": 0,
+			"wlvl": 0,
+			"planet": "Earth"
+		}
+		this.values = {};
+		this.query = {};
+
+		// Reset values to defaults		
+		for(var v in this.defaults) this.values[v] = (this.query[v]) ? this.query[v] : this.defaults[v];
 
 		this.parseQueryString();
 		this.setValues();
@@ -125,16 +142,11 @@ var CraterImpact;
 
 	// Set defaults if not provided
 	CraterImpact.prototype.setValues = function(){
-		this.value = {};
-		this.value.lang = (this.query.lang) ? this.query.lang : "en";
-		this.value.dist = (this.query.dist) ? this.query.dist : 0;
-		this.value.diam = (this.query.diam) ? this.query.diam : 0;
-		this.value.traj = (this.query.traj) ? this.query.traj : 90;
-		this.value.velo = (this.query.velo) ? this.query.velo : 0;
-		this.value.pjd = (this.query.pjd) ? this.query.pjd : 0;
-		this.value.tgd = (this.query.tgd) ? this.query.tgd : 0;
-		this.value.wlvl = (this.query.wlvl) ? this.query.wlvl : 0;
-		this.value.planet = (this.query.planet) ? this.query.planet : "Earth";
+		this.values = {};
+		for(var v in this.defaults){
+			this.values[v] = (this.query[v]) ? (parseInt(this.query[v]) ? parseInt(this.query[v]) : this.query[v]) : this.defaults[v];
+		}
+
 		this.log('setValues',this.value)
 		return this;
 	}
