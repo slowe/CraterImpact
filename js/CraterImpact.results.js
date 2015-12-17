@@ -450,12 +450,6 @@
 
 		this.log('updateLanguage',this.dict);
 
-		var x = this.str('result');
-		E("#Crater_Size_Title").html(x);
-		E("#Crater_Depth_Title").html(x);
-		E("#Data_View_Title").html(x);
-		E("#Data_Title").html(x);
-
 		x = this.str('lblImpactVal');
 		E("#InputValues_Title").html(x);
 
@@ -488,17 +482,18 @@
 		E("#MapInst").html(this.str('lblClickMap'));
 		E("#BT_Back").html(this.str('btBack'));
 
+		var result = this.str('result');
 		x = this.str('cvsData');
 		E("#BT_Data").html(x);
-		E("#Data_View_Title").append(" - " + x);
+		E("#Data_View_Title").html(result+" - " + x);
 
 		x = this.str('cvsDepth');
 		E("#BT_CraterDepth").html(x);
-		E("#Crater_Depth_Title").append(" - " + x);
+		E("#Crater_Depth_Title").html(result+" - " + x);
 
 		x = this.str('cvsSize');
 		E("#BT_CraterPlace").html(x);
-		E("#Crater_Size_Title").append(" - " +x);
+		E("#Crater_Size_Title").html(result+" - " +x);
 
 		E("#LB_SelectLandmark").html(this.str('lblLandmark'));
 		E("#LB_InpactValues").html(this.str('lblInVals'));
