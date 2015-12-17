@@ -46,6 +46,12 @@
 		S('#ImpactCalc_Crater_Depth').css({'display':(tabNo==2 ? 'block':'none')});
 		S('#ImpactCalc_Output_Map').css({'display':(tabNo==1 ? 'block':'none')});
 
+		var r = this.str('result')
+		var key = 'cvsSize';
+		if(tabNo==3) key = 'cvsData'; 
+		if(tabNo==2) key = 'cvsDepth'; 
+		S('#AppTitle span').html(this.delim + r + this.delim + this.str(key));
+
 		return this;
 	}
 
@@ -445,6 +451,7 @@
 
 		x = this.str('lblImpactVal');
 		S("#InputValues_Title").html(x);
+		S('#AppTitle span').html(this.delim+x);
 
 		x = this.str('htParameter');
 		S("#Thead_param").html(x);

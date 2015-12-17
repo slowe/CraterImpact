@@ -58,35 +58,46 @@ body {
 	height: 3em;
 	line-height: 3em;
 	border-bottom: 1px solid #404040;
+	color: #d0d0d0;
 }
 #header, #footer {
 	background: #202020;
+}
+#AppTitle {
+	float: left;
 }
 #header  h1 {
 	color: #ffffff;
 	font-size: 1.4em;
 }
-#header a, #header button {
+#header a, #header button, #header span {
 	line-height: 3em;
 	height: 3em;
 	line-height: auto;
+}
+#header a, #header button {
 	padding: 0 1em;
 	display: inline-block;
 }
+#AppTitle a { padding-right: 0px; }
 #header a { color: inherit; text-decoration: none; }
-#header .right { float: right; color: white; }
+#header .right { float: right; }
 #header .right button {
+	display: block;
 	text-align: center;
 	border: 0px;
 	min-width: 7em;
 	width: 100%;
 	cursor: pointer;
-	font-size: 1em;
+	font-size: inherit;
 	background-color: transparent;
+	color: inherit;
+}
+#header a:hover, #header a:focus, #header button:hover, #header button:focus {
 	color: white;
 }
-#header .dropdown ul { margin-top: -1px; display: none; }
-#header .dropdown li { background-color: #202020; padding: 0 1em; }
+#header .dropdown ul { display: none; }
+#header .dropdown li { background-color: #202020; padding: 0 1em; line-height: 2.5em; }
 #header .right button:hover, #header .dropdown li:hover { background-color: #404040; cursor: pointer; }
 #footer {
 	position: fixed;
@@ -150,11 +161,7 @@ h1{
 	background-color: #00b9e4;
 	color: white;
 	width: auto;
-	float: right;
-	border-radius: 0px;
-	border-top-right-radius: 5px;
 	margin-right: 0px;
-	line-height: 28px;
 	font-weight: 700;
 }
 
@@ -625,11 +632,6 @@ DATA Output
 /*============================
  ACK DIALOG
 ============================== */
-#AppTitle {
-	color: #d0d0d0;
-	float: left;
-}
-
 div#ACK {
 	color: #d0d0d0;
 	float: right;

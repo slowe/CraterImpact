@@ -280,7 +280,8 @@
 		this.log('updateLanguage');
 			
 		var x = this.str('inputs');
-		S("#Title").html(this.str('inputs'));
+		S('#AppTitle span').html(this.delim+x);
+		S("#Title").html(x);
 
 		x = this.str('lblValue');
 		S("#Slider1_Text").html(x);
@@ -615,7 +616,7 @@
 
 
 	//============================================
-	// To pre select values in a comobo box.
+	// To pre select values in a combo box.
 	// @param s The combo box to select.
 	// @param i The index to select;
 	function setSelectedIndex(s, i){
