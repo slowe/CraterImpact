@@ -315,6 +315,7 @@ h1{
 
 #projDiam, #projAngle, #projVel, #ProjectileSizeSlider, #ProjectileAngleSlider, #ProjectileVelocitySlider {
 	width: 120px;
+	width: 90%;
 	display: inline-block;
 }
 #ImpactDistanceSlider {
@@ -436,13 +437,15 @@ h1{
 	padding-left: 10px;
 	min-width: 5em;
 }
-.slider_text_l {
-	padding-right: 20px;
-	font-weight: bold;
-}
 .slider_text_l, .slider_text_r {
 	display: inline-block;
 }
+.slider_text_l {
+	padding-right: 20px;
+	font-weight: bold;
+	display: none;
+}
+.input_short .slider_text_l { display: inline-block; }
 .input_panel input, .input_panel_right input, .input_panel_w input {
 	display: none;
 }
