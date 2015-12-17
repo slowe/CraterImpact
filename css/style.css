@@ -66,17 +66,20 @@ body {
 	color: #ffffff;
 	font-size: 1.4em;
 }
+#header a, #header button {
+	line-height: 3em;
+	height: 3em;
+	line-height: auto;
+	padding: 0 1em;
+	display: inline-block;
+}
 #header a { color: inherit; text-decoration: none; }
 #header .right { float: right; color: white; }
 #header .right button {
 	text-align: center;
-	padding: 0 1em;
-	line-height: auto;
 	border: 0px;
-	height: 3em;
 	min-width: 7em;
 	width: 100%;
-	line-height: 3em;
 	cursor: pointer;
 	font-size: 1em;
 	background-color: transparent;
@@ -163,9 +166,10 @@ h1{
 	border: 1px solid #202020;
 	background-color: #000000;
 	background-image:url('../imgs/bkg3.jpg');
-	background-size: contain;
+	background-size: cover;
 	background-repeat: no-repeat;
 	padding-top: 0%;
+	min-height: 552px;
 }
 
 #LanguageList {
@@ -252,7 +256,6 @@ h1{
 
 #ImpactCalc_Input {
 	background-color: #000000;
-	height: 548px;
 	margin: 0 auto;
 	margin-top: 2%;
 	padding-top: 0%;
@@ -523,11 +526,6 @@ DATA Output
 #Crater_Area {
 	width: 782px;
 }
-#Content_Wrapper,
-#ImpactCalc_Input,
-#impactCalc {
-	height: 548px;
-}
 #ImpactCalc_Output_Map, #ImpactCalc_Crater_Depth, #ImpactCalc_Data_View {
 	height: 488px;
 }
@@ -630,8 +628,6 @@ DATA Output
 #AppTitle {
 	color: #d0d0d0;
 	float: left;
-	margin-left: 20px;
-	font-size: 1em;
 }
 
 div#ACK {

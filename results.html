@@ -14,10 +14,15 @@
 	<script src="js/CraterImpact.js"></script>
 	<script src="js/CraterImpact.results.js"></script>
 	<script>
+	// Hide the main panel initially
+	document.write('<style>.main { display: none; }</style>');
 	// Add an event to be called when the document is loaded
 	S(document).ready(function(){
 		craterimpact = new CraterImpact({});
 		craterimpact.processResults();
+		// Now that things are set up, re-display the main panel
+		S('.main').css({'display':'block'});
+		craterimpact.resize();
 	});
 	</script>
 </head> 
@@ -35,7 +40,7 @@
 		</div><!--end header-->
 		
 		<div id="content">
-			<div id="Content_Wrapper">
+			<div id="Content_Wrapper" class="main">
 				<div id="ImpactCalc_Output_Map">	
 
 					<div class="heading">
@@ -182,7 +187,7 @@
 						</div><!--DataGrid-->
 
 						<h6 id="LB_Damage">Damage At</h6>
-						<div id="DamageInfo" class="text_output">Test 124</div>
+						<div id="DamageInfo" class="text_output">---</div>
 						
 					</div><!--End Data Tables L-->
 					
@@ -200,7 +205,7 @@
 							</table>
 						</div><!--DataGrid-->
 						<h6 id="LB_Impactor">What happens to the impactor?</h6>
-						<div id="ImpactorInfo" class="text_output">Test 124</div>
+						<div id="ImpactorInfo" class="text_output">---</div>
 						
 			
 						<h6 id="LB_Fireball">Is a fireball Seen?</h6>

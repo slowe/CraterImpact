@@ -26,14 +26,14 @@
 		this.resultTab(1);
 
 		// Add events
-		E('#cpLocation').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
-		E('#cpLocationMoon').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
-		E('#cpLocationMars').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
-		E('#cpLandmark').on('change',{me:this},function(e){ e.data.me.selectLandmark(e.currentTarget); });
-		E('#BT_Back').on('click',{me:this},function(e){ e.data.me.goBack(); });
-		E('#BT_Data').on('click',{me:this},function(e){ e.data.me.resultTab(3); });
-		E('#BT_CraterDepth').on('click',{me:this},function(e){ e.data.me.resultTab(2); });
-		E('#BT_CraterPlace').on('click',{me:this},function(e){ e.data.me.resultTab(1); });
+		S('#cpLocation').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
+		S('#cpLocationMoon').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
+		S('#cpLocationMars').on('change',{me:this},function(e){ e.data.me.selectLocation(e.currentTarget); });
+		S('#cpLandmark').on('change',{me:this},function(e){ e.data.me.selectLandmark(e.currentTarget); });
+		S('#BT_Back').on('click',{me:this},function(e){ e.data.me.goBack(); });
+		S('#BT_Data').on('click',{me:this},function(e){ e.data.me.resultTab(3); });
+		S('#BT_CraterDepth').on('click',{me:this},function(e){ e.data.me.resultTab(2); });
+		S('#BT_CraterPlace').on('click',{me:this},function(e){ e.data.me.resultTab(1); });
 
 		this.drawCrater("");	// nothing has been selected yet.
 
@@ -42,9 +42,9 @@
 	
 	// Swap fragments
 	CraterImpact.prototype.resultTab = function(tabNo){
-		E('#ImpactCalc_Data_View').css({'display':(tabNo==3 ? 'block':'none')});
-		E('#ImpactCalc_Crater_Depth').css({'display':(tabNo==2 ? 'block':'none')});
-		E('#ImpactCalc_Output_Map').css({'display':(tabNo==1 ? 'block':'none')});
+		S('#ImpactCalc_Data_View').css({'display':(tabNo==3 ? 'block':'none')});
+		S('#ImpactCalc_Crater_Depth').css({'display':(tabNo==2 ? 'block':'none')});
+		S('#ImpactCalc_Output_Map').css({'display':(tabNo==1 ? 'block':'none')});
 
 		return this;
 	}
@@ -123,7 +123,7 @@
 		if(!select) return this;
 		option = select.options[select.selectedIndex];
 		if(!option) return this;
-		this.drawCrater(E(option).attr('data-key'));
+		this.drawCrater(S(option).attr('data-key'));
 		return this;
 	}
 
@@ -139,15 +139,15 @@
 		if(i == 0) i++;	// If no option is selected, we use the first one
 		option = select.options[i];
 		if(!option) return this;
-		this.cmbLocation = parseInt(E(option).attr('value'));
-		var lat = parseFloat(E(option).attr('data-lat'));
-		var lon = parseFloat(E(option).attr('data-lon'));
+		this.cmbLocation = parseInt(S(option).attr('value'));
+		var lat = parseFloat(S(option).attr('data-lat'));
+		var lon = parseFloat(S(option).attr('data-lon'));
 		
-		var z = E(option).attr('data-z');
+		var z = S(option).attr('data-z');
 		if(z) z = parseInt(z);
 		
 		// Work out the best fit map size for our crater
-		var h = height(E('#map_canvas').e[0]);
+		var h = height(S('#map_canvas').e[0]);
 		var angle = 0.1;
 		var circ = 2*Math.PI*this.planets[this.value.planet].R*1000;
 		var d = this.dataProvider.impactor.crDiam;
@@ -387,19 +387,13 @@
 		if(google) google.maps.event.addDomListener(window, 'load', _obj.initializeMap);
 
 		// Remove unwanted DOM elements
-		if(planetname == "Earth"){
-			E('.forEarth').css({'display':'block'});
-			E('.forMoon').css({'display':'none'});
-			E('.forMars').css({'display':'none'});
-		}else if(planetname == "Moon"){
-			E('.forEarth').css({'display':'none'});
-			E('.forMoon').css({'display':'block'});
-			E('.forMars').css({'display':'none'});
-		}else if(planetname == "Mars"){
-			E('.forEarth').css({'display':'none'});
-			E('.forMoon').css({'display':'none'});
-			E('.forMars').css({'display':'block'});
-		}
+		S('.forEarth').css({'display':'none'});
+		S('.forMoon').css({'display':'none'});
+		S('.forMars').css({'display':'none'});
+		if(planetname == "Earth") S('.forEarth').css({'display':'block'});
+		else if(planetname == "Moon") S('.forMoon').css({'display':'block'});
+		else if(planetname == "Mars") S('.forMars').css({'display':'block'});
+		
 
 		var mapTypes = {};
 		var lang;
@@ -426,7 +420,7 @@
 		var tgd = this.value.tgd;
 		var wlvl = this.value.wlvl;
 
-		var calcs; // Will do the calcs
+		this.calcs; // Will do the calcs
 
 		// Locations for crater placement
 		var lox;
@@ -451,56 +445,56 @@
 		this.log('updateLanguage',this.dict);
 
 		x = this.str('lblImpactVal');
-		E("#InputValues_Title").html(x);
+		S("#InputValues_Title").html(x);
 
 		x = this.str('htParameter');
-		E("#Thead_param").html(x);
-		E("#Thead_param1").html(x);
-		E("#Thead_param3").html(x);
-		E("#Thead_param4").html(x);
+		S("#Thead_param").html(x);
+		S("#Thead_param1").html(x);
+		S("#Thead_param3").html(x);
+		S("#Thead_param4").html(x);
 
 		x = this.str('htValue');
-		E("#Thead_value").html(x);
-		E("#Thead_value1").html(x);
-		E("#Thead_value3").html(x);
-		E("#Thead_value4").html(x)
+		S("#Thead_value").html(x);
+		S("#Thead_value1").html(x);
+		S("#Thead_value3").html(x);
+		S("#Thead_value4").html(x)
 
 		x = this.str('lblSelect');
-		E("#SelectLM_Title").html(x);
-		E("#cpLocation option:eq(0)").html(x);
-		E("#cpLocationMoon option:eq(0)").html(x);
-		E("#cpLocationMars option:eq(0)").html(x);
-		E("#cpLandmark option:eq(0)").html(x);
+		S("#SelectLM_Title").html(x);
+		S("#cpLocation option:eq(0)").html(x);
+		S("#cpLocationMoon option:eq(0)").html(x);
+		S("#cpLocationMars option:eq(0)").html(x);
+		S("#cpLandmark option:eq(0)").html(x);
 
-		E('#cpLandmark option:eq(1)').html(this.str('lblSphinx'));
-		E('#cpLandmark option:eq(2)').html(this.str('lblBen'));
-		E('#cpLandmark option:eq(3)').html(this.str('lblEiffel'));
-		E('#cpLandmark option:eq(4)').html(this.str('lblEmpireSt'));
-		E('#cpLandmark option:eq(5)').html(this.str('lblCN'));
-		E('#cpLandmark option:eq(6)').html(this.str('lblBurj'));
+		S('#cpLandmark option:eq(1)').html(this.str('lblSphinx'));
+		S('#cpLandmark option:eq(2)').html(this.str('lblBen'));
+		S('#cpLandmark option:eq(3)').html(this.str('lblEiffel'));
+		S('#cpLandmark option:eq(4)').html(this.str('lblEmpireSt'));
+		S('#cpLandmark option:eq(5)').html(this.str('lblCN'));
+		S('#cpLandmark option:eq(6)').html(this.str('lblBurj'));
 
-		E("#MapInst").html(this.str('lblClickMap'));
-		E("#BT_Back").html(this.str('btBack'));
+		S("#MapInst").html(this.str('lblClickMap'));
+		S("#BT_Back").html(this.str('btBack'));
 
 		var result = this.str('result');
 		x = this.str('cvsData');
-		E("#BT_Data").html(x);
-		E("#Data_View_Title").html(result+" - " + x);
+		S("#BT_Data").html(x);
+		S("#Data_View_Title").html(result+" - " + x);
 
 		x = this.str('cvsDepth');
-		E("#BT_CraterDepth").html(x);
-		E("#Crater_Depth_Title").html(result+" - " + x);
+		S("#BT_CraterDepth").html(x);
+		S("#Crater_Depth_Title").html(result+" - " + x);
 
 		x = this.str('cvsSize');
-		E("#BT_CraterPlace").html(x);
-		E("#Crater_Size_Title").html(result+" - " +x);
+		S("#BT_CraterPlace").html(x);
+		S("#Crater_Size_Title").html(result+" - " +x);
 
-		E("#LB_SelectLandmark").html(this.str('lblLandmark'));
-		E("#LB_InpactValues").html(this.str('lblInVals'));
-		E("#LB_Damage").html(this.str('damage').replace(/%DISTANCE%/,this.value.dist));
-		E("#LB_InputEnergy").html(this.str('lblImpEnergy'));
-		E("#LB_Impactor").html(this.str('lblWhatImpactor'));
-		E("#LB_Fireball").html(this.str('lblFireball'));
+		S("#LB_SelectLandmark").html(this.str('lblLandmark'));
+		S("#LB_InpactValues").html(this.str('lblInVals'));
+		S("#LB_Damage").html(this.str('damage').replace(/%DISTANCE%/,this.value.dist));
+		S("#LB_InputEnergy").html(this.str('lblImpEnergy'));
+		S("#LB_Impactor").html(this.str('lblWhatImpactor'));
+		S("#LB_Fireball").html(this.str('lblFireball'));
 
 		return this;
 	}
@@ -524,16 +518,18 @@
 
 		this.planets = {
 			'Earth': {'Name':'Earth','R':6370},
-			'Moon': {'Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':0.0020,'scaleHeight':65000},
+			'Moon': {'Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':4e-15,'scaleHeight':65000},//rhoSurface old value = 0.0020, replaced with value calculated using estimated composition from http://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html
 			'Mars': {'Name':'Mars','G':3711,'R':3390,'V':1.6318*Math.pow(10,11),'l':3.0 * Math.pow(10,44),'p':1.5* Math.pow(10,25),'rhoSurface':0.020,'scaleHeight':11100}
 		}
 
 		// Setup the calculations
-		calcs = new CraterCalcs(this.planets[this.value.planet]);			
+		this.calcs = new CraterCalcs(this.planets[this.value.planet]);			
 		
 		// Do calculation
-		calcs = calcs.getData(this.dataProvider,this.dict);	// From CraterImpact.calculations.js
-		this.dataProvider = calcs.dataProvider;
+		this.calcs = this.calcs.getData(this.dataProvider,this.dict);	// From CraterImpact.calculations.js
+		this.hasAtmos = (this.calcs.rhoSurface < 1e-8 ? 0 : 1);
+
+		this.dataProvider = this.calcs.dataProvider;
 
 		// Once the calc is complete, update the UI with the results
 		var _obj = this;
@@ -552,31 +548,34 @@
 			_obj.log('updateTables',d)
 
 			// Sets the output array that falls on the map screeen.
-			E('#ImpactValuesTable').html(makeTable(d.get('dgOutputs')));
+			S('#ImpactValuesTable').html(makeTable(d.get('dgOutputs')));
 
 			// Sets the input array that is the first table in the Data View.
-			E('#InputValuesTable').html(makeTable(d.get('dgInputs')));
+			S('#InputValuesTable').html(makeTable(d.get('dgInputs'),!_obj.hasAtmos));
 	
 			// Sets the damage text which is the second table of the data view are.
-			E("#LB_Damage").html( _obj.str('damage').replace(/%DISTANCE%/,_obj.value.dist +" km "));
-			E('#DamageInfo').html(d.get('txtDamage'));
+			S("#LB_Damage").html( _obj.str('damage').replace(/%DISTANCE%/,_obj.value.dist +" km "));
+			S('#DamageInfo').html(d.get('txtDamage'));
 
 			// Sets the data for the energy table which is the third table of the data view.
-			E('#InputEnergyTable').html(makeTable(d.get('dgEnergy')));
+			S('#InputEnergyTable').html(makeTable(d.get('dgEnergy')));
 
 			// Set the what happens to the impactor text.
-			E('#ImpactorInfo').html(d.get('txtImpactor'));
+			S('#ImpactorInfo').html(d.get('txtImpactor'));
 
 			// Sets if a fireball has been seen which is the final table of the data view.
-			//if dist is 0 do not display the exposure, the last value in the fire array.
-			E('#FireballTable').html(makeTable( d.get('dgFirevall') , _obj.value.dist == 0 ? 1 : 0 ));
-
+			// if dist is 0 do not display the exposure, the last value in the fire array.
+			S('#FireballTable').html(makeTable( d.get('dgFirevall') , _obj.value.dist == 0 ? 1 : 0 ));
+			// Show or hide the fireball table depending on the existence of an atmosphere
+			S('#FireballTable').parent().parent().css({'display':(_obj.hasAtmos ? 'block' : 'none')})
+			S('#LB_Fireball').css({'display':(_obj.hasAtmos ? 'block' : 'none')})
+			
 			_obj.drawScale();
 		}		
 		// Update the tables
 		updateTables();
 
-		this.selectLocation(E('#cpLocation'+(this.value.planet=="Earth" ? "": this.value.planet )).e[0]);
+		this.selectLocation(S('#cpLocation'+(this.value.planet=="Earth" ? "": this.value.planet )).e[0]);
 
 
 		return this;

@@ -8,8 +8,10 @@ var CraterImpact;
 
 	function height(el){
 		if(!el) return 0;
+		if(el.offsetHeight) return parseInt(el.offsetHeight)
 		if('getComputedStyle' in window) return parseInt(window.getComputedStyle(el, null).getPropertyValue('height'));
-		else return parseInt(el.currentStyle.height);	
+		if(el.currentStyle) return parseInt(el.currentStyle.height);
+		return 0;
 	}
 
 	// Very basic YAML parser. Only deals with simple key/value pairs
@@ -83,13 +85,11 @@ var CraterImpact;
 		tall = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 		// Update main panel
-		var els = ['#impactCalc','#ImpactCalc_Input','#Content_Wrapper','.modal-inner']
+		var els = [S('.main'),S('.modal-inner')];
 		for(var i = 0; i < els.length; i++){
-			el = S(els[i]);
-			for(var j = 0; j < el.e.length; j++){
-				h = height(el.e[j]);
-				if(isNaN(h)) h = 10;
-				if(h > 0 && tall > h) S(el.e[j]).css({'top':((tall-h)/2)+'px'});
+			for(var j = 0; j < els[i].e.length; j++){
+				h = height(els[i].e[j]);
+				S(els[i].e[j]).css({'top':((!isNaN(h) && h > 0 && tall > h) ? ((tall-h)/2)+'px' : '')});
 			}
 		}
 

@@ -277,18 +277,23 @@ CraterCalcs.prototype.sentData = function(){
 
 	// Projectile travelling through the atmosphere
 	this.impactor.imDesc = "";
-	
+
+	var _obj = this;	
+	function buildString(str,n){
+		var o = _obj.getString(str);
+		return (o.indexOf("%VAL%") >= 0) ? o.replace(/%VAL%/,n) : o+' '+n;
+	}
 	if(this.iFactor >= 1){
-		this.impactor.imDesc += this.getString("projectile1")+nbFormat(this.impactor.imVel)+" km/s <br/><br/>";
-		this.impactor.imDesc += this.getString("projectile2")+this.standform(this.impactor.imEnergy)+" J";
+		this.impactor.imDesc += buildString("projectile1",nbFormat(this.impactor.imVel)+" km/s")+"<br/><br/>";
+		this.impactor.imDesc += buildString("projectile2",this.standform(this.impactor.imEnergy)+" J");
 	}else{
 		if(this.impactor.abAltBurst > 0){
-			this.impactor.imDesc += this.getString("projectile3")+nbFormat(this.impactor.abAltBurst)+" m\ <br/><br/>";
-			this.impactor.imDesc += this.getString("projectile4")+nbFormat(this.impactor.imVel)+" km/s<br/><br/>";
-			this.impactor.imDesc += this.getString("projectile5")+this.standform(this.impactor.imEnergy)+" J<br/><br/>";
+			this.impactor.imDesc += buildString("projectile3",nbFormat(this.impactor.abAltBurst)+" m")+"<br/><br/>";
+			this.impactor.imDesc += buildString("projectile4",nbFormat(this.impactor.imVel)+" km/s")+"<br/><br/>";
+			this.impactor.imDesc += buildString("projectile5",this.standform(this.impactor.imEnergy)+" J")+"<br/><br/>";
 			this.impactor.imDesc += this.getString("projectile6");	
 		}else{
-			this.impactor.imDesc += this.getString("projectile7").replace(/%VELOCITY%/,nbFormat2(this.impactor.imVel)+" km/s")+"<br/><br/>";
+			this.impactor.imDesc += buildString("projectile7",nbFormat2(this.impactor.imVel)+" km/s")+"<br/><br/>";
 		}
 	}
 		
