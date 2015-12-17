@@ -252,9 +252,9 @@ h1{
 	height: 548px;
 	margin: 0 auto;
 	margin-top: 2%;
-	background-image:url('../imgs/background.jpg');
+/*	background-image:url('../imgs/background.jpg');
 	background-size: contain;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat;*/
 	padding-top: 0%;
 }
 
@@ -456,7 +456,6 @@ DATA Output
 
 #Content_Wrapper {
 	background-color: #000000;
-	background-image:url('../imgs/background.jpg');
 	background-size: contain;
 	background-repeat: no-repeat;
 	padding-top: 0%;
