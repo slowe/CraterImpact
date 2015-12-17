@@ -50,6 +50,11 @@ function DataProvider(){
 	
 	this.impactor;/**The populated impact data model**/
 
+	this.set = function set(key,value){
+		this[key] = value;
+	}
+
+
 	/**
 	 * Sets the projectile density selected index.
 	 * @return A value.
@@ -86,31 +91,12 @@ function DataProvider(){
 	}
 
 	/**
-	 * Sets the text describing the damage caused by the 
-	 * impact.
-	 * @param txtDamage A  containing the description.
-	 */
-	 this.setTxtDamage = setTxtDamage;
-	function setTxtDamage( txtDamage_) {
-		this.txtDamage = txtDamage_;
-	}
-
-	/**
 	 * Gets the textual description of the impact.
 	 * @return A  containing the description.
 	 */
 	 this.getTxtImpactor = getTxtImpactor;
 	function  getTxtImpactor() {
 		return this.txtImpactor;
-	}
-
-	/**
-	 * Sets the textual description of the impact.
-	 * @param txtImpactor The description in a .
-	 */
-	 this.setTxtImpactor = setTxtImpactor;
-	function setTxtImpactor( txtImpactor_) {
-		this.txtImpactor = txtImpactor_;
 	}
 
 	/**
@@ -123,15 +109,6 @@ function DataProvider(){
 		return this.dgInputs;
 	}
 
-	/**
-	 * Sets the HashMap containing the titles and values of the data originally 
-	 * input by the various UI elements of the application.
-	 * @param dgInputs The HashMap of inputs in title, value pairs.
-	 */
-	 this.setDgInputs = setDgInputs;
-	function setDgInputs( dgInputs_) {
-		this.dgInputs = dgInputs_;
-	}
 
 	/**
 	 * Gets the HashMap contain the core calculated data about the
@@ -143,15 +120,6 @@ function DataProvider(){
 		return this.dgOutputs;
 	}
 
-	/**
-	 * Sets the results output Hashmap. The results are stored in title 
-	 * value pairs.
-	 * @param dgOutputs The Hashmap of the core calculated data.
-	 */
-	 this.setDgOutputs = setDgOutputs;
-	function setDgOutputs(dgOutputs_) {
-		this.dgOutputs = dgOutputs_;
-	}
 
 	/**
 	 * Gets a HashMap of impact energy data. It is stored in title, value pairs.
@@ -162,14 +130,6 @@ function DataProvider(){
 		return this.dgEnergy;
 	}
 
-	/**
-	 * Set the HashMap of impact energy data. It is stored in title value pairs.
-	 * @param dgEnergy The HashMap of engergy data.
-	 */
-	 this.setDgEnergy = setDgEnergy;
-	 function setDgEnergy( dgEnergy_) {
-		this.dgEnergy = dgEnergy_;
-	}
 
 	/**
 	 * Gets the HashMap of the fire ball data which contastitle value pairs.
@@ -178,15 +138,6 @@ function DataProvider(){
 	 this.getDgFirevall = getDgFirevall;
 	function getDgFirevall() {
 		return this.dgFirevall;
-	}
-
-	/**
-	 * Set the FireWall HasMap containing fireball data in title value pairs/
-	 * @param dgFirevall HashMap of fireball data.
-	 */
-	 this.setDgFirevall = setDgFirevall;
-	function  setDgFirevall( dgFirevall_) {
-		this.dgFirevall = dgFirevall_;
 	}
 
 	/**
@@ -235,10 +186,6 @@ function DataProvider(){
 		return this.impactDist;
 	}
 
-	this.set = function set(key,value){
-		this[key] = value;
-	}
-
 	/**
 	 * Get the selected depth
 	 * @return
@@ -268,14 +215,6 @@ function DataProvider(){
 		return this.latitude;
 	}
 
-	/**
-	 * Sets the map latitude..
-	 * @param latitude A .
-	 */
-	 this.setLatitude = setLatitude;
-	function setLatitude( latitude) {
-		this.latitude = latitude;
-	}
 
 	/**
 	 * Gets the map longitude.
