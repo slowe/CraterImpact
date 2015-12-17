@@ -456,6 +456,7 @@
 		var x = this.str('result');
 		E("#Crater_Size_Title").html(x);
 		E("#Crater_Depth_Title").html(x);
+		E("#Data_View_Title").html(x);
 		E("#Data_Title").html(x);
 
 		x = this.str('lblImpactVal');
