@@ -101,7 +101,7 @@ var CraterImpact;
 		wide = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 		tall = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 		head = height(S('#header').e[0]);
-console.log(head)
+
 		// Update main panel
 		var els = [S('.main'),S('.modal-inner')];
 		for(var i = 0; i < els.length; i++){

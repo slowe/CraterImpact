@@ -322,11 +322,11 @@ h1{
 	display: inline-block;
 }
 #ImpactDistanceSlider {
-   width: 30%;
+   width: 90%;
    display: inline-block;
 }
 #impactDist, #WaterDepthSlider {
-   width: 200px;
+   width: 100%;
    display: inline-block;
 }
 
@@ -342,8 +342,8 @@ h1{
 }
 
 #WaterVis {
-	width: 344px;
-	height: 122px;
+	width: 362px;
+	height: 128px;
 	margin-top: 10px;
 	margin: 0 auto;
 	display: block;
@@ -392,7 +392,7 @@ h1{
 	margin: 0;
 }
 .input_panel_w {
-	width: 340px;
+	width: 344px;
 }
 
 .input_panel, .input_panel_right, .input_panel_w {
