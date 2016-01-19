@@ -25,9 +25,7 @@ html {
 	background-color: #000000;
 	padding: 0;
 	margin: 0;
-	height: 100%;
-	min-height: 600px;
-	min-width: 800px;
+	min-height: 100%;
 }
 
 body {
@@ -43,7 +41,7 @@ body {
 }
 
 #container {
-	height: 100%;
+	min-height: 100%;
 	width: 100%;
 	background-image:url('../imgs/background_sm.jpg');
 	background-size: cover;
@@ -271,7 +269,6 @@ h1{
 #ImpactCalc_Input {
 	background-color: #000000;
 	margin: 0 auto;
-	margin-top: 2%;
 	padding-top: 0%;
 }
 
