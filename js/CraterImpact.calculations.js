@@ -1125,7 +1125,7 @@ var DataProvider;
 		this.impactor;/**The populated impact data model**/
 
 		// Set the value for a key
-		this.set = function(key,value){ this[key] = value; }
+		this.set = function(key,value){ this[key] = value; console.log(key,value)}
 		// Get the value for a key
 		this.get = function(key,value){ return this[key]; }
 

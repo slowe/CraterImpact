@@ -356,8 +356,9 @@
 	//=============================================
 	// Called when the target density list is selected.
 	CraterImpact.prototype.selectTgDensity = function(tgList){
-		var idx = tgList.selectedIndex;
+		var idx = (typeof tgList==="number" ? tgList : tgList.selectedIndex);
 		var tgImg =document.getElementById("TargetImage");
+		this.log('selectTgDensity',idx,tgList);
 
 		switch(idx){
 			case 1:
@@ -379,15 +380,15 @@
 			default:
 				tgImg.src = images.imgBlank.img.src;
 		}
-		
-		this.values.tgd = idx;
+		this.values.tjd = idx;
 		return this;
 	}
 
 	CraterImpact.prototype.selectTgDensityMarsMoon = function(tgList){
-		var idx = tgList.selectedIndex;
+		var idx = (typeof tgList==="number" ? tgList : tgList.selectedIndex);
 		var tgImg = document.getElementById("TargetImage");
-		 
+		this.log('selectTgDensityMarsMoon',idx,tgList);
+
 		switch(idx){
 				case 1:
 				S('#TargetFeature').css({'display':"block"});
@@ -399,7 +400,7 @@
 				tgImg.src = images.imgBlank.img.src;
 		}
 		
-		this.values.tgd = 3;
+		this.values.tjd = 3;
 		return this;
 	}
 	 
@@ -430,15 +431,16 @@
 				tgImg.src = images.imgBlank.img.src;
 		}
 		
-		this.values.tgd = idx;
+		this.values.tjd = idx;
 		return this;
 	}
 
 	//=============================================
 	// Called when the target density list is selected.
 	CraterImpact.prototype.selectPjDensity = function(pjList){
-		var idx = pjList.selectedIndex;
+		var idx = (typeof pjList==="number" ? pjList : pjList.selectedIndex);
 		var pjImg = document.getElementById("ProjectileImage");
+		this.log('selectPjDensity',idx)
  
 		switch(idx){
 			case 1:
@@ -456,34 +458,6 @@
 			default:
 				pjImg.src = images.imgBlank.img.src;
 		}
-		
-		this.values.pjd = idx;
-		return this;
-	}
-	 	 
-	//=============================================
-	// Called when the target density list is selected.
-	CraterImpact.prototype.selectPjDensity2 = function(x){
-		var idx = x;
-		
-	    var pjImg = document.getElementById("ProjectileImage");
-		 
-		switch(idx){
-			case 1:
-				pjImg.src = images.pjd1.img.src;
-				break;
-			case 2:
-				pjImg.src = images.pjd2.img.src;
-				break;
-			case 3:
-				pjImg.src = images.pjd3.img.src;
-				break;
-			case 4:
-				pjImg.src = images.pjd4.img.src;
-				break;
-			default:
-				pjImg.src = images.imgBlank.img.src;
-		}//end switch
 		
 		this.values.pjd = idx;
 		return this;
@@ -540,12 +514,12 @@
 			passed = false;
 		}
 		
-		if(this.values.tgd <= 0){
+		if(this.values.tjd <= 0){
 			msg += "<li>" + this.str("input_error_tgd") + "</li>";
 			passed = false;
 		}
 		
-		if(this.values.tgd == 1 && this.values.wlvl <= 0){
+		if(this.values.tjd == 1 && this.values.wlvl <= 0){
 			passed = false;
 			msg +="<li>" + this.str("input_error_water") + "</li>";
 		}
@@ -556,7 +530,7 @@
 			S("#validation .title").html(input_error_title); 
 			this.resize();
 		}else{
-			window.location = "results.html?lang=" + this.lang +"&dist=" +"&planet=" + this.values.planet +"&dist=" + this.values.dist +"&diam=" + this.values.diam + "&traj=" + this.values.traj + "&velo=" + this.values.velo + "&pjd=" + this.values.pjd + "&tgd=" + this.values.tgd + "&wlvl=" + this.values.wlvl;
+			window.location = "results.html?lang=" + this.lang +"&dist=" +"&planet=" + this.values.planet +"&dist=" + this.values.dist +"&diam=" + this.values.diam + "&traj=" + this.values.traj + "&velo=" + this.values.velo + "&pjd=" + this.values.pjd + "&tjd=" + this.values.tjd + "&wlvl=" + this.values.wlvl;
 		}
 	}
 	
@@ -601,12 +575,12 @@
 		S("#ProjectileVelocity").attr("value", this.values.velo).trigger('change');
 		S("#WaterDepth").attr("value", this.values.wlvl).trigger('change');
 		S("#cpPjDens").attr('value', this.values.pjd).trigger('change'); 
-		S("#cpTgDens").attr('value', this.values.tgd).trigger('change');
+		S("#cpTgDens").attr('value', this.values.tjd).trigger('change');
 
-		if(this.values.pjd) S('#cpPjDens option:eq('+(this.values.pjd+1)+')').attr('selected','selected');
-		if(this.values.pjd) S('#cpTgDens option:eq('+(this.values.tgd+1)+')').attr('selected','selected');
-		this.selectTgDensity2(parseInt(this.values.tgd));
-		this.selectPjDensity2(parseInt(this.values.pjd));
+		if(this.values.pjd) S('#cpPjDens option:eq('+(this.values.pjd)+')').attr('selected','selected');
+		if(this.values.tjd) S('#cpTgDens option:eq('+(this.values.tjd)+')').attr('selected','selected');
+		this.selectTgDensity(parseInt(this.values.tjd));
+		this.selectPjDensity(parseInt(this.values.pjd));
 		
 		return this;
 	}

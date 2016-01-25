@@ -343,7 +343,7 @@
 	//==========================================================================================
 	// Called when the go back button is pressed.
 	CraterImpact.prototype.goBack = function(){
-		window.location = "input.html?" + (this.lang ? 'lang='+this.lang : '') + (this.values.dist ? '&dist='+this.values.dist : '') + (this.values.diam ? '&diam='+this.values.diam : '')+(this.values.traj ? '&traj='+this.values.traj : '') + (this.values.velo ? '&velo='+this.values.velo : '') + (this.values.pjd ? '&pjd='+this.values.pjd : '') + (this.values.tgd ? '&tgd='+this.values.tgd : '') + (this.values.wlvl ? '&wlvl='+this.values.wlvl : '') + (this.values.planet ? '&planet='+this.values.planet : '');
+		window.location = "input.html?" + (this.lang ? 'lang='+this.lang : '') + (this.values.dist ? '&dist='+this.values.dist : '') + (this.values.diam ? '&diam='+this.values.diam : '')+(this.values.traj ? '&traj='+this.values.traj : '') + (this.values.velo ? '&velo='+this.values.velo : '') + (this.values.pjd ? '&pjd='+this.values.pjd : '') + (this.values.tjd ? '&tjd='+this.values.tjd : '') + (this.values.wlvl ? '&wlvl='+this.values.wlvl : '') + (this.values.planet ? '&planet='+this.values.planet : '');
 	}
 
 
@@ -422,7 +422,7 @@
 		var traj = this.values.traj;
 		var velo = this.values.velo;
 		var pjd = this.values.pjd;
-		var tgd = this.values.tgd;
+		var tgd = this.values.tjd;
 		var wlvl = this.values.wlvl;
 
 		this.calcs; // Will do the calcs
@@ -519,7 +519,7 @@
 		this.dataProvider.set('projAngle',this.values.traj);
 		this.dataProvider.set('projVel',this.values.velo);
 		this.dataProvider.set('cbPjDens',this.values.pjd);
-		this.dataProvider.set('cbTgDens',this.values.tgd);
+		this.dataProvider.set('cbTgDens',this.values.tjd);
 		this.dataProvider.set('slTgDepth',this.values.wlvl);
 
 		this.planets = {

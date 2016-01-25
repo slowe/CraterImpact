@@ -49,7 +49,7 @@ var CraterImpact;
 			"traj": 45,	// Most likely impact angle (Shoemaker 1965)
 			"velo": 0,
 			"pjd": 0,
-			"tgd": 0,
+			"tjd": 0,
 			"wlvl": 0,
 			"planet": "Earth"
 		}
