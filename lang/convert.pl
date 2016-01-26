@@ -63,6 +63,7 @@ sub fromTXT {
 			$key =~ s/[\t\s]*$//g;
 			if($key =~ /Deciduous/){ print "==$key==$value==\n"; }
 			$dict{$key} = $value;
+			$dict{$key.":"} = $value;
 		}
 	}
 
