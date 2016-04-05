@@ -37,7 +37,7 @@ var CraterImpact;
 	CraterImpact = function(inp){
 
 		this.dict = {};
-		this.lang = "en";
+		this.lang = "";
 		this.gmap = false;
 		this.scaling = 13;	// Factor to downsize asteroid by for display
 		this.languages = { "cy": "Cymraeg", "de": "Deutsch", "gr": "E&lambda;&lambda;&eta;&nu;&iota;&kappa;&#x3AC;", "en": "English", "es": "Espa&ntilde;ol", "et": "Eesti keel", "fr": "Fran&ccedil;ais", "it": "Italiano", "pl": "Polski", "pt": "Portugu&ecirc;s", "ro": "Rom&acirc;n&#x103;" };
@@ -61,7 +61,8 @@ var CraterImpact;
 
 		this.parseQueryString();
 		this.setValues();
-		if(this.query.lang) this.lang = this.query.lang;
+		// Country codes at http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+		this.lang = (typeof this.query.lang==="string") ? this.query.lang : (navigator ? (navigator.userLanguage||navigator.systemLanguage||navigator.language||browser.language) : this.lang);
 		this.log('new crater',this.query);
 		
 		// Open the acknowledgements
@@ -155,12 +156,12 @@ var CraterImpact;
 	}
 
 	// Load a language file
-	CraterImpact.prototype.loadLanguage = function(l){
-		this.log('setLanguage',l);
+	CraterImpact.prototype.loadLanguage = function(l,callback){
+		this.log('setLanguage',l,callback);
 		this.lang = l;
 		var ul = S('#MenuLanguage ul');
 		function updateLang(data,attr){
-			this.log('updating with',data,attr)
+			this.log('loadLanguage',this.lang,'success')
 			this.dict = YAML2JSON(data);
 
 			// Update common elements
@@ -169,6 +170,7 @@ var CraterImpact;
 
 			if(typeof this.updateLanguage==="function") this.updateLanguage();
 			if(typeof this.onload==="function") this.onload();
+			if(typeof callback==="function") callback.call(this);
 
 			// Update current language
 			if(S('#MenuLanguage').e.length > 0){
@@ -185,11 +187,15 @@ var CraterImpact;
 					// Hide the menu
 					ul.css({'display':''});
 					// Load the new language
-					e.data.me.loadLanguage(S(e.currentTarget).attr('id'));
+					e.data.me.loadLanguage(S(e.currentTarget).attr('id'),callback);
 				});
 			}
 		}
-		S().ajax('lang/'+l+'.txt',{'complete':updateLang,'this':this});
+		function failLang(e){
+			this.log('loadLanguage',this.lang,'fail');
+			if(this.lang.length > 2) this.loadLanguage(this.lang.substr(0,2),callback)
+		}
+		S().ajax('lang/'+l+'.txt',{'complete':updateLang,'this':this,'error':failLang});
 	}
 
 	CraterImpact.prototype.str = function(str){

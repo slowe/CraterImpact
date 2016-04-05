@@ -38,6 +38,14 @@
 			go();
 		});
 	
+		if(craterimpact.lang){
+			window.location ="planet.html?lang=" + craterimpact.lang;
+			/*
+			craterimpact.loadLanguage(craterimpact.lang,function(){
+				// Launch next screen and pass selected language to it.
+				window.location ="planet.html?lang=" + this.lang;
+			});*/
+		}
 	});
 
 	//========================================================
