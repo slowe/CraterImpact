@@ -89,6 +89,8 @@ var CraterImpact;
 			ul.css({'display':(ul.css('display')=='block' ? 'none' : 'block')});
 		});
 
+		S('#header .dropdown ul').css({'display':'none'});
+
 		var _obj = this;
 		// We'll need to change the sizes when the window changes size
 		window.addEventListener('resize',function(e){ _obj.resize(); });
@@ -161,7 +163,7 @@ var CraterImpact;
 		this.lang = l;
 		var ul = S('#MenuLanguage ul');
 		function updateLang(data,attr){
-			this.log('loadLanguage',this.lang,'success')
+			this.log('loadLanguage',this.lang,'success');
 			this.dict = YAML2JSON(data);
 
 			// Update common elements
@@ -182,6 +184,8 @@ var CraterImpact;
 				S('#MenuLanguage li').off('click');
 				// Update list
 				ul.html(list);
+				console.log(ul)
+				ul.css({'display':'none'});
 				// Add events to list items
 				S('#MenuLanguage li').on('click',{me:this},function(e){
 					// Hide the menu

@@ -152,6 +152,18 @@
 		var z = S(option).attr('data-z');
 		if(z) z = parseInt(z);
 		
+		this.setLocation(lat,lon,z)
+
+		return this;
+	}
+		//======================================================================================
+	// Scroll the map to a predefined location on the map
+	CraterImpact.prototype.setLocation = function(lat,lon,z){
+		this.log('setLocation',lat,lon);
+
+		if(this.map == null) this.initializeMap();
+		if(typeof lat!=="number" || typeof lon!=="number" || typeof z!=="number") return this;
+		
 		// Work out the best fit map size for our crater
 		var h = height(S('#map_canvas').e[0]);
 		var angle = 0.1;

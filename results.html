@@ -14,6 +14,7 @@
 	<script src="js/CraterImpact.calculations.js"></script>
 	<script src="js/CraterImpact.js"></script>
 	<script src="js/CraterImpact.results.js"></script>
+	<script src="js/CraterImpact.geo.js"></script>
 	<script>
 	// Hide the main panel initially
 	document.write('<style>.main { display: none; }</style>');
@@ -64,7 +65,7 @@
 								</tbody>
 							</table>
 						</div><!--DataGrid-->
-						<h4 id="SelectLM_Title" class="forEarth">Please Select City:</h4>
+						<p id="SelectLM_Title" class="forEarth">Please Select City:</p>
 						<select id="cpLocation" class="forEarth input_combo">
 							<option value="0">Please Select...</option>
 							<option value="1" data-lat="51.47806" data-lon="-3.18250" data-z="11">Cardiff</option>
@@ -79,7 +80,11 @@
 							<option value="10" data-lat="6.501622" data-lon="-1.409893" data-z="11">Bosumtwi, Ghana</option>
 							<option value="11" data-lat="39.03572" data-lon="73.464203" data-z="12">Karakul, Tajikstan</option>
 						</select>
-						<h4 id="SelectLM_TitleMoon" class="forMoon">Please Select Crater:</h4>
+						<div class="search">
+							<input type="text" id="searchplace" class="forEarth input_text" placeholder="e.g. London" />
+							<div class="searchresults"></div>
+						</div>
+						<p id="SelectLM_TitleMoon" class="forMoon">Please Select Crater:</p>
 						<select id="cpLocationMoon" class="forMoon input_combo">
 							<option value="0">Please Select...</option>
 							<option value="1" data-lat="-27.5" data-lon="-31.5" data-z="11">Kelvin A</option>
@@ -103,7 +108,7 @@
 							<option value="19" data-lat="2.6" data-lon="-129.2" data-z="12">Apollo</option>
 							<option value="20">Hertzsprung</option>
 						</select>
-                        <h4 id="SelectLM_TitleMars" class="forMars">Please Select Crater:</h4>
+                        <p id="SelectLM_TitleMars" class="forMars">Please Select Crater:</p>
 						<select id="cpLocationMars" class="forMars input_combo">
 							<option value="0">Please Select...</option>
 							<option value="1"data-lat="48.5" data-lon="-224.1" data-z="11">Houston</option>
@@ -130,7 +135,7 @@
 							<option value="22" data-lat="49.7" data-lon=" 118.0" data-z="12">Utopia Planitia</option>
 						</select>
                         
-						<h4 id="MapInst">Click the map to place the crater...</h4>
+						<p id="MapInst">Click the map to place the crater...</p>
 
 					</div><!--End Resilts Table area-->
 						
@@ -259,9 +264,7 @@
 				<div class="ack_sect">
 					<h4 id="lbAuthor">Developers</h4>
 					<ul>
-						<li>Stuart Lowe</li>
-						<li>Andrew Scott, N. AlBeiruti & D. Zampelis</li>
-						<li>Edward Gomez & Jon Yardley</li>
+						<li>Stuart Lowe, Andrew Scott, N. AlBeiruti & D. Zampelis, Edward Gomez & Jon Yardley</li>
 					</ul>
 				</div>
 	
@@ -285,6 +288,14 @@
 					<h4 id="lbBased">Based on the original science of </h4>
 					<p>Robert Marcus, H. Jay Melosh & Gareth Collins.</p>
 				</div>
+
+				<div class="ack_sect">
+					<h4 id="lbAuthor">City name lookup</h4>
+					<ul>
+						<li>CC-BY-3.0 <a href="http://www.geonames.org/">GeoNames Gazetteer</a></li>
+					</ul>
+				</div>
+	
 	
 				<div class="ack_sect">
 					<p>For further information on the D2E project, contact: <a href="mailto:info@faulkes-telescope.com">info@faulkes-telescope.com</a></p>

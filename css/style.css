@@ -94,7 +94,6 @@ body {
 #header a:hover, #header a:focus, #header button:hover, #header button:focus {
 	color: white;
 }
-#header .dropdown ul { display: none; }
 #header .dropdown li { background-color: #202020; padding: 0 1em; line-height: 2.5em; }
 #header .right button:hover, #header .dropdown li:hover { background-color: #404040; cursor: pointer; }
 #footer {
@@ -409,11 +408,15 @@ h1{
 }
 
 
+.input_combo, .input_text {
+	width: 100%;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
 .input_combo {
-  width: 100%;
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
+#MapInst { margin-top: 10px; }
 
 .input_image, .input_image img{
 	width: 100%;
@@ -634,7 +637,44 @@ DATA Output
 .datagrid table tfoot ul.active, 
 .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #00557F; color: #FFFFFF; background: none; background-color:#006699;}
 
- 
+
+/* Search Results */
+.search {
+	position: relative;
+}
+.search .searchresults {
+	position: absolute;
+	left: 0px;
+	width: 100%;
+}
+.search .searchresults ol {
+	margin: 0px;
+	padding: 0px;
+	background-color: #cccccc;
+}
+.search .searchresults li {
+	margin-bottom: 1px;
+	display: block;
+	text-align: left;
+	background-color: #efefef;
+	color: #404040;
+}
+.search .searchresults li .name {
+	padding: 0 0.5em;
+	display: inline-block;
+}
+.search .searchresults li.selected, .search .searchresults li:hover {
+	background-color: black; color: #fefefe;
+	cursor: pointer;
+}
+.search .searchresults li div {
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.search .searchresults li .name {
+	width: auto;
+}
+
+
 /*============================
  ACK DIALOG
 ============================== */
