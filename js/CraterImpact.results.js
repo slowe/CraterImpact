@@ -144,6 +144,8 @@
 
 		if(!select) return this;
 		var i = select.selectedIndex;
+		S('.search').css({'display':'none'});
+		S('#searchplace').e[0].value = '';
 		if(i == 0){
 			if(!this.cmbLocation) i++;	// If no option is selected and no map is set, use the first
 			else return this;	// We've already set the map position so no need to continue
@@ -155,7 +157,6 @@
 		lon = S(option).attr('data-lon');
 		z = S(option).attr('data-z');
 		if(z) z = parseInt(z);
-		S('.search').css({'display':'none'});
 		
 		if(lat=="?" && lon=="?"){
 			var _obj = this;
@@ -185,12 +186,7 @@
 			}
 			if(navigator.geolocation) getPosition();
 			else notFound();
-		}else{
-			lat = parseFloat(lat);
-			lon = parseFloat(lon);
-			this.setLocation(lat,lon,z)
-		}
-		
+		}else this.setLocation(parseFloat(lat),parseFloat(lon),z);
 
 		return this;
 	}
