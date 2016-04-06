@@ -140,19 +140,57 @@
 
 		if(this.map == null) this.initializeMap();
 
+		var i,lat,lon,z;
+
 		if(!select) return this;
 		var i = select.selectedIndex;
-		if(i == 0) i++;	// If no option is selected, we use the first one
+		if(i == 0){
+			if(!this.cmbLocation) i++;	// If no option is selected and no map is set, use the first
+			else return this;	// We've already set the map position so no need to continue
+		}
 		option = select.options[i];
 		if(!option) return this;
 		this.cmbLocation = parseInt(S(option).attr('value'));
-		var lat = parseFloat(S(option).attr('data-lat'));
-		var lon = parseFloat(S(option).attr('data-lon'));
-		
-		var z = S(option).attr('data-z');
+		lat = S(option).attr('data-lat');
+		lon = S(option).attr('data-lon');
+		z = S(option).attr('data-z');
 		if(z) z = parseInt(z);
+		S('.search').css({'display':'none'});
 		
-		this.setLocation(lat,lon,z)
+		if(lat=="?" && lon=="?"){
+			var _obj = this;
+			var options = { enableHighAccuracy: false, timeout: 6000, maximumAge: 0 };
+			// As FF doesn't seem to use the timeout, we simulate it ourself using setTimeout
+			this.geostart = new Date();	// Get the time for the start of this attempt to get a location
+			if(typeof this.geolocate!=="boolean") this.geolocate = true; // If we've not set the variable, we'll assume we can do a lookup
+			function showPosition(position){
+				_obj.geopos = position;	// The found position
+				_obj.setLocation(position.coords.latitude,position.coords.longitude,z);	// Set the location of the map
+			}
+			function notFound(e){
+				S('.search').css({'display':'block'});	// Show the manual input field
+				_obj.geolocate = false;	// Finding location failed for some reason so don't bother trying again
+				return;
+			}
+			function getPosition(){
+				if(!_obj.geolocate) return notFound();
+				if((new Date()) - _obj.geostart < options.timeout){
+					if(!_obj.geotimeout){
+						navigator.geolocation.getCurrentPosition(showPosition,notFound,options)
+						_obj.geotimeout = setTimeout(getPosition,1000);
+					}else{
+						if(!_obj.geopos) _obj.geotimeout = setTimeout(getPosition,1000);
+					}
+				}else return notFound();
+			}
+			if(navigator.geolocation) getPosition();
+			else notFound();
+		}else{
+			lat = parseFloat(lat);
+			lon = parseFloat(lon);
+			this.setLocation(lat,lon,z)
+		}
+		
 
 		return this;
 	}
