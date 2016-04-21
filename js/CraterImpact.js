@@ -42,9 +42,9 @@ var CraterImpact;
 		this.scaling = 13;	// Factor to downsize asteroid by for display
 		this.languages = { "cy": "Cymraeg", "de": "Deutsch", "gr": "E&lambda;&lambda;&eta;&nu;&iota;&kappa;&#x3AC;", "en": "English", "es": "Espa&ntilde;ol", "et": "Eesti keel", "fr": "Fran&ccedil;ais", "it": "Italiano", "pl": "Polski", "pt": "Portugu&ecirc;s", "ro": "Rom&acirc;n&#x103;" };
 		this.planets = {
-			'Earth': {'key':'bodyEarth','img':'imgs/earth.png','Name':'Earth','R':6370},
-			'Moon': {'key':'bodyMoon','img':'imgs/moon.png','Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':4e-15,'scaleHeight':0},//rhoSurface old value = 0.0020, replaced with value calculated using estimated composition from http://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html. Scale height previously 65000
-			'Mars': {'key':'bodyMars','img':'imgs/mars.png','Name':'Mars','G':3711,'R':3390,'V':1.6318*Math.pow(10,11),'l':3.0 * Math.pow(10,44),'p':1.5* Math.pow(10,25),'rhoSurface':0.020,'scaleHeight':11100}
+			'Earth': {'key':'bodyEarth','img':'imgs/earth_small.png','Name':'Earth','R':6370},
+			'Moon': {'key':'bodyMoon','img':'imgs/moon_small.png','Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':4e-15,'scaleHeight':0},//rhoSurface old value = 0.0020, replaced with value calculated using estimated composition from http://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html. Scale height previously 65000
+			'Mars': {'key':'bodyMars','img':'imgs/mars_small.png','Name':'Mars','G':3711,'R':3390,'V':1.6318*Math.pow(10,11),'l':3.0 * Math.pow(10,44),'p':1.5* Math.pow(10,25),'rhoSurface':0.020,'scaleHeight':11100}
 		}
 		this.delim = " &#x276F; ";
 		this.defaults = {
