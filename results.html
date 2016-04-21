@@ -35,7 +35,10 @@
 		<div id="header">
 			<div id="AppTitle"><a href="index.html">Impact Calculator</a><span></span></div>
 			<div id="MenuLanguage" class="dropdown right">
-				<button class="choice">English</button><ul></ul>
+				<button class="choice"></button><ul></ul>
+			</div>
+			<div id="PlanetChoice" class="dropdown right">
+				<button class="choice"></button><ul></ul>
 			</div>
 		</div><!--end header-->
 		
@@ -68,18 +71,18 @@
 						<p id="SelectLM_Title" class="forEarth">Please Select City:</p>
 						<select id="cpLocation" class="forEarth input_combo">
 							<option value="0" data-lat=" " data-lon=" ">Please Select...</option>
-							<option value="1" data-lat="51.47806" data-lon="-3.18250" data-z="11">Cardiff</option>
-							<option value="2" data-lat="51.5028167" data-lon="0.0031167" data-z="11">London</option>
-							<option value="3" data-lat="48.858222" data-lon="2.294500" data-z="11">Paris</option>
-							<option value="4" data-lat="40.708499" data-lon="-74.010745" data-z="11">New York</option>
-							<option value="5" data-lat="35.02722" data-lon="-111.02250" data-z="11">Barringer Meteor Crater, Arizona</option>
-							<option value="6" data-lat="19.092416" data-lon="19.245494" data-z="11">Aorounga, Chad, Africa</option>
-							<option value="7" data-lat="-19.171764" data-lon="127.795453" data-z="11">Wolfe Creek, Australia</option>
-							<option value="8" data-lat="-27.766266" data-lon="16.288776" data-z="11">Roter Kamm, Namibia</option>
-							<option value="9" data-lat="55.884227" data-lon="-63.307791" data-z="11">Mistastin Lake, Canada</option>
-							<option value="10" data-lat="6.501622" data-lon="-1.409893" data-z="11">Bosumtwi, Ghana</option>
-							<option value="11" data-lat="39.03572" data-lon="73.464203" data-z="12">Karakul, Tajikstan</option>
-							<option value="12" data-lat="?" data-lon="?" data-z="11">You</option>
+							<option value="1" data-lat="?" data-lon="?" data-z="11" class="you">You</option>
+							<option value="2" data-lat="51.47806" data-lon="-3.18250" data-z="11">Cardiff</option>
+							<option value="3" data-lat="51.5028167" data-lon="0.0031167" data-z="11">London</option>
+							<option value="4" data-lat="48.858222" data-lon="2.294500" data-z="11">Paris</option>
+							<option value="5" data-lat="40.708499" data-lon="-74.010745" data-z="11">New York</option>
+							<option value="6" data-lat="35.02722" data-lon="-111.02250" data-z="11">Barringer Meteor Crater, Arizona</option>
+							<option value="7" data-lat="19.092416" data-lon="19.245494" data-z="11">Aorounga, Chad, Africa</option>
+							<option value="8" data-lat="-19.171764" data-lon="127.795453" data-z="11">Wolfe Creek, Australia</option>
+							<option value="9" data-lat="-27.766266" data-lon="16.288776" data-z="11">Roter Kamm, Namibia</option>
+							<option value="10" data-lat="55.884227" data-lon="-63.307791" data-z="11">Mistastin Lake, Canada</option>
+							<option value="11" data-lat="6.501622" data-lon="-1.409893" data-z="11">Bosumtwi, Ghana</option>
+							<option value="12" data-lat="39.03572" data-lon="73.464203" data-z="12">Karakul, Tajikstan</option>
 						</select>
 						<div class="search">
 							<input type="text" id="searchplace" class="forEarth input_text" placeholder="e.g. London" />
@@ -191,8 +194,8 @@
 							</table>
 						</div><!--DataGrid-->
 
-						<h6 id="LB_Damage">Damage At</h6>
-						<div id="DamageInfo" class="text_output">---</div>
+						<h6 id="LB_Damage" class="forEarth">Damage At</h6>
+						<div id="DamageInfo" class="text_output forEarth">---</div>
 						
 					</div><!--End Data Tables L-->
 					
@@ -255,7 +258,7 @@
 
 			<div id="ACK_DIV">
 				<div class="ack_sect">
-					<h4>Faulkes Telescope Project (University of South Wales)</h4>
+					<h4>Faulkes Telescope Project</h4>
 					<ul>
 						<li>Paul Roche</li>
 						<li>Sarah Roberts</li>
@@ -277,11 +280,14 @@
 				<div class="ack_sect">
 					<h4>Translation</h4>	
 					<ul>
-						<li>Polski: Jan Pmierny - Astronomia.pl</li>
-						<li>Espa&ntilde;ol: Vanessa Stroud</li>
-						<li>Fran&ccedil;ais: Eric Depagne, LCOGT</li>
-						<li>Deutsch: Reinheart Bruling & Vlaudia Heiss</li>
 						<li>Cymraeg: Amgueddfa Cymru/National Museum Wales</li>
+						<li>Deutsch: Reinheart Bruling & Vlaudia Heiss</li>
+						<li>E&lambda;&lambda;&eta;&nu;&iota;&kappa;&#x3AC;: Takis Lazos</li>
+						<li>Espa&ntilde;ol: Vanessa Stroud</li>
+						<li>Eesti keel: Leo Siiman</li>
+						<li>Fran&ccedil;ais: Eric Depagne (<a href="http://lcogt.net/">LCOGT</a>)</li>
+						<li>Polski: Jan Pmierny (<a href="http://astronomia.pl/">Astronomia.pl</a>)</li>
+						<li>Rom&acirc;n&#x103;: Dorina Girbovan</li>
 					</ul>
 				</div>
 	

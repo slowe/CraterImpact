@@ -165,19 +165,18 @@ var DataProvider;
 		}//end switch
 	
 		var dp2 = this.dataProvider.get('cbTgDens');
-		//Convert target density to a number
-		switch(dp2)
-		{
-			case 1:
+		// Convert target density to a number
+		switch(dp2){
+			case "w":	// Water
 				this.impactor.tgDens = 1000.0;
 				//Only water is allowed a depth
 				this.impactor.tgDepth = this.dataProvider.get('slTgDepth');
 				break;
-			case 2:
+			case "s":	// Sedimentary rock
 				this.impactor.tgDens = 2500.0;
 				this.impactor.tgDepth = 0;
 				break;
-			case 3:
+			case "i":
 				this.impactor.tgDens = 2750.0;
 				this.impactor.tgDepth = 0;
 				break;
@@ -547,13 +546,13 @@ var DataProvider;
 
 		anglefac = Math.pow((Math.sin (this.impactor.pjAngle * Math.PI / 180)),(1/3));
 	
-		if(this.impactor.tgType == 1){
+		if(this.impactor.tgType == "w"){	// Water
 			Cd = 1.88;
 			beta = 0.22;
-		}else if(this.impactor.tgType == 2){
+		}else if(this.impactor.tgType == "s"){	// Sedimentary
 			Cd = 1.54;
 			beta = 0.165;
-		}else{
+		}else{	// Ignious
 			Cd = 1.6;
 			beta = 0.22;
 		}
@@ -858,7 +857,7 @@ var DataProvider;
 		this.tgDens= 0;
 		this.tgDepth = 0;
 		this.tgDist = 0;
-		this.tgType = 0;
+		this.tgType = "";
 		// Projectile
 		this.pjDens = 0;
 		this.pjVel = 0;
@@ -923,7 +922,7 @@ var DataProvider;
 		this.tgDens=0;
 		this.tgDepth = 0;
 		this.tgDist = 0;
-		this.tgType = 0;
+		this.tgType = "";
 		// Projectile
 		this.pjDens = 0;
 		this.pjVel = 0;
@@ -1125,7 +1124,7 @@ var DataProvider;
 		this.impactor;/**The populated impact data model**/
 
 		// Set the value for a key
-		this.set = function(key,value){ this[key] = value; console.log(key,value)}
+		this.set = function(key,value){ this[key] = value; }
 		// Get the value for a key
 		this.get = function(key,value){ return this[key]; }
 

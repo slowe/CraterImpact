@@ -35,7 +35,7 @@
 		else S("#cpTgDens").css({'display':'none'});
 
 		this.prepareView();
-	
+		
 		// Make sliders
 		makeSlider('#ProjectileSize','#ProjectileSizeSlider',this.updateDiameter,this);
 		makeSlider('#ProjectileAngle','#ProjectileAngleSlider',this.updateAngle,this);
@@ -82,17 +82,6 @@
 	loadImage('mntn','imgs/water.jpg');
 	loadImage('refl','imgs/water_u3.jpg');
 	
-	// Dynamically build array of speed images.
-	var speedImgs = new Array();
-	for (var i = 0; i <= 9; i++){
-		var img = new Image();
-		img.src = 'imgs/n' + i + '.png'; 
-		speedImgs[i] = img;
-	}
-
-	loadImage('speedNeedle','imgs/speedNeedle1.png');
-	loadImage('speedo','imgs/speedo.png');
-
 	var input_error_title;
 	var input_error_diam;
 	var input_error_angle;
@@ -233,6 +222,25 @@
 		return span.innerHTML;
 	}
 	//==============================================
+	// Draw some 'neon' text that adds a background blur
+	function neonText(ctx,text,x,y,ct,cs,blur,width,fs,n){
+		if(!fs) fs = 15;
+		if(!width) width = c.width;
+		y += fs/2;
+		ctx.font = "300 "+fs+"px sans-serif";
+		ctx.shadowOffsetX = width;
+		ctx.shadowOffsetY = 0;
+		ctx.shadowBlur = blur;
+		ctx.textAlign = 'center';
+		ctx.shadowColor = cs;
+		for(var i = 0; i < n; i++) ctx.fillText(text, x-width, y);
+		ctx.shadowOffsetX = 0;
+		ctx.shadowOffsetY = 0;
+		ctx.shadowBlur = 0;
+		ctx.fillStyle = ct;
+		ctx.fillText(text, x, y);
+	}
+	//==============================================
 	// Called when the velocity slider is moved to a new 
 	// value.
 	CraterImpact.prototype.updateVelocity = function(e){
@@ -242,30 +250,97 @@
 		
 		var c = document.getElementById("Speedo");
 		var ctx = c.getContext("2d");
+		ctx.clearRect(0, 0, c.width, c.height);
 		var r = 60 + this.values.velo*3;
 	
-		ctx.drawImage(images.speedo.img,0,0);
-		
-		// Split speed into two values.
-		var str = "" + this.values.velo;
-		var n1 = str.charAt(0);
-		
-		var img;
-		if(str.length > 1){
-			img = speedImgs[parseInt(n1)];
-			//if(n1 != 9)
-			ctx.drawImage(img,63,105);
-			var n2 = str.charAt(1);
-			img = speedImgs[parseInt(n2)];
-			//if(n2 != 9)
-			ctx.drawImage(img,73,105);
-		}else{
-			img = speedImgs[parseInt(n1)];
-			//if(n1 != 9)
-			ctx.drawImage(img,68,105);
+		// Alternative to loading the speedo image which is 29.2kB
+		var w = c.width;
+		var h = c.height;
+		var ang_s = 150;
+		var ang_e = 30;
+		var rad = Math.floor(Math.min(w,h)/2);
+		var sp = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80];
+		// Draw background
+		ctx.beginPath();
+		ctx.arc(w/2,h/2,rad-1,0,2*Math.PI,false);
+		var grd = ctx.createLinearGradient(0, 0, w, h); // add linear gradient
+		grd.addColorStop(0, '#DFDFDF');   
+		grd.addColorStop(1, '#404040');
+		ctx.fillStyle = grd;
+		ctx.strokeStyle = "rgba(100,100,100,0.3)";
+		ctx.lineWidth = 1;
+		ctx.fill();
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(w/2,h/2,rad - 6,0,2*Math.PI,false);
+		ctx.fillStyle = 'black';
+		ctx.fill();
+		var dang = (ang_e-ang_s);
+		while(dang < 0) dang += 360;
+		while(dang >= 360) dang -= 360;
+		dang /= (sp[sp.length-1]-sp[0]);
+		for(var i = 0; i < sp.length; i++){
+			ctx.beginPath();
+			da = ((sp[i]%10==0) ? 2.4 : 1)*Math.PI/180;
+			dr = (sp[i]%10==0) ? 16 : 8;
+			rt = rad - 14;
+			a = parseFloat(((ang_s+sp[i]*dang)*Math.PI/180).toFixed(2))
+			if(sp[i] <= 60){
+				// Draw each tick mark
+				ctx.arc(w/2, h/2, rt-dr/2, a-da, a+da, false);
+				ctx.lineWidth = dr;
+				ctx.strokeStyle = '#48c7e9';
+				ctx.stroke();
+			}
+			// Draw the speed value
+			if(sp[i]%10==0){
+				x = (w/2 + (rt-27)*Math.cos(a));
+				y = (h/2 + (rt-27)*Math.sin(a));
+				neonText(ctx,sp[i],x,y,'#f6881f','#f6881f',4,w,15*0.9,1);
+			}
 		}
 		
-		drawImageRot(images.speedNeedle.img,62,66,32,64,r,ctx);
+		// Draw red warning areas
+		var warn = [[61.5,69.8],[70.3,80]];
+		for(var i = 0; i < warn.length; i++){
+			ctx.beginPath();
+			ctx.arc(w/2, h/2, rt-dr/2, (ang_s+warn[i][0]*dang)*Math.PI/180, (ang_s+warn[i][1]*dang)*Math.PI/180, false);
+			ctx.lineWidth = dr;
+			ctx.strokeStyle = '#f04031';
+			ctx.stroke();
+		}
+		
+		// Draw speed and units
+		neonText(ctx,this.values.velo,w/2,112,'#f6881f','#f05948',8,w,16,2);
+		neonText(ctx,'km/s',w/2,128,'#b72268','#f05948',6,w,15,1);
+
+		// Draw needle
+		a = (ang_s+this.values.velo*dang)*Math.PI/180;
+		a2 = (ang_s+this.values.velo*dang+90)*Math.PI/180;
+		a3 = (ang_s+this.values.velo*dang-90)*Math.PI/180;
+		r = rt-15;
+		ctx.beginPath();
+		ctx.moveTo(w/2, h/2);
+		ctx.lineTo(w/2 + r*0.08*Math.cos(a2),h/2 + r*0.08*Math.sin(a2));
+		ctx.lineTo(w/2 + r*Math.cos(a),h/2 + r*Math.sin(a));
+		ctx.lineTo(w/2 + r*0.08*Math.cos(a3),h/2 + r*0.08*Math.sin(a3));
+		ctx.closePath();
+		ctx.lineWidth = 0;
+		ctx.fillStyle = "#00b9e4";
+		ctx.shadowOffsetX = 0;
+		ctx.shadowOffsetY = 0;
+		ctx.shadowBlur = 4;
+		ctx.shadowColor = 'black';
+		ctx.fill();
+		ctx.restore();
+		ctx.shadowBlur = 0;
+		ctx.fillStyle = "#00b9e4";
+		ctx.arc(w/2, h/2, 6, 0, 2*Math.PI, false);
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = '#00b9e4';
+		ctx.fill();
+		ctx.stroke();
+
 		ctx.restore();
 		return this;
 	}
@@ -356,23 +431,23 @@
 	//=============================================
 	// Called when the target density list is selected.
 	CraterImpact.prototype.selectTgDensity = function(tgList){
-		var idx = (typeof tgList==="number" ? tgList : tgList.selectedIndex);
-		var tgImg =document.getElementById("TargetImage");
+		var idx = (typeof tgList==="string" ? tgList : tgList.value);
+		var tgImg = document.getElementById("TargetImage");
 		this.log('selectTgDensity',idx,tgList);
 
 		switch(idx){
-			case 1:
+			case "w":
 				S('#TargetFeature').css({'display':"none"});
 				S('#WaterFeature').css({'display':"block"});
 				this.updateWater();
 				tgImg.src = images.tgd3.img.src;
 				break;
-			case 2:
+			case "s":
 				S('#TargetFeature').css({'display':"block"});
 				S('#WaterFeature').css({'display':"none"});
 				tgImg.src = images.tgd1.img.src;
 				break;
-			case 3:
+			case "i":
 				S('#TargetFeature').css({'display':"block"});
 				S('#WaterFeature').css({'display':"none"});
 				tgImg.src = images.tgd2.img.src;
@@ -385,12 +460,12 @@
 	}
 
 	CraterImpact.prototype.selectTgDensityMarsMoon = function(tgList){
-		var idx = (typeof tgList==="number" ? tgList : tgList.selectedIndex);
+		var idx = (typeof tgList==="string" ? tgList : tgList.value);
 		var tgImg = document.getElementById("TargetImage");
 		this.log('selectTgDensityMarsMoon',idx,tgList);
 
 		switch(idx){
-				case 1:
+				case "i":
 				S('#TargetFeature').css({'display':"block"});
 				S('#WaterFeature').css({'display':"none"});
 				tgImg.src = images.tgd2.img.src;
@@ -398,37 +473,7 @@
 	
 			default:
 				tgImg.src = images.imgBlank.img.src;
-		}
-		
-		this.values.tjd = 3;
-		return this;
-	}
-	 
-	//=============================================
-	// Called when the target density list is selected.
-	CraterImpact.prototype.selectTgDensity2 = function(x){
-		var idx = x;
-		var tgImg = document.getElementById("TargetImage");
-
-		switch(idx){
-			case 1:
-				S('#TargetFeature').css({'display':"none"});
-				S('#WaterFeature').css({'display':"block"});
-				this.updateWater();
-				tgImg.src = images.tgd3.img.src;
-				break;
-			case 2:
-				S('#TargetFeature').css({'display':"block"});
-				S('#WaterFeature').css({'display':"none"});
-				tgImg.src = images.tgd1.img.src;
-				break;
-			case 3:
-				S('#TargetFeature').css({'display':"block"});
-				S('#WaterFeature').css({'display':"none"});
-				tgImg.src = images.tgd2.img.src;
-				break;
-			default:
-				tgImg.src = images.imgBlank.img.src;
+				idx = "";
 		}
 		
 		this.values.tjd = idx;
@@ -481,9 +526,7 @@
 		
 		ctx.drawImage(images.refl.img, 0, level, 343, clp, 0, clp-155, 343, clp);
 		
-		ctx.font = '600 12pt Arial';
-		
-		ctx.fillText(this.values.wlvl+"m", 280, 24);
+		neonText(ctx,htmlEncode(this.values.wlvl+"&thinsp;m"),280,24,'black','black',4,c.width,15,0);
 		
 		return this;
 	 }
@@ -514,12 +557,12 @@
 			passed = false;
 		}
 		
-		if(this.values.tjd <= 0){
+		if(!this.values.tjd){
 			msg += "<li>" + this.str("input_error_tgd") + "</li>";
 			passed = false;
 		}
 		
-		if(this.values.tjd == 1 && this.values.wlvl <= 0){
+		if(this.values.tjd == "w" && this.values.wlvl <= 0){
 			passed = false;
 			msg +="<li>" + this.str("input_error_water") + "</li>";
 		}
@@ -554,6 +597,7 @@
 		
 		S("#cpPjDens").e[0].selectedIndex = 0;
 		S("#cpTgDens").e[0].selectedIndex = 0;
+		S("#cpTgDensMarsMoon").e[0].selectedIndex = 0;
 
 		S('#TargetFeature').css({'display':"block"});
 		S('#WaterFeature').css({'display':"none"});
@@ -575,12 +619,21 @@
 		S("#ProjectileVelocity").attr("value", this.values.velo).trigger('change');
 		S("#WaterDepth").attr("value", this.values.wlvl).trigger('change');
 		S("#cpPjDens").attr('value', this.values.pjd).trigger('change'); 
-		S("#cpTgDens").attr('value', this.values.tjd).trigger('change');
+		if(this.values.planet == "Earth") S("#cpTgDens").attr('value', this.values.tjd).trigger('change');
+		else S("#cpTgDensMarsMoon").attr('value', this.values.tjd).trigger('change');
 
 		if(this.values.pjd) S('#cpPjDens option:eq('+(this.values.pjd)+')').attr('selected','selected');
-		if(this.values.tjd) S('#cpTgDens option:eq('+(this.values.tjd)+')').attr('selected','selected');
-		this.selectTgDensity(parseInt(this.values.tjd));
 		this.selectPjDensity(parseInt(this.values.pjd));
+
+		// Set the target density option dropdown
+		if(this.values.tjd){
+			var opt = (this.values.planet == "Earth") ? S('#cpTgDens option') : S('#cpTgDensMarsMoon option');
+			for(var i = 0; i < opt.length; i++){
+				if(S(opt.e[i]).attr('value') == this.values.tjd) S(opt.e[i]).attr('selected','selected');
+			}
+		}
+		if(this.values.planet == "Earth") this.selectTgDensity(this.values.tjd);
+		else this.selectTgDensityMarsMoon(this.values.tjd);
 		
 		return this;
 	}

@@ -147,8 +147,10 @@
 		S('.search').css({'display':'none'});
 		S('#searchplace').e[0].value = '';
 		if(i == 0){
-			if(!this.cmbLocation) i++;	// If no option is selected and no map is set, use the first
-			else return this;	// We've already set the map position so no need to continue
+			if(!this.cmbLocation){
+				if(this.values.planet=="Earth") i+=2;	// For Earth we default to the second option as the first is the user's location and that may not be shared
+				else i++; // If no option is selected and no map is set, use the first
+			}else return this;	// We've already set the map position so no need to continue
 		}
 		option = select.options[i];
 		if(!option) return this;
@@ -437,15 +439,6 @@
 		var _obj = this;
 		if(google) google.maps.event.addDomListener(window, 'load', _obj.initializeMap);
 
-		// Remove unwanted DOM elements
-		S('.forEarth').css({'display':'none'});
-		S('.forMoon').css({'display':'none'});
-		S('.forMars').css({'display':'none'});
-		if(planetname == "Earth") S('.forEarth').css({'display':'block'});
-		else if(planetname == "Moon") S('.forMoon').css({'display':'block'});
-		else if(planetname == "Mars") S('.forMars').css({'display':'block'});
-		
-
 		var mapTypes = {};
 		var lang;
 		var planet;
@@ -461,15 +454,6 @@
 
 		this.cmbLocation = 0;	// The location combo box
 		this.selectedBuilding = 0;	// The selected building
-
-		//input values from previous screen
-		var dist = this.values.dist;
-		var diam = this.values.diam;
-		var traj = this.values.traj;
-		var velo = this.values.velo;
-		var pjd = this.values.pjd;
-		var tgd = this.values.tjd;
-		var wlvl = this.values.wlvl;
 
 		this.calcs; // Will do the calcs
 
@@ -517,6 +501,7 @@
 		S("#cpLocationMoon option:eq(0)").html(x);
 		S("#cpLocationMars option:eq(0)").html(x);
 		S("#cpLandmark option:eq(0)").html(x);
+		S("#cpLocation .you").html(this.str('input_your_location'));
 
 		S('#cpLandmark option:eq(1)').html(this.str('lblSphinx'));
 		S('#cpLandmark option:eq(2)').html(this.str('lblBen'));
@@ -567,12 +552,6 @@
 		this.dataProvider.set('cbPjDens',this.values.pjd);
 		this.dataProvider.set('cbTgDens',this.values.tjd);
 		this.dataProvider.set('slTgDepth',this.values.wlvl);
-
-		this.planets = {
-			'Earth': {'Name':'Earth','R':6370},
-			'Moon': {'Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':4e-15,'scaleHeight':0},//rhoSurface old value = 0.0020, replaced with value calculated using estimated composition from http://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html. Scale height previously 65000
-			'Mars': {'Name':'Mars','G':3711,'R':3390,'V':1.6318*Math.pow(10,11),'l':3.0 * Math.pow(10,44),'p':1.5* Math.pow(10,25),'rhoSurface':0.020,'scaleHeight':11100}
-		}
 
 		// Setup the calculations
 		this.calcs = new CraterCalcs(this.planets[this.values.planet],this);			

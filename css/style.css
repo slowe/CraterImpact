@@ -84,18 +84,22 @@ body {
 	display: block;
 	text-align: center;
 	border: 0px;
-	min-width: 7em;
-	width: 100%;
+	line-height: 3em;
 	cursor: pointer;
 	font-size: inherit;
 	background-color: transparent;
 	color: inherit;
 }
+#header button { min-width: 7em; }
+#header #PlanetChoice > button { min-width: 7.4em; }
+#header #PlanetChoice li { padding: 0px; }
+
 #header a:hover, #header a:focus, #header button:hover, #header button:focus {
 	color: white;
 }
 #header .dropdown li { background-color: #202020; padding: 0 1em; line-height: 2.5em; }
 #header .right button:hover, #header .dropdown li:hover { background-color: #404040; cursor: pointer; }
+#header .right button img { float: left; display: inline-block; height: 2em; margin-top: 0.5em; margin-right: 0.25em; }
 #footer {
 	position: fixed;
 	bottom: 0;
@@ -124,6 +128,9 @@ body {
 #content {
 	height: 100%;
 }
+
+body.Earth .forMoon, body.Earth .forMars, body.Moon .forMars, body.Moon .forEarth, body.Mars .forEarth, body.Mars .forMoon { display: none; }
+
 
 .close button, #LanguageList li, #content button, .input_table td {
 	border-radius: 5px;
@@ -203,7 +210,6 @@ h1{
 	text-align: center;
 	background-color: transparent;
 }
-
 #LanguageList li a { color: inherit; text-decoration: none; line-height: 2em; padding: 10px; display: inline-block; width: 100%; }
 #LanguageList li:hover {
 	cursor: pointer;
@@ -376,6 +382,10 @@ h1{
 
 .input_table td.input_area {
 	width: 50%;
+}
+
+.input_table td.input_full {
+	width: 100%;
 }
 
 .input_title {
@@ -653,20 +663,27 @@ DATA Output
 	margin: 0px;
 	padding: 0px;
 	background-color: #cccccc;
+	border: 1px solid #006699;
+	border-top: 0px;
+	border-radius: 0 0 3px 3px;
 }
 .search .searchresults li {
-	margin-bottom: 1px;
+	padding: 2px;
 	display: block;
 	text-align: left;
-	background-color: #efefef;
+	background-color: #e1eef4;
 	color: #404040;
+}
+.search .searchresults li:nth-child(2n+1) {
+	background-color: white;
 }
 .search .searchresults li .name {
 	padding: 0 0.5em;
 	display: inline-block;
 }
 .search .searchresults li.selected, .search .searchresults li:hover {
-	background-color: black; color: #fefefe;
+	background-color: #006699;
+	color: #fefefe;
 	cursor: pointer;
 }
 .search .searchresults li div {

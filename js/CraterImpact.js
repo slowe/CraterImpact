@@ -41,6 +41,11 @@ var CraterImpact;
 		this.gmap = false;
 		this.scaling = 13;	// Factor to downsize asteroid by for display
 		this.languages = { "cy": "Cymraeg", "de": "Deutsch", "gr": "E&lambda;&lambda;&eta;&nu;&iota;&kappa;&#x3AC;", "en": "English", "es": "Espa&ntilde;ol", "et": "Eesti keel", "fr": "Fran&ccedil;ais", "it": "Italiano", "pl": "Polski", "pt": "Portugu&ecirc;s", "ro": "Rom&acirc;n&#x103;" };
+		this.planets = {
+			'Earth': {'key':'bodyEarth','img':'imgs/earth.png','Name':'Earth','R':6370},
+			'Moon': {'key':'bodyMoon','img':'imgs/moon.png','Name':'Moon','G':1.622,'R':1737.4,'V':2.1958*Math.pow(10,10),'l':2.5 * Math.pow(10,39),'p':7.52* Math.pow(10,25),'rhoSurface':4e-15,'scaleHeight':0},//rhoSurface old value = 0.0020, replaced with value calculated using estimated composition from http://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html. Scale height previously 65000
+			'Mars': {'key':'bodyMars','img':'imgs/mars.png','Name':'Mars','G':3711,'R':3390,'V':1.6318*Math.pow(10,11),'l':3.0 * Math.pow(10,44),'p':1.5* Math.pow(10,25),'rhoSurface':0.020,'scaleHeight':11100}
+		}
 		this.delim = " &#x276F; ";
 		this.defaults = {
 			"lang": "en",
@@ -61,6 +66,7 @@ var CraterImpact;
 
 		this.parseQueryString();
 		this.setValues();
+		
 		// Country codes at http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 		this.lang = (typeof this.query.lang==="string") ? this.query.lang : (navigator ? (navigator.userLanguage||navigator.systemLanguage||navigator.language||browser.language) : this.lang);
 		this.log('new crater',this.query);
@@ -83,9 +89,18 @@ var CraterImpact;
 			S(e.currentTarget).parent().parent().parent().css({'display': 'none'});
 		});
 		
+		// Remove unwanted DOM elements
+		if(this.values.planet) S('body').addClass(this.values.planet)
+
 		// Deal with the language menu
 		S('#MenuLanguage .choice').on('click',{},function(e){
 			var ul = S('#MenuLanguage ul');
+			ul.css({'display':(ul.css('display')=='block' ? 'none' : 'block')});
+		});
+
+		// Deal with the planet menu
+		S('#PlanetChoice .choice').on('click',{},function(e){
+			var ul = S('#PlanetChoice ul');
 			ul.css({'display':(ul.css('display')=='block' ? 'none' : 'block')});
 		});
 
@@ -157,6 +172,34 @@ var CraterImpact;
 		return this;
 	}
 
+	// Switch to the appropriate planet
+	CraterImpact.prototype.loadPlanet = function(p,callback){
+		this.log('setPlanet',p);
+
+		// Set the planet value
+		this.values.planet = p;
+
+		// Get the current URL
+		var loc = window.location.href;
+
+		// Remove everything after the query string
+		if(loc.indexOf('?') > 0) loc = loc.substr(0,loc.indexOf('?'));
+
+		// Set the destination to the current page
+		var dest = loc;
+
+		// If we are changing to something other than Earth and the rock 
+		// type isn't ignious, we need to zap it and go back to the input
+		if(p != "Earth" && this.values.tjd != "i"){
+			this.values.tjd = undefined;
+			// Set the destination to the input values page
+			dest = "input.html";
+		}
+
+		// Update the URL
+		window.location = dest+"?" + (this.lang ? 'lang='+this.lang : '') + (this.values.dist ? '&dist='+this.values.dist : '') + (this.values.diam ? '&diam='+this.values.diam : '')+(this.values.traj ? '&traj='+this.values.traj : '') + (this.values.velo ? '&velo='+this.values.velo : '') + (this.values.pjd ? '&pjd='+this.values.pjd : '') + (this.values.tjd ? '&tjd='+this.values.tjd : '') + (this.values.wlvl && this.values.planet == "Earth" ? '&wlvl='+this.values.wlvl : '') + (this.values.planet ? '&planet='+this.values.planet : '');
+	};
+
 	// Load a language file
 	CraterImpact.prototype.loadLanguage = function(l,callback){
 		this.log('setLanguage',l,callback);
@@ -184,7 +227,6 @@ var CraterImpact;
 				S('#MenuLanguage li').off('click');
 				// Update list
 				ul.html(list);
-				console.log(ul)
 				ul.css({'display':'none'});
 				// Add events to list items
 				S('#MenuLanguage li').on('click',{me:this},function(e){
@@ -193,6 +235,24 @@ var CraterImpact;
 					// Load the new language
 					e.data.me.loadLanguage(S(e.currentTarget).attr('id'),callback);
 				});
+			}
+			// Update planet if that exists
+			if(S('#PlanetChoice').length > 0){
+				if(this.values.planet && this.planets[this.values.planet]){
+					var list = "";
+					for(var p in this.planets){
+						if(p != this.values.planet) list += '<li id="'+p+'"><button><img src="'+this.planets[p].img+'" title="'+this.str(this.planets[p].key)+'" /><span>'+this.str(this.planets[p].key)+'</span></button></li>';
+					}
+					S('#PlanetChoice li').off('click');
+					var ulp = S('#PlanetChoice ul');
+					ulp.html(list);
+					ulp.css({'display':'none'});
+					S('#PlanetChoice li').on('click',{me:this},function(e){
+						ulp.css({'display':''});
+						e.data.me.loadPlanet(S(e.currentTarget).attr('id'))
+					});
+					S('#PlanetChoice .choice').html('<img src="'+this.planets[this.values.planet].img+'" /><span>'+this.str(this.planets[this.values.planet].key)+'</span>')
+				}
 			}
 		}
 		function failLang(e){

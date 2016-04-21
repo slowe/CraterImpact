@@ -30,7 +30,10 @@
 		<div id="header">
 			<div id="AppTitle"><a href="index.html">Impact Calculator</a><span></span></div>
 			<div id="MenuLanguage" class="dropdown right">
-				<button class="choice">English</button><ul></ul>
+				<button class="choice"></button><ul></ul>
+			</div>
+			<div id="PlanetChoice" class="dropdown right">
+				<button class="choice"></button><ul></ul>
 			</div>
 		</div><!--end header-->
 	
@@ -89,14 +92,14 @@
 					</td><td class="input_area">
 						<div id="titleTGDensity" class="input_title">Target Density</div>
 						 <select id="cpTgDens" class="input_combo forEarth">
-						   <option id="tgd_op0" value="0">Please Select...</option>
-						   <option id="tgd_op1" value="1">Water</option>
-						   <option id="tgd_op2" value="2">Sedimentry Rock</option>
-						   <option id="tgd_op3" value="3">Igneous Rock</option>
+						   <option id="tgd_op0" value="">Please Select...</option>
+						   <option id="tgd_op1" value="w">Water</option>
+						   <option id="tgd_op2" value="s">Sedimentry Rock</option>
+						   <option id="tgd_op3" value="i">Igneous Rock</option>
 						 </select>
 						 <select id="cpTgDensMarsMoon" class="input_combo">
-							<option id="tgd_op0" value = "0">Please Select...</option>
-							<option id="tgd_op3" value = "3">Igneous Rock</option>
+							<option id="tgd_op0" value="">Please Select...</option>
+							<option id="tgd_op3" value="i">Igneous Rock</option>
 						 </select>
 						<div id="TargetFeature" class="input_image"><img  alt="Projectile Target Density" id="TargetImage" src="imgs/blank.png"/></div>
 						<div id="WaterFeature" style="display: none;" class="input_image">
@@ -108,17 +111,16 @@
 						</div>
 					</td></tr>
 				</table>
-				<table class="input_table input_short">
-					<!--PROJECTILE DENSITTY-->
-					<tr>
-						<td class="input_area">
-							<div class="input_panel">
-								<input type="number" id="ImpactDistance" min="0" max="500" step="1" required="required" value="0" />
-								<div id="Slider5_Text" class="input_title">Distance from Crash Site:</div><div id="ImpactDistanceSlider"></div>
-								<div class="slider_text_r" id="DistanceAMT">0km</div>
-							</div>
-						</td>
-					</tr>
+				<table class="input_table input_short forEarth">
+				<tr>
+					<td class="input_area">
+						<div class="input_panel">
+							<input type="number" id="ImpactDistance" min="0" max="500" step="1" required="required" value="0" />
+							<div id="Slider5_Text" class="input_title">Distance from Crash Site:</div><div id="ImpactDistanceSlider"></div>
+							<div class="slider_text_r" id="DistanceAMT">0km</div>
+						</div>
+					</td>
+				</tr>
 				</table>
 
 				<div id="Input_Footer">
@@ -163,7 +165,7 @@
 
 			<div id="ACK_DIV">
 				<div class="ack_sect">
-					<h4>Faulkes Telescope Project (University of South Wales)</h4>
+					<h4>Faulkes Telescope Project</h4>
 					<ul>
 						<li>Paul Roche</li>
 						<li>Sarah Roberts</li>
@@ -187,11 +189,14 @@
 				<div class="ack_sect">
 					<h4>Translation</h4>	
 					<ul>
-						<li>Polski: Jan Pmierny - Astronomia.pl</li>
-						<li>Espa&ntilde;ol: Vanessa Stroud</li>
-						<li>Fran&ccedil;ais: Eric Depagne, LCOGT</li>
-						<li>Deutsch: Reinheart Bruling & Vlaudia Heiss</li>
 						<li>Cymraeg: Amgueddfa Cymru/National Museum Wales</li>
+						<li>Deutsch: Reinheart Bruling & Vlaudia Heiss</li>
+						<li>E&lambda;&lambda;&eta;&nu;&iota;&kappa;&#x3AC;: Takis Lazos</li>
+						<li>Espa&ntilde;ol: Vanessa Stroud</li>
+						<li>Eesti keel: Leo Siiman</li>
+						<li>Fran&ccedil;ais: Eric Depagne (<a href="http://lcogt.net/">LCOGT</a>)</li>
+						<li>Polski: Jan Pmierny (<a href="http://astronomia.pl/">Astronomia.pl</a>)</li>
+						<li>Rom&acirc;n&#x103;: Dorina Girbovan</li>
 					</ul>
 				</div>
 	
